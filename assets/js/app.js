@@ -491,16 +491,20 @@ class VapeTube {
     }
 
     // نمایش نتایج جستجو به صورت Real-Time
+    // نمایش نتایج جستجو به صورت Real-Time
     displaySearchResults(results) {
         const searchResultsContainer = document.getElementById('searchResults');
 
         // اگر نتایج جستجو وجود داشته باشند
         if (results.length > 0) {
             searchResultsContainer.innerHTML = results.map(result => `
-                <div class="result-item" onclick="window.location.href='product-details.html?id=${result.item.id}'">
-                    ${result.item.name_fa}
+            <div class="result-item" onclick="window.location.href='product-details.html?id=${result.item.id}'">
+                <div class="result-item-content">
+                    <img src="${result.item.image_url || 'assets/images/placeholder.jpg'}" alt="${result.item.name_fa}" class="result-item-image">
+                    <span class="result-item-name">${result.item.name_fa}</span>
                 </div>
-            `).join('');
+            </div>
+        `).join('');
             searchResultsContainer.style.display = 'block';  // نمایش نتایج جستجو
         } else {
             searchResultsContainer.innerHTML = '<div class="text-center">محصولی یافت نشد</div>';

@@ -14,8 +14,22 @@
 .search-results .result-item {
     padding: 10px;
     cursor: pointer;
+    display: flex;  /* نمایش محتویات به صورت افقی */
+    align-items: center;  /* قرار دادن تصویر و نام در یک ردیف */
 }
 
 .search-results .result-item:hover {
     background-color: #f4f4f4;
+}
+
+.search-results .result-item img.result-item-image {
+    width: 40px; /* عرض تصویر */
+    height: 40px; /* ارتفاع تصویر */
+    margin-right: 10px; /* فاصله از نام محصول */
+    object-fit: cover;  /* بهینه‌سازی نمایش تصویر */
+}
+
+.search-results .result-item .result-item-name {
+    font-size: 16px;
+    color: #333;
 }
