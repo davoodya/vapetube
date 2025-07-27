@@ -216,6 +216,8 @@
         box-shadow: none;
         padding: 0;
         margin: 0;
+        max-height: none !important;
+        transition: none !important;
         border-radius: 0;
     }
 
@@ -224,6 +226,7 @@
         display: block;
         padding: 10px 15px;
         margin-bottom: 10px;
+        display: block !important;
     }
 
     /* گرید به حالت عمودی تغییر کند */
@@ -295,6 +298,10 @@
 
     .nav-menu a:hover {
         color: var(--accent-color);
+    }
+
+    .products-menu:hover .mega-menu {
+        display: none !important;
     }
 }
 

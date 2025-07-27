@@ -650,6 +650,63 @@ class VapeTube {
         this.showNotification('در حال پیاده سازی...', 'info');
     }
 }
+// document.addEventListener('DOMContentLoaded', () => {
+//     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+//     const navLeft = document.querySelector('.nav-left');
+//     const navRight = document.querySelector('.nav-right');
+//     const productsLink = document.querySelector('.products-link');
+//     const megaMenu = document.querySelector('.mega-menu');
+//
+//     if (!mobileMenuToggle || !navLeft || !navRight || !productsLink || !megaMenu) {
+//         console.error('یکی از المنت های ناوبری پیدا نشد!');
+//         return;
+//     }
+//
+//     // باز/بستن منوی کلی موبایل
+//     mobileMenuToggle.addEventListener('click', () => {
+//         const expanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+//         mobileMenuToggle.setAttribute('aria-expanded', !expanded);
+//         mobileMenuToggle.classList.toggle('active');
+//         navLeft.classList.toggle('active');
+//         navRight.classList.toggle('active');
+//
+//         // همزمان زیرمنوی محصولات بسته شود
+//         megaMenu.classList.remove('active');
+//         productsLink.classList.remove('active');
+//         productsLink.setAttribute('aria-expanded', false);
+//     });
+//
+//     // باز/بستن زیرمنوی محصولات در موبایل
+//     productsLink.addEventListener('click', (e) => {
+//         e.preventDefault(); // جلوگیری از رفتن به لینک
+//
+//         const isActive = megaMenu.classList.contains('active');
+//         if (isActive) {
+//             megaMenu.classList.remove('active');
+//             productsLink.classList.remove('active');
+//             productsLink.setAttribute('aria-expanded', false);
+//         } else {
+//             megaMenu.classList.add('active');
+//             productsLink.classList.add('active');
+//             productsLink.setAttribute('aria-expanded', true);
+//         }
+//     });
+//
+//     // بستن منو هنگام کلیک بیرون
+//     document.addEventListener('click', (e) => {
+//         if (!e.target.closest('.navbar-content') && !e.target.closest('.mobile-menu-toggle')) {
+//             mobileMenuToggle.classList.remove('active');
+//             mobileMenuToggle.setAttribute('aria-expanded', false);
+//             navLeft.classList.remove('active');
+//             navRight.classList.remove('active');
+//             megaMenu.classList.remove('active');
+//             productsLink.classList.remove('active');
+//             productsLink.setAttribute('aria-expanded', false);
+//         }
+//     });
+// });
+//
+
 document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
     const navLeft = document.querySelector('.nav-left');
@@ -676,8 +733,10 @@ document.addEventListener('DOMContentLoaded', () => {
         productsLink.setAttribute('aria-expanded', false);
     });
 
-    // باز/بستن زیرمنوی محصولات در موبایل
+    // باز/بستن زیرمنوی محصولات فقط در موبایل (عرض ≤ 992px)
     productsLink.addEventListener('click', (e) => {
+        if (window.innerWidth > 992) return; // فقط در موبایل ادامه بده
+
         e.preventDefault(); // جلوگیری از رفتن به لینک
 
         const isActive = megaMenu.classList.contains('active');
