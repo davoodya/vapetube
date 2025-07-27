@@ -133,6 +133,21 @@ $imagePath = "assets/images/products/" . htmlspecialchars($product['image_url'])
         alert('محصول به سبد خرید اضافه شد');
     }
 </script>
+<script>
+    // تغییر تصویر اصلی با کلیک روی تصاویر کوچک
+    function changeImage(imagePath) {
+        document.getElementById('mainImage').src = imagePath;
+    }
 
+    // به‌طور پیش‌فرض تصویر اول را نمایش بده
+    window.onload = function() {
+        // به‌دست آوردن اولین تصویر گالری
+        const firstThumbnail = document.querySelector('.thumbnails img');
+        if (firstThumbnail) {
+            // تغییر تصویر اصلی به اولین تصویر
+            document.getElementById('mainImage').src = firstThumbnail.src;
+        }
+    }
+</script>
 </body>
 </html>
