@@ -1,21 +1,20 @@
 .search-results {
-    position: absolute;
-    top: 100%;  /* قرار گرفتن زیر فیلد ورودی */
-    left: 0;
-    width: 100%;
-    background: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: none;  /* به طور پیش‌فرض مخفی است */
-    max-height: 300px;
-    overflow-y: auto;
-    z-index: 1000;
+    display: grid; /* استفاده از grid برای طراحی */
+    grid-template-columns: repeat(4, 1fr); /* 4 کارت در هر سطر */
+    gap: 20px;  /* فاصله بین کارت‌ها */
+    padding: 10px;
+    margin-top: 10px;
 }
 
 .search-results .result-item {
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    display: flex;  /* نمایش محتویات به صورت افقی */
-    align-items: center;  /* قرار دادن تصویر و نام در یک ردیف */
+    border-radius: 8px;
 }
 
 .search-results .result-item:hover {
@@ -23,13 +22,29 @@
 }
 
 .search-results .result-item img.result-item-image {
-    width: 40px; /* عرض تصویر */
-    height: 40px; /* ارتفاع تصویر */
-    margin-right: 10px; /* فاصله از نام محصول */
-    object-fit: cover;  /* بهینه‌سازی نمایش تصویر */
+    width: 100px; /* اندازه تصویر */
+    height: 100px; /* اندازه تصویر */
+    margin-bottom: 10px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .search-results .result-item .result-item-name {
     font-size: 16px;
     color: #333;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* برای موبایل یا صفحات کوچک‌تر، تعداد کارت‌ها را کاهش می‌دهیم */
+@media (max-width: 768px) {
+    .search-results {
+        grid-template-columns: repeat(2, 1fr); /* 2 کارت در هر سطر */
+    }
+}
+
+@media (max-width: 480px) {
+    .search-results {
+        grid-template-columns: 1fr; /* 1 کارت در هر سطر */
+    }
 }

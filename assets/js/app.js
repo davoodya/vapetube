@@ -499,19 +499,16 @@ class VapeTube {
         if (results.length > 0) {
             searchResultsContainer.innerHTML = results.map(result => `
             <div class="result-item" onclick="window.location.href='product-details.html?id=${result.item.id}'">
-                <div class="result-item-content">
-                    <img src="${result.item.image_url || 'assets/images/placeholder.jpg'}" alt="${result.item.name_fa}" class="result-item-image">
-                    <span class="result-item-name">${result.item.name_fa}</span>
-                </div>
+                <img src="${result.item.image_url || 'assets/images/placeholder.jpg'}" alt="${result.item.name_fa}" class="result-item-image">
+                <span class="result-item-name">${result.item.name_fa}</span>
             </div>
         `).join('');
-            searchResultsContainer.style.display = 'block';  // نمایش نتایج جستجو
+            searchResultsContainer.style.display = 'grid';  // نمایش نتایج به صورت grid
         } else {
             searchResultsContainer.innerHTML = '<div class="text-center">محصولی یافت نشد</div>';
             searchResultsContainer.style.display = 'block';  // نمایش پیام عدم یافتن نتایج
         }
     }
-
 
     async filterProducts() {
         const categoryFilter = document.getElementById('categoryFilter');
