@@ -1,0 +1,21 @@
+.search-results {
+    position: absolute;
+    top: 100%;  /* قرار گرفتن زیر فیلد ورودی */
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;  /* به طور پیش‌فرض مخفی است */
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.search-results .result-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-results .result-item:hover {
+    background-color: #f4f4f4;
+}
