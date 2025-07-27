@@ -239,11 +239,7 @@ a:hover {
 }
 
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+
 
 .header-main-content {
     display: flex;
@@ -615,30 +611,123 @@ a:hover {
     animation: fadeInUp 1s ease 0.4s both;
 }
 
-/* Sections */
-.section-header {
-    text-align: center;
-    margin-bottom: 50px;
+/* Section & Categories */
+.categories-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* ۵ ستون مساوی */
+    gap: 20px; /* فاصله بین کارت‌ها */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
 }
 
-.section-header h2 {
-    color: var(--dark-color);
-    margin-bottom: 10px;
-}
+.category_container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* ۵ ستون مساوی */
+    gap: 30px; /* فاصله بین کارت‌ها */
 
-.section-header p {
-    color: var(--gray-600);
-    font-size: 1.1rem;
-}
-
-.featured-products,
-.categories,
-.all-products {
-    padding: 80px 0;
 }
 
 .categories {
-    background-color: var(--gray-100);
+    background-color: rgba(128, 128, 2, 0.4);
+    padding: 60px 20px;
+    font-family: var(--font-family);
+}
+
+.categories .section-header {
+	
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.categories .section-header h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color, #4a90e2);
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.categories .section-header h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: var(--accent-color, #f39c12);
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+.categories .section-header p {
+    font-size: 1.2rem;
+    color: var(--white, #666);
+}
+
+
+
+.category-card {
+	
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+	
+}
+
+.category-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+}
+
+.category-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.category-card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.category-card p {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* واکنشگرایی برای موبایل و تبلت */
+@media (max-width: 1200px) {
+    .categories-filter-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .categories-filter-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .categories-filter-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Products Grid */
@@ -760,7 +849,7 @@ a:hover {
 }
 
 /* Categories Grid */
-.categories-grid {
+.categories-filter-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;

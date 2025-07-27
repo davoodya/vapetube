@@ -36,7 +36,11 @@
         gap: 20px;
     }
     
-    .categories-grid {
+    .categories-filter-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .category_container {
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
     
@@ -325,7 +329,11 @@
         grid-template-columns: 1fr;
     }
     
-    .categories-grid {
+    .categories-filter-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .category_container {
         grid-template-columns: repeat(2, 1fr);
     }
     
