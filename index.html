@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vape Tube - فروشگاه ویپ و سیگار الکترونیکی</title>
+    <meta name="description" content="فروشگاه آنلاین ویپ تیوب - خرید انواع ویپ، مود، پاد سیستم، مایع ویپ و لوازم جانبی با بهترین قیمت">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="header-contact">
+                        <span><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</span>
+                        <span><i class="fas fa-envelope"></i> info@vapetube.com</span>
+                    </div>
+                    <div class="header-auth">
+                        <div class="auth-buttons" id="authButtons">
+                            <a href="#" class="auth-link" id="loginBtn">ورود</a>
+                            <span>|</span>
+                            <a href="#" class="auth-link" id="registerBtn">ثبت نام</a>
+                        </div>
+                        <div class="user-menu" id="userMenu" style="display: none;">
+                            <span class="user-name" id="userName"></span>
+                            <div class="user-dropdown">
+                                <a href="#" id="profileBtn">پروفایل</a>
+                                <a href="#" id="ordersBtn">سفارشات</a>
+                                <a href="#" id="logoutBtn">خروج</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-main">
+            <div class="container">
+                <div class="header-main-content">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <h1><a href="index.html">Vape Tube</a></h1>
+                    </div>
+                    
+                    <!-- Search -->
+                    <div class="search-box">
+                        <form class="search-form" id="searchForm">
+                            <input type="text" placeholder="جستجو در محصولات..." id="searchInput">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                    
+                    <!-- Cart -->
+                    <div class="cart-icon">
+                        <a href="#" id="cartToggle">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-content">
+                    <!-- Left Menu -->
+                    <div class="nav-right">
+                        <ul class="nav-menu">
+                            <li><a href="#" data-page="about">درباره ما</a></li>
+                            <li><a href="#" data-page="contact">تماس با ما</a></li>
+                            <li><a href="#" data-page="faq">سوالات متداول</a></li>
+                            <li><a href="#" data-page="articles">مقالات</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Right Menu (Products) -->
+                    <div class="nav-left">
+                        <div class="products-menu">
+                            <a href="#" class="products-link">محصولات <i class="fas fa-chevron-down"></i></a>
+                            <div class="mega-menu">
+                                <div class="mega-menu-content">
+                                    <div class="category-column" data-category="1">
+                                        <h3>مود ویپ</h3>
+                                        <ul>
+                                            <li><a href="#" data-subcategory="1">آیتم ۱</a></li>
+                                            <li><a href="#" data-subcategory="2">آیتم ۲</a></li>
+                                            <li><a href="#" data-subcategory="3">آیتم ۳</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="category-column" data-category="2">
+                                        <h3>سیستم های پاد</h3>
+                                        <ul>
+                                            <li><a href="#" data-subcategory="4">آیتم ۱</a></li>
+                                            <li><a href="#" data-subcategory="5">آیتم ۲</a></li>
+                                            <li><a href="#" data-subcategory="6">آیتم ۳</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="category-column" data-category="3">
+                                        <h3>نیکوتین نمک</h3>
+                                        <ul>
+                                            <li><a href="#" data-subcategory="7">آیتم ۱</a></li>
+                                            <li><a href="#" data-subcategory="8">آیتم ۲</a></li>
+                                            <li><a href="#" data-subcategory="9">آیتم ۳</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="category-column" data-category="4">
+                                        <h3>مایع ویپ</h3>
+                                        <ul>
+                                            <li><a href="#" data-subcategory="10">آیتم ۱</a></li>
+                                            <li><a href="#" data-subcategory="11">آیتم ۲</a></li>
+                                            <li><a href="#" data-subcategory="12">آیتم ۳</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="category-column" data-category="5">
+                                        <h3>یکبار مصرف</h3>
+                                        <ul>
+                                            <li><a href="#" data-subcategory="13">آیتم ۱</a></li>
+                                            <li><a href="#" data-subcategory="14">آیتم ۲</a></li>
+                                            <li><a href="#" data-subcategory="15">آیتم ۳</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="category-column" data-category="6">
+                                        <h3>کویل و کارتریج</h3>
+                                        <ul>
+                                            <li><a href="#" data-subcategory="16">آیتم ۱</a></li>
+                                            <li><a href="#" data-subcategory="17">آیتم ۲</a></li>
+                                            <li><a href="#" data-subcategory="18">آیتم ۳</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="category-column" data-category="7">
+                                        <h3>لوازم جانبی</h3>
+                                        <ul>
+                                            <li><a href="#" data-subcategory="19">آیتم ۱</a></li>
+                                            <li><a href="#" data-subcategory="20">آیتم ۲</a></li>
+                                            <li><a href="#" data-subcategory="21">آیتم ۳</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="category-column" data-category="8">
+                                        <h3>سیگار الکترونیکی</h3>
+                                        <ul>
+                                            <li><a href="#" data-subcategory="22">آیتم ۱</a></li>
+                                            <li><a href="#" data-subcategory="23">آیتم ۲</a></li>
+                                            <li><a href="#" data-subcategory="24">آیتم ۳</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Menu Toggle -->
+                    <div class="mobile-menu-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-slider">
+                <div class="hero-slide active">
+                    <div class="hero-content">
+                        <h2>بهترین محصولات ویپ</h2>
+                        <p>کیفیت بالا، قیمت مناسب، ارسال سریع</p>
+                        <a href="#" class="btn btn-primary">مشاهده محصولات</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="featured-products">
+            <div class="container">
+                <div class="section-header">
+                    <h2>محصولات ویژه</h2>
+                    <p>جدیدترین و بهترین محصولات ویپ</p>
+                </div>
+                <div class="products-grid" id="featuredProducts">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories">
+            <div class="container">
+                <div class="section-header">
+                    <h2>دسته بندی محصولات</h2>
+                    <p>انتخاب کنید و خرید کنید</p>
+                </div>
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Categories will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- All Products -->
+        <section class="all-products" id="allProductsSection">
+            <div class="container">
+                <div class="section-header">
+                    <h2>همه محصولات</h2>
+                    <div class="products-filters">
+                        <select id="categoryFilter">
+                            <option value="">همه دسته‌ها</option>
+                        </select>
+                        <select id="sortFilter">
+                            <option value="newest">جدیدترین</option>
+                            <option value="price_low">قیمت: کم به زیاد</option>
+                            <option value="price_high">قیمت: زیاد به کم</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="products-grid" id="allProducts">
+                    <!-- Products will be loaded here -->
+                </div>
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>سبد خرید</h3>
+            <button class="cart-close" id="cartClose"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-content" id="cartContent">
+            <!-- Cart items will be loaded here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>مجموع: <span id="cartTotal">۰ تومان</span></span>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">تسویه حساب</button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>ورود به حساب کاربری</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>نام کاربری یا ایمیل</label>
+                        <input type="text" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label>رمز عبور</label>
+                        <input type="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">ورود</button>
+                </form>
+                <p class="modal-footer-text">
+                    حساب کاربری ندارید؟ <a href="#" id="switchToRegister">ثبت نام کنید</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>ثبت نام</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>نام</label>
+                            <input type="text" name="first_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>نام خانوادگی</label>
+                            <input type="text" name="last_name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>نام کاربری</label>
+                        <input type="text" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label>ایمیل</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>شماره تلفن</label>
+                        <input type="tel" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label>رمز عبور</label>
+                        <input type="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">ثبت نام</button>
+                </form>
+                <p class="modal-footer-text">
+                    قبلاً ثبت نام کرده‌اید؟ <a href="#" id="switchToLogin">وارد شوید</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Vape Tube</h3>
+                    <p>بهترین فروشگاه آنلاین ویپ و سیگار الکترونیکی در ایران</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>لینک های مفید</h4>
+                    <ul>
+                        <li><a href="#">درباره ما</a></li>
+                        <li><a href="#">تماس با ما</a></li>
+                        <li><a href="#">سوالات متداول</a></li>
+                        <li><a href="#">مقالات</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>خدمات مشتریان</h4>
+                    <ul>
+                        <li><a href="#">راهنمای خرید</a></li>
+                        <li><a href="#">شرایط استفاده</a></li>
+                        <li><a href="#">حریم خصوصی</a></li>
+                        <li><a href="#">ضمانت بازگشت</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تماس با ما</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</p>
+                        <p><i class="fas fa-envelope"></i> info@vapetube.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> تهران، خیابان ولیعصر</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; ۱۴۰۳ Vape Tube. تمامی حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
+
