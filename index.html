@@ -17,6 +17,13 @@
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/style_new.css">
+
+    <!-- Fuse Searching Mechanism -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+
+
+    <base href="/vape-tube/">
 </head>
 <body>
     <!-- Header -->
@@ -65,6 +72,9 @@
                             <input type="text" placeholder="جستجو در محصولات..." id="searchInput">
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </form>
+
+                        <!-- نمایش نتایج جستجو -->
+                        <div id="searchResults" class="search-results"></div>
                     </div>
 
                     <!-- سبد خرید -->
@@ -191,13 +201,17 @@
             </div>
             <div class="category_container">
 
+                <!-- Pod Systems Category -->
+                <a href="http://localhost/vape-tube/api/auth.php">
                 <div class="category-card">
-                    <img src="/assets/images/iqos-iluma.jpg" alt="نام دسته بندی ۱" />
+                    <img src="assets/images/iqos-iluma.jpg" alt="نام دسته بندی ۱" />
                     <h3>پاد سیستم</h3>
                     <p>محصولاتی برای ترک</p>
                 </div>
+                </a>
+
                 <div class="category-card">
-                    <img src="path-to-image2.jpg" alt="نام دسته بندی ۲" />
+                    <img src="assets/images/bg/Berseker.jpg" alt="نام دسته بندی ۲" />
                     <h3>نام دسته بندی ۲</h3>
                     <p>توضیح کوتاه درباره دسته بندی ۲</p>
                 </div>
@@ -437,6 +451,7 @@
 
     <!-- JavaScript -->
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/additional.js" defer></script>
 </body>
 </html>
 

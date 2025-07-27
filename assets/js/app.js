@@ -1,4 +1,5 @@
 // Vape Tube Website JavaScript
+let fuse;
 
 class VapeTube {
     constructor() {
@@ -9,20 +10,20 @@ class VapeTube {
         this.categories = [];
         this.currentPage = 1;
         this.totalPages = 1;
-        
+
         this.init();
     }
-    
+
     init() {
         this.bindEvents();
         this.checkAuth();
         this.loadCategories();
         this.loadFeaturedProducts();
-        this.loadAllProducts();
+        this.loadAllProducts();  // بارگذاری همه محصولات
         this.loadCart();
     }
-    
-    bindEvents() {
+
+        bindEvents() {
         // Authentication
         document.getElementById('loginBtn')?.addEventListener('click', () => this.showModal('loginModal'));
         document.getElementById('registerBtn')?.addEventListener('click', () => this.showModal('registerModal'));
@@ -39,7 +40,7 @@ class VapeTube {
         // Forms
         document.getElementById('loginForm')?.addEventListener('submit', (e) => this.handleLogin(e));
         document.getElementById('registerForm')?.addEventListener('submit', (e) => this.handleRegister(e));
-        document.getElementById('searchForm')?.addEventListener('submit', (e) => this.handleSearch(e));
+        document.getElementById('searchForm')?.addEventListener('submit', (e) => vapeTube.handleSearch(e));
         
         // Cart
         document.getElementById('cartToggle')?.addEventListener('click', () => this.toggleCart());
@@ -203,27 +204,30 @@ class VapeTube {
             this.renderProducts(result.products, 'featuredProducts');
         }
     }
-    
+
+    // بارگذاری همه محصولات
     async loadAllProducts(page = 1, categoryId = '', search = '', sort = '') {
         const params = new URLSearchParams({
             action: 'all',
             page: page,
             category_id: categoryId,
-            search: search,
             sort: sort
         });
-        
+
         const result = await this.apiCall(`products.php?${params}`);
         if (result.success) {
             this.products = result.products;
             this.currentPage = result.pagination.current_page;
             this.totalPages = result.pagination.total_pages;
-            
-            this.renderProducts(result.products, 'allProducts');
-            this.renderPagination(result.pagination);
+
+            // ایجاد یک شی Fuse برای جستجو در محصولات
+            const options = {
+                includeScore: true,  // نمایش امتیاز تطابق
+                keys: ['name_fa', 'description']  // کلیدهایی که می‌خواهیم جستجو در آن‌ها انجام شود
+            };
+            fuse = new Fuse(this.products, options);  // ایجاد نمونه Fuse با محصولات
         }
     }
-    
     renderCategories() {
         const container = document.getElementById('categoriesGrid');
         if (!container) return;
@@ -237,16 +241,17 @@ class VapeTube {
             </div>
         `).join('');
     }
-    
+
+    // متد برای رسم محصولات
     renderProducts(products, containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
-        
+
         if (products.length === 0) {
             container.innerHTML = '<div class="text-center">محصولی یافت نشد</div>';
             return;
         }
-        
+
         container.innerHTML = products.map(product => `
             <div class="product-card">
                 <div class="product-image">
@@ -271,7 +276,7 @@ class VapeTube {
             </div>
         `).join('');
     }
-    
+
     renderPagination(pagination) {
         const container = document.getElementById('pagination');
         if (!container) return;
@@ -464,19 +469,46 @@ class VapeTube {
         const total = this.cart.reduce((sum, item) => sum + (item.total_price || item.current_price * item.quantity), 0);
         if (cartTotal) cartTotal.textContent = this.formatPrice(total);
     }
-    
-    // Search and Filter Methods
+
+    // جستجو در محصولات (Real-Time)
     async handleSearch(e) {
-        e.preventDefault();
+        e.preventDefault();  // جلوگیری از ارسال فرم
+
         const searchInput = document.getElementById('searchInput');
-        const query = searchInput.value.trim();
-        
+        const query = searchInput.value.trim();  // دریافت کلمه جستجو
+
+        // اگر کلمه جستجو خالی نباشد
         if (query) {
-            await this.loadAllProducts(1, '', query);
-            document.getElementById('allProductsSection').scrollIntoView({ behavior: 'smooth' });
+            // جستجو با Fuse.js
+            const results = fuse.search(query);  // انجام جستجو با Fuse.js
+
+            // نمایش نتایج جستجو
+            this.displaySearchResults(results);
+        } else {
+            // اگر کلمه جستجو خالی بود، نتایج را مخفی کنیم
+            document.getElementById('searchResults').style.display = 'none';
         }
     }
-    
+
+    // نمایش نتایج جستجو به صورت Real-Time
+    displaySearchResults(results) {
+        const searchResultsContainer = document.getElementById('searchResults');
+
+        // اگر نتایج جستجو وجود داشته باشند
+        if (results.length > 0) {
+            searchResultsContainer.innerHTML = results.map(result => `
+                <div class="result-item" onclick="window.location.href='product-details.html?id=${result.item.id}'">
+                    ${result.item.name_fa}
+                </div>
+            `).join('');
+            searchResultsContainer.style.display = 'block';  // نمایش نتایج جستجو
+        } else {
+            searchResultsContainer.innerHTML = '<div class="text-center">محصولی یافت نشد</div>';
+            searchResultsContainer.style.display = 'block';  // نمایش پیام عدم یافتن نتایج
+        }
+    }
+
+
     async filterProducts() {
         const categoryFilter = document.getElementById('categoryFilter');
         const sortFilter = document.getElementById('sortFilter');
@@ -776,6 +808,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Tablet style product
 // کنترل باز و بسته شدن منوی محصولات با کلیک فقط در موبایل و تبلت (≤ 992px)
+
+// افزودن رویداد به ورودی جستجو برای Real-Time
+document.getElementById('searchInput').addEventListener('input', (e) => vapeTube.handleSearch(e));
+
 
 // Initialize the application
 const vapeTube = new VapeTube();
