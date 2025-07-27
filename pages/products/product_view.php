@@ -51,8 +51,9 @@ $imagePath = "assets/images/products/" . htmlspecialchars($product['image_url'])
 </head>
 <body>
 
-<?php include '../components/header.html'; ?>
 <!-- Header Section -->
+<?php include '../components/header.html'; ?>
+
 
 <div class="header-section">
     <!-- کارت اول: تصاویر اسلاید شو -->
