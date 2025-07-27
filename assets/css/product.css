@@ -7,6 +7,28 @@ body {
     padding: 0;
     direction: rtl;
 }
+/* Header Section */
+.header-section {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr; /* دو ستون بزرگتر برای کارت وسط */
+    gap: 20px; /* فاصله بین کارت‌ها */
+    max-width: 100%;
+    min-height: 40vh;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/* استایل‌های کارت‌ها */
+.product-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+}
+
 
 /* اصلاحات برای اینکه .product-container تمام صفحه را بگیرد */
 .product-container {
@@ -25,10 +47,10 @@ body {
 }
 
 
-/* تصویر اسلاید شو */
+/* کارت اول: تصاویر اسلاید شو */
 .product-images {
-    flex: 1;
-    margin-right: 30px;  /* فاصله از اطلاعات محصول */
+    display: flex;
+    flex-direction: column;
 }
 
 .product-image {
@@ -37,6 +59,7 @@ body {
     object-fit: cover;
     border-radius: 8px;
 }
+
 
 .thumbnails {
     display: flex;
@@ -58,11 +81,20 @@ body {
 }
 
 
+
 /* فاصله بین تصویر و بخش نام و توضیحات محصول */
 .product-details {
     flex: 2;
     padding-left: 30px;  /* اضافه کردن فاصله به سمت چپ */
     padding-right: 30px; /* اضافه کردن فاصله به سمت راست */
+}
+
+/* کارت دوم: نام و توضیحات مختصر محصول */
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .product-title {
@@ -75,6 +107,7 @@ body {
     font-size: 18px;
     color: #777;
     margin-top: 10px;
+    text-align: center;
 }
 
 .price {
@@ -97,16 +130,18 @@ body {
 }
 
 /* انتخاب تعداد و افزودن به سبد خرید */
+/* کارت سوم: انتخاب تعداد و افزودن به سبد خرید */
 .add-to-cart {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin-top: 20px;
 }
 
 .quantity-selector {
     display: flex;
     align-items: center;
-    margin-right: 15px;
+    margin-bottom: 15px;
 }
 
 .quantity-selector button {
@@ -134,7 +169,6 @@ body {
     cursor: pointer;
     font-size: 18px;
 }
-
 /* ویدیو یوتیوب */
 .youtube-video {
     margin-top: 30px;

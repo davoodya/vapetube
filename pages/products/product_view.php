@@ -11,6 +11,7 @@ try {
 } catch (PDOException $e) {
     die("خطا در اتصال به پایگاه داده: " . $e->getMessage());
 }
+
 // دریافت ID از URL
 $productId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -33,7 +34,6 @@ if (!$product) {
 
 // مسیر کامل عکس
 $imagePath = "assets/images/products/" . htmlspecialchars($product['image_url']);
-
 ?>
 
 <!DOCTYPE html>
@@ -41,83 +41,98 @@ $imagePath = "assets/images/products/" . htmlspecialchars($product['image_url'])
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($product['name_fa']) ?> | ویپ تیوب</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            direction: rtl;
-            background: #f7f7f7;
-            padding: 20px;
-        }
-        .product-container {
-            background: white;
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .product-image {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-        .product-title {
-            font-size: 26px;
-            margin: 15px 0 10px;
-        }
-        .price {
-            font-size: 22px;
-            color: green;
-        }
-        .description {
-            margin-top: 15px;
-            color: #444;
-        }
-        .meta {
-            margin-top: 25px;
-            font-size: 14px;
-            color: #888;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 30px;
-            color: #007BFF;
-            text-decoration: none;
-        }
-    </style>
+    <!-- وارد کردن فایل CSS -->
+
     <base href="/vape-tube/">
+
+    <link rel="stylesheet" href="assets/css/product.css">
+
 </head>
 <body>
 
-<div class="product-container">
-    <img src="<?= $imagePath ?>" alt="<?= htmlspecialchars($product['name_fa']) ?>" class="product-image">
-
-    <h1 class="product-title"><?= htmlspecialchars($product['name_fa']) ?></h1>
-
-    <div class="price">
-        قیمت: <?= number_format($product['price']) ?> تومان
-        <?php if (!empty($product['sale_price'])): ?>
-            <span style="color:red; text-decoration:line-through; font-size:16px; margin-right:10px;">
-                <?= number_format($product['sale_price']) ?> تومان
-            </span>
-        <?php endif; ?>
+<!-- Header Section -->
+<div class="header-section">
+    <!-- کارت اول: تصاویر اسلاید شو -->
+    <div class="product-card product-images">
+        <div class="slider">
+            <img src="<?= $imagePath ?>" alt="<?= htmlspecialchars($product['name_fa']) ?>" class="product-image" id="mainImage">
+            <div class="thumbnails">
+                <!-- تصاویر گالری -->
+                <?php if (!empty($product['gallery_images'])): ?>
+                    <?php
+                    // تجزیه JSON
+                    $galleryImages = json_decode($product['gallery_images'], true);
+                    foreach ($galleryImages as $image): ?>
+                        <img src="assets/images/products/<?= htmlspecialchars($image) ?>" alt="<?= htmlspecialchars($product['name_fa']) ?>" onclick="changeImage('assets/images/products/<?= htmlspecialchars($image) ?>')" class="thumbnail-img">
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
 
-    <div class="description">
-        <strong>توضیحات:</strong><br>
-        <?= nl2br(htmlspecialchars($product['description_fa'])) ?>
+    <!-- کارت دوم: نام و توضیحات مختصر محصول -->
+    <div class="product-card product-info">
+        <h2 class="product-title"><?= htmlspecialchars($product['name_fa']) ?></h2>
+        <p class="product-subtitle"><?= htmlspecialchars($product['short_description_fa']) ?></p>
     </div>
 
-    <div class="meta">
-        <div>دسته‌بندی: <?= $product['category_name'] ?></div>
-        <?php if ($product['subcategory_name']): ?>
-            <div>زیر دسته: <?= $product['subcategory_name'] ?></div>
-        <?php endif; ?>
-        <div>کد محصول (SKU): <?= htmlspecialchars($product['sku']) ?></div>
-        <div>موجودی انبار: <?= $product['stock_quantity'] ?> عدد</div>
+    <!-- کارت سوم: انتخاب تعداد و دکمه افزودن به سبد خرید -->
+    <div class="product-card add-to-cart">
+        <div class="quantity-selector">
+            <button onclick="changeQuantity(-1)">-</button>
+            <input type="number" id="quantity" value="1" min="1">
+            <button onclick="changeQuantity(1)">+</button>
+        </div>
+        <button onclick="addToCart()">افزودن به سبد خرید</button>
     </div>
-
-    <a href="index.html" class="back-link">← بازگشت به صفحه اصلی</a>
 </div>
+
+<hr>
+
+<!-- Body Section -->
+<div class="product-body">
+    <h2>توضیحات کامل</h2>
+    <p><?= nl2br(htmlspecialchars($product['description_fa'])) ?></p>
+
+    <!-- YouTube Video -->
+    <div class="youtube-video">
+        <h2>ویدئو محصول</h2>
+        <iframe src="https://www.youtube.com/embed/<?= $product['video_url'] ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+<!-- Comments Section -->
+<div class="comments">
+    <h3>نظرات کاربران</h3>
+    <!-- Placeholder for comments section -->
+    <p>نظرات کاربران در اینجا نمایش داده خواهد شد.</p>
+</div>
+
+<!-- Footer Section -->
+<footer>
+    <p>تمامی حقوق متعلق به ویپ تیوب است.</p>
+</footer>
+
+<script>
+    function changeImage(image) {
+        document.getElementById('mainImage').src = image;
+    }
+
+    function changeQuantity(amount) {
+        const quantityInput = document.getElementById('quantity');
+        let currentQuantity = parseInt(quantityInput.value);
+        currentQuantity += amount;
+        if (currentQuantity < 1) currentQuantity = 1;
+        quantityInput.value = currentQuantity;
+    }
+
+    function addToCart() {
+        const productId = <?= $productId ?>;
+        const quantity = document.getElementById('quantity').value;
+        // Here you can add the logic to add the product to the cart
+        alert('محصول به سبد خرید اضافه شد');
+    }
+</script>
 
 </body>
 </html>
