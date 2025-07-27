@@ -84,6 +84,7 @@ $imagePath = "assets/images/products/" . htmlspecialchars($product['image_url'])
             text-decoration: none;
         }
     </style>
+    <base href="/vape-tube/">
 </head>
 <body>
 
@@ -115,7 +116,7 @@ $imagePath = "assets/images/products/" . htmlspecialchars($product['image_url'])
         <div>موجودی انبار: <?= $product['stock_quantity'] ?> عدد</div>
     </div>
 
-    <a href="/index.php" class="back-link">← بازگشت به صفحه اصلی</a>
+    <a href="index.html" class="back-link">← بازگشت به صفحه اصلی</a>
 </div>
 
 </body>
