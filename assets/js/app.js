@@ -498,7 +498,8 @@ class VapeTube {
         if (results.length > 0) {
             searchResultsContainer.innerHTML = results.map(result => `
             <div class="result-item" onclick="window.location.href='pages/products/product_view.php?id=${result.item.id}'">
-                <img src="${result.item.image_url || 'assets/images/placeholder.jpg'}" alt="${result.item.name_fa}" class="result-item-image">
+                <img src="${result.item.image_url || 'assets/images/placeholder.jpg'}" alt="${result.item.name_fa}" 
+                class="result-item-image" onclick="window.location.href='pages/products/product_view.php?id=${result.item.id}'>
                 <span class="result-item-name">${result.item.name_fa}</span>
             </div>
         `).join('');
