@@ -82,11 +82,18 @@
         <nav class="navbar">
             <div class="container">
                 <div class="navbar-content">
+                    <!-- Mobile Menu Toggle -->
+                    <div class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" role="button" tabindex="0">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+
                     <!-- Right Menu (Products) -->
                     <div class="nav-left">
                         <div class="products-menu">
-                            <a href="#" class="products-link">محصولات <i class="fas fa-chevron-down"></i></a>
-                            <div class="mega-menu">
+                            <a href="#" class="products-link" aria-haspopup="true" aria-expanded="false">محصولات <i class="fas fa-chevron-down"></i></a>
+                            <div class="mega-menu" aria-label="محصولات">
                                 <div class="mega-menu-content">
                                     <div class="category-column" data-category="1">
                                         <h3>مود ویپ</h3>
@@ -167,12 +174,7 @@
                         </ul>
                     </div>
 
-                    <!-- Mobile Menu Toggle -->
-                    <div class="mobile-menu-toggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+
                 </div>
             </div>
         </nav>
@@ -180,6 +182,20 @@
 
     <!-- Main Content -->
     <main class="main-content">
+        <!-- Categories -->
+        <section class="categories">
+            <div class="container">
+                <div class="section-header">
+                    <h2>دسته بندی محصولات</h2>
+                    <p>انتخاب کنید و خرید کنید</p>
+                </div>
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Categories will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-slider">
@@ -193,6 +209,8 @@
             </div>
         </section>
 
+
+
         <!-- Featured Products -->
         <section class="featured-products">
             <div class="container">
@@ -202,19 +220,6 @@
                 </div>
                 <div class="products-grid" id="featuredProducts">
                     <!-- Products will be loaded here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Categories -->
-        <section class="categories">
-            <div class="container">
-                <div class="section-header">
-                    <h2>دسته بندی محصولات</h2>
-                    <p>انتخاب کنید و خرید کنید</p>
-                </div>
-                <div class="categories-grid" id="categoriesGrid">
-                    <!-- Categories will be loaded here -->
                 </div>
             </div>
         </section>

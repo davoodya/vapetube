@@ -64,10 +64,10 @@ class VapeTube {
             this.hideAllModals();
         });
         
-        // Mobile menu
-        document.querySelector('.mobile-menu-toggle')?.addEventListener('click', () => {
-            this.toggleMobileMenu();
-        });
+        // // Mobile menu
+        // document.querySelector('.mobile-menu-toggle')?.addEventListener('click', () => {
+        //     this.toggleMobileMenu();
+        // });
         
         // Product categories hover (desktop)
         if (window.innerWidth > 768) {
@@ -563,13 +563,13 @@ class VapeTube {
         document.body.style.overflow = '';
     }
     
-    toggleMobileMenu() {
-        const navLeft = document.querySelector('.nav-left');
-        const navRight = document.querySelector('.nav-right');
-        
-        navLeft?.classList.toggle('active');
-        navRight?.classList.toggle('active');
-    }
+    // toggleMobileMenu() {
+    //     const navLeft = document.querySelector('.nav-left');
+    //     const navRight = document.querySelector('.nav-right');
+    //
+    //     navLeft?.classList.toggle('active');
+    //     navRight?.classList.toggle('active');
+    // }
     
     showNotification(message, type = 'info') {
         // Create notification element
@@ -650,27 +650,60 @@ class VapeTube {
         this.showNotification('در حال پیاده سازی...', 'info');
     }
 }
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLeft = document.querySelector('.nav-left');
+    const navRight = document.querySelector('.nav-right');
+    const productsLink = document.querySelector('.products-link');
+    const megaMenu = document.querySelector('.mega-menu');
 
-// مدیریت منوی موبایل
-const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-const navLeft = document.querySelector('.nav-left');
-const navRight = document.querySelector('.nav-right');
+    if (!mobileMenuToggle || !navLeft || !navRight || !productsLink || !megaMenu) {
+        console.error('یکی از المنت های ناوبری پیدا نشد!');
+        return;
+    }
 
-if (mobileMenuToggle) {
+    // باز/بستن منوی کلی موبایل
     mobileMenuToggle.addEventListener('click', () => {
+        const expanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+        mobileMenuToggle.setAttribute('aria-expanded', !expanded);
         mobileMenuToggle.classList.toggle('active');
         navLeft.classList.toggle('active');
         navRight.classList.toggle('active');
-    });
-}
 
-// بستن منو هنگام کلیک خارج از آن
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.navbar-content') && !e.target.closest('.mobile-menu-toggle')) {
-        mobileMenuToggle.classList.remove('active');
-        navLeft.classList.remove('active');
-        navRight.classList.remove('active');
-    }
+        // همزمان زیرمنوی محصولات بسته شود
+        megaMenu.classList.remove('active');
+        productsLink.classList.remove('active');
+        productsLink.setAttribute('aria-expanded', false);
+    });
+
+    // باز/بستن زیرمنوی محصولات در موبایل
+    productsLink.addEventListener('click', (e) => {
+        e.preventDefault(); // جلوگیری از رفتن به لینک
+
+        const isActive = megaMenu.classList.contains('active');
+        if (isActive) {
+            megaMenu.classList.remove('active');
+            productsLink.classList.remove('active');
+            productsLink.setAttribute('aria-expanded', false);
+        } else {
+            megaMenu.classList.add('active');
+            productsLink.classList.add('active');
+            productsLink.setAttribute('aria-expanded', true);
+        }
+    });
+
+    // بستن منو هنگام کلیک بیرون
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.navbar-content') && !e.target.closest('.mobile-menu-toggle')) {
+            mobileMenuToggle.classList.remove('active');
+            mobileMenuToggle.setAttribute('aria-expanded', false);
+            navLeft.classList.remove('active');
+            navRight.classList.remove('active');
+            megaMenu.classList.remove('active');
+            productsLink.classList.remove('active');
+            productsLink.setAttribute('aria-expanded', false);
+        }
+    });
 });
 
 
