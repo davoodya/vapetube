@@ -1,6 +1,8 @@
 <?php
 require_once '../config.php';
 
+
+
 // Handle CORS preflight requests
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     header('Access-Control-Allow-Origin: *');
@@ -110,7 +112,8 @@ function handleLogin($user) {
     }
     
     // Rate limiting
-    if (!rateLimit('login_' . getClientIP(), 10, 3600)) {
+    // debug max request changed
+    if (!rateLimit('login_' . getClientIP(), 1000, 3600)) {
         sendJsonResponse(['success' => false, 'message' => 'تعداد درخواست‌های ورود بیش از حد مجاز'], 429);
     }
     

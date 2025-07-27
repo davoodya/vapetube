@@ -43,7 +43,7 @@ class User {
         }
     }
     
-    public function login($username, $password) {
+    public function login_old($username, $password) {
         $sql = "SELECT * FROM users WHERE username = :username OR email = :username";
         $user = $this->db->selectOne($sql, ['username' => $username]);
         
@@ -62,7 +62,37 @@ class User {
             return ['success' => false, 'message' => 'نام کاربری یا رمز عبور اشتباه است'];
         }
     }
-    
+
+    public function login($username, $password) {
+        // ابتدا فقط با نام کاربری جستجو کنید
+        $sql = "SELECT * FROM users WHERE username = :username";
+        $user = $this->db->selectOne($sql, ['username' => $username]);
+
+        // اگر کاربر با نام کاربری یافت نشد، با ایمیل جستجو کنید
+        if (!$user) {
+            $sql = "SELECT * FROM users WHERE email = :email";
+            $user = $this->db->selectOne($sql, ['email' => $username]);
+        }
+
+        if ($user) {
+            // بررسی صحت پسورد
+            if (password_verify($password, $user['password_hash'])) {
+                // Update last login
+                $this->db->update('users', ['updated_at' => date('Y-m-d H:i:s')], 'id = :id', ['id' => $user['id']]);
+
+                // Set session
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['is_admin'] = $user['is_admin'];
+                $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
+
+                return ['success' => true, 'message' => 'ورود موفقیت آمیز', 'user' => $user];
+            }
+        }
+
+        return ['success' => false, 'message' => 'نام کاربری یا رمز عبور اشتباه است'];
+    }
+
     public function logout() {
         session_destroy();
         return ['success' => true, 'message' => 'خروج موفقیت آمیز'];
