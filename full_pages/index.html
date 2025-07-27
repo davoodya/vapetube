@@ -1,0 +1,3254 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vape Tube - فروشگاه ویپ و سیگار الکترونیکی</title>
+  <meta name="description" content="فروشگاه آنلاین ویپ تیوب - خرید انواع ویپ، مود، پاد سیستم، مایع ویپ و لوازم جانبی با بهترین قیمت">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/style_new.css">
+
+  <!-- Fuse Searching Mechanism -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+
+
+  <base href="/vape-tube/">
+
+  <style>
+    /* Vape Tube Website Styles */
+
+    /* CSS Variables */
+    :root {
+      --primary-color: #6c5ce7;
+      --secondary-color: #a29bfe;
+      --accent-color: #fd79a8;
+      --dark-color: #2d3436;
+      --light-color: #ddd;
+      --white: #ffffff;
+      --black: #000000;
+      --gray-100: #f8f9fa;
+      --gray-200: #e9ecef;
+      --gray-300: #dee2e6;
+      --gray-400: #ced4da;
+      --gray-500: #adb5bd;
+      --gray-600: #6c757d;
+      --gray-700: #495057;
+      --gray-800: #343a40;
+      --gray-900: #212529;
+      --success-color: #00b894;
+      --warning-color: #fdcb6e;
+      --error-color: #e17055;
+      --border-radius: 8px;
+      --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --font-family: 'Vazirmatn', sans-serif;
+    }
+
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      line-height: 1.6;
+      color: var(--dark-color);
+      background-color: var(--white);
+      direction: rtl;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.75rem; }
+    h4 { font-size: 1.5rem; }
+    h5 { font-size: 1.25rem; }
+    h6 { font-size: 1rem; }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--secondary-color);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+    }
+
+    .btn-secondary {
+      background-color: var(--gray-200);
+      color: var(--dark-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--gray-300);
+    }
+    .header-auth {
+      margin-right: auto; /* این باعث می‌شود به header-contact بچسبد */
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* Header */
+    .header {
+      background-color: var(--white);
+      box-shadow: var(--box-shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-top {
+      background-color: var(--gray-100);
+      padding: 8px 0;
+      font-size: 0.875rem;
+    }
+
+    .header-top-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .header-contact {
+      display: flex;
+      gap: 20px; /* فاصله بین آیتم‌های تماس */
+      align-items: center;
+    }
+
+    .header-contact span {
+      margin-left: 20px;
+      color: var(--gray-600);
+    }
+
+    .header-contact i {
+      margin-left: 5px;
+      color: var(--primary-color);
+    }
+
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-link {
+      color: var(--dark-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .auth-link:hover {
+      color: var(--primary-color);
+    }
+
+    .auth-buttons a {
+      color: var(--gray-700);
+      margin: 0 5px;
+    }
+
+    .auth-buttons a:hover {
+      color: var(--primary-color);
+    }
+
+    .user-menu {
+      position: relative;
+      z-index: 1000; /* بالاتر از هدر */
+
+    }
+
+    .user-name {
+      color: var(--primary-color);
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .user-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      min-width: 200px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 10px 0;
+      z-index: 1001; /* بالاتر از هدر */
+    }
+
+    .user-menu:hover .user-dropdown {
+      display: block;
+    }
+
+    .user-dropdown a {
+      display: block;
+      padding: 10px 20px;
+      text-decoration: none;
+      transition: all 0.3s;
+      color: var(--gray-700);
+    }
+
+    .user-dropdown a:hover {
+      background: var(--gray-100);
+      color: var(--primary-color);
+    }
+
+    .header-main {
+      padding: 20px 0; /* افزایش padding برای عریض‌تر شدن */
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* سایه قوی‌تر */
+      position: relative; /* تغییر از sticky به relative */
+      z-index: 100;
+      min-height: 80px; /* حداقل ارتفاع هدر */
+    }
+
+
+
+
+    .header-main-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px; /* فاصله بیشتر بین المان‌ها */
+      height: 100%;
+    }
+
+
+    /* استایل لوگو */
+    .logo {
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.03);
+    }
+
+    .logo h1 {
+      font-size: 2.2rem; /* بزرگتر شدن فونت لوگو */
+      margin: 0;
+    }
+
+    .logo img {
+      height: 50px; /* بزرگتر شدن لوگو تصویری */
+    }
+
+    .logo a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #fff;
+      gap: 10px;
+    }
+
+
+    /* استایل جعبه جستجو */
+    .search-box {
+      flex-grow: 1;
+      max-width: 600px;
+    }
+
+    .search-form {
+      display: flex;
+      position: relative;
+    }
+
+    .search-form input {
+      padding: 15px 25px; /* بزرگتر شدن جعبه جستجو */
+      font-size: 1.1rem;
+      width: 100%;
+      border-radius: 30px;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      color: #fff;
+      transition: all 0.3s ease;
+      padding-right: 50px;
+    }
+
+    .search-form input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.3);
+    }
+
+    .search-form input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .search-form button {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    .search-form button:hover {
+      color: #fff;
+    }
+
+
+    /* استایل سبد خرید */
+    .cart-icon {
+      position: relative;
+    }
+
+    .cart-icon a {
+      width: 60px; /* بزرگتر شدن آیکون سبد خرید */
+      height: 60px;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+      color: #fff;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .cart-icon a:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+    }
+
+
+    .cart-icon a:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #ff7675;
+      color: white;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    /* انیمیشن برای سبد خرید */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .cart-icon .pulse {
+      animation: pulse 0.5s ease;
+    }
+    /* Navigation */
+    /* Mobile Menu Toggle */
+
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 10px 15px;
+      user-select: none;
+      z-index: 1100;
+    }
+
+    .mobile-menu-toggle span {
+      width: 25px;
+      height: 3.5px;
+      background-color: var(--white);
+      margin: 4px 0;
+      transition: 0.3s ease;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+
+    .navbar {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 60px;
+      font-family: var(--font-family);
+      position: relative;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-menu li {
+      margin-left: 30px;
+    }
+
+    .nav-menu a {
+      color: var(--white);
+      font-weight: 500;
+      padding: 20px 0;
+      display: block;
+      transition: var(--transition);
+    }
+
+    .nav-menu a:hover {
+      color: var(--accent-color);
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+
+    .products-menu {
+      position: relative;
+    }
+
+    .products-link {
+      color: var(--white);
+      font-weight: 600;
+      padding: 20px 15px;
+      display: flex;
+      align-items: center;
+      transition: var(--transition);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .products-link:hover {
+      color: var(--accent-color);
+    }
+
+    .products-link i {
+      margin-right: 5px;
+      transition: var(--transition);
+    }
+
+    /* Rotate chevron on hover desktop */
+    @media (min-width: 768px) {
+      .products-menu:hover .products-link i {
+        transform: rotate(180deg);
+      }
+    }
+
+
+
+    .products-menu:hover .products-link i {
+      transform: rotate(180deg);
+    }
+
+    /* Mega Menu */
+    .mega-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: var(--white);
+      box-shadow: var(--box-shadow);
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+      padding: 30px;
+      min-width: 800px;
+      display: none;
+      z-index: 1000;
+    }
+
+    /* Show mega menu on hover desktop */
+    @media (min-width: 768px) {
+      .products-menu:hover .mega-menu {
+        display: block;
+      }
+    }
+
+
+    .products-menu:hover .mega-menu {
+      display: block;
+    }
+
+    .mega-menu-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+
+    .category-column h3 {
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    .category-column ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .category-column li {
+      margin-bottom: 8px;
+    }
+
+    .category-column a {
+      color: var(--gray-700);
+      font-size: 0.9rem;
+      transition: var(--transition);
+      display: block;
+      padding: 4px 0;
+    }
+
+    .category-column a:hover {
+      color: var(--primary-color);
+      padding-right: 5px;
+    }
+
+
+    /* Navigation End */
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--white);
+      padding: 80px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      color: orange;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .hero .btn {
+      animation: fadeInUp 1s ease 0.4s both;
+      color: white;
+      transition: background-color;
+    }
+
+    /* Section & Categories */
+    .categories-filter-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr); /* ۵ ستون مساوی */
+      gap: 20px; /* فاصله بین کارت‌ها */
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .category_container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 5px 5px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* ۵ ستون مساوی */
+      gap: 30px; /* فاصله بین کارت‌ها */
+
+    }
+
+    .categories {
+      position: relative;
+      padding: 60px 20px;
+      font-family: var(--font-family);
+      z-index: 0;
+      min-height: 300px;
+      overflow: hidden;
+    }
+
+    /* لایه پس‌زمینه با تصویر */
+    .categories::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-image 0.8s ease-in-out;
+      z-index: 0;
+    }
+
+    /* لایه تیره نیمه‌شفاف برای خوانایی */
+    .categories::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    .categories > * {
+      position: relative;
+      z-index: 2; /* محتوا بالای پس‌زمینه و لایه تیره */
+    }
+
+    .categories .section-header {
+
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .categories .section-header h2 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--primary-color, #4a90e2);
+      margin-bottom: 10px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .categories .section-header h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background-color: var(--accent-color, #f39c12);
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+
+    .categories .section-header p {
+      font-size: 1.2rem;
+      color: var(--white, #666);
+    }
+
+
+
+    .category-card {
+
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+    }
+
+    .category-card img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .category-card h3 {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .category-card p {
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    /* واکنشگرایی برای موبایل و تبلت */
+    @media (max-width: 1200px) {
+      .categories-filter-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .categories-filter-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .categories-filter-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .product-card {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-image {
+      position: relative;
+      height: 250px;
+      background-color: var(--gray-100);
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.1);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--accent-color);
+      color: var(--white);
+      padding: 5px 10px;
+      border-radius: var(--border-radius);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--dark-color);
+    }
+
+    .product-price {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .current-price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .original-price {
+      font-size: 1rem;
+      color: var(--gray-500);
+      text-decoration: line-through;
+      margin-right: 10px;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .add-to-cart {
+      flex: 1;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--white);
+      border: none;
+      padding: 10px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .add-to-cart:hover {
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      transform: translateY(-2px);
+    }
+
+    .quick-view {
+      background-color: var(--gray-200);
+      color: var(--dark-color);
+      border: none;
+      padding: 10px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .quick-view:hover {
+      background-color: var(--gray-300);
+    }
+
+    /* Categories Grid */
+    .categories-filter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .category-card {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .category-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      color: var(--white);
+      font-size: 1.5rem;
+    }
+
+    .category-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+
+    /* Filters */
+    .products-filters {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .products-filters select {
+      padding: 10px 15px;
+      border: 2px solid var(--gray-300);
+      border-radius: var(--border-radius);
+      background-color: var(--white);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .products-filters select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+
+    /* Pagination */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .pagination a,
+    .pagination span {
+      padding: 10px 15px;
+      border: 2px solid var(--gray-300);
+      border-radius: var(--border-radius);
+      color: var(--gray-700);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .pagination a:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .pagination .current {
+      background-color: var(--primary-color);
+      color: var(--white);
+      border-color: var(--primary-color);
+    }
+
+    /* Cart Sidebar */
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      left: -400px;
+      width: 400px;
+      height: 100vh;
+      background-color: var(--white);
+      box-shadow: var(--box-shadow);
+      z-index: 1001;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-sidebar.active {
+      left: 0;
+    }
+
+    .cart-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-header h3 {
+      margin: 0;
+      color: var(--dark-color);
+    }
+
+    .cart-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--gray-500);
+      transition: var(--transition);
+    }
+
+    .cart-close:hover {
+      color: var(--dark-color);
+    }
+
+    .cart-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .cart-item-image {
+      width: 60px;
+      height: 60px;
+      background-color: var(--gray-100);
+      border-radius: var(--border-radius);
+      margin-left: 15px;
+      overflow: hidden;
+    }
+
+    .cart-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--dark-color);
+    }
+
+    .cart-item-price {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .quantity-btn {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--gray-300);
+      background-color: var(--white);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .quantity-btn:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .quantity-input {
+      width: 50px;
+      text-align: center;
+      border: 1px solid var(--gray-300);
+      border-radius: var(--border-radius);
+      padding: 5px;
+    }
+
+    .remove-item {
+      color: var(--error-color);
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .remove-item:hover {
+      color: var(--dark-color);
+    }
+
+    .cart-footer {
+      padding: 20px;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .cart-total {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+
+    /* Modals */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1002;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      color: var(--dark-color);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--gray-500);
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      color: var(--dark-color);
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .modal-footer-text {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--gray-600);
+    }
+
+    .modal-footer-text a {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    /* Forms */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: var(--dark-color);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--gray-300);
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 999;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--dark-color);
+      color: var(--white);
+      padding: 50px 0 20px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 30px;
+    }
+
+    .footer-section h3,
+    .footer-section h4 {
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .footer-section h3 {
+      background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-section p {
+      color: var(--gray-400);
+      line-height: 1.6;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-section ul li a {
+      color: var(--gray-400);
+      transition: var(--transition);
+    }
+
+    .footer-section ul li a:hover {
+      color: var(--white);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+    }
+
+    .contact-info p {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      color: var(--gray-400);
+    }
+
+    .contact-info i {
+      margin-left: 10px;
+      color: var(--primary-color);
+      width: 20px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--gray-700);
+      color: var(--gray-400);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    /* Loading States */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      color: var(--gray-500);
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--gray-200);
+      border-top: 4px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Utility Classes */
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .text-right { text-align: right; }
+    .d-none { display: none; }
+    .d-block { display: block; }
+    .d-flex { display: flex; }
+    .justify-center { justify-content: center; }
+    .align-center { align-items: center; }
+    .mt-1 { margin-top: 0.25rem; }
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-3 { margin-top: 1rem; }
+    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-3 { margin-bottom: 1rem; }
+    .p-1 { padding: 0.25rem; }
+    .p-2 { padding: 0.5rem; }
+    .p-3 { padding: 1rem; }
+
+    /* Responsive Styles for Vape Tube Website */
+
+    /* Tablet Styles */
+    @media (max-width: 1024px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .header-main-content {
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .search-box {
+        order: 3;
+        flex-basis: 100%;
+        margin: 15px 0 0 0;
+        max-width: none;
+      }
+
+      .mega-menu {
+        min-width: 600px;
+      }
+
+      .mega-menu-content {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .categories-filter-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .category_container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 767px) {
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .navbar-content {
+        flex-wrap: wrap;
+        min-height: auto;
+      }
+
+      .nav-left,
+      .nav-right {
+        flex-direction: column;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background: var(--primary-color);
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+      }
+
+      .nav-left.active,
+      .nav-right.active {
+        max-height: 1000px; /* بزرگ باشه تا باز شود */
+        padding: 10px 0;
+      }
+
+      /* محصولات لینک - تغییر به حالت آکاردئونی */
+      .products-link {
+        padding: 15px;
+        justify-content: space-between;
+        font-weight: 700;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+      }
+
+      .products-link i {
+        margin-right: 0;
+        transition: transform 0.3s ease;
+      }
+
+      /* مخفی کردن مگا منو پیش فرض موبایل */
+      .mega-menu {
+        position: static;
+        padding: 0;
+        min-width: auto;
+        box-shadow: none;
+        border-radius: 0;
+        display: none;
+        background: var(--primary-color);
+      }
+
+      /* فعال شدن مگا منو با کلاس active */
+      .mega-menu.active {
+        display: block;
+        padding: 10px 15px;
+      }
+
+      /* تغییر گرید مگامنو به حالت عمودی */
+      .mega-menu-content {
+        display: block;
+        padding: 0;
+        margin: 0;
+      }
+
+      .category-column {
+        margin-bottom: 15px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        padding-bottom: 10px;
+      }
+
+      .category-column h3 {
+        color: var(--white);
+        border: none;
+        margin-bottom: 8px;
+      }
+
+      .category-column ul {
+        padding-left: 10px;
+      }
+
+      .category-column a {
+        color: var(--white);
+        font-size: 1rem;
+        padding: 5px 0;
+      }
+
+      .category-column a:hover {
+        color: var(--accent-color);
+        padding-right: 0;
+      }
+
+      /* Nav Right */
+      .nav-menu {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .nav-menu li {
+        margin: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+      }
+
+      .nav-menu a {
+        padding: 15px;
+        font-size: 1.1rem;
+      }
+    }
+
+
+
+    @media (max-width: 992px) {
+      .mobile-menu-toggle {
+        display: flex; /* موبایل نمایش */
+      }
+
+      .nav-left,
+      .nav-right {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        max-height: 80vh;       /* حداکثر ارتفاع معقول */
+        overflow-y: scroll;
+        background-color: var(--primary-color);
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+        padding: 0;
+        margin: 0;
+      }
+
+
+      /* منو باز شده */
+      .nav-left.active,
+      .nav-right.active {
+        display: flex;
+        padding: 10px 0;
+      }
+
+      .products-menu {
+        width: 100%;
+      }
+
+      .products-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        font-weight: 700;
+        color: var(--white);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .products-link i {
+        transition: transform 0.3s ease;
+        margin-left: 5px;
+      }
+
+      .products-link.active i {
+        transform: rotate(180deg);
+      }
+
+      /* مخفی کردن مگا منو پیش فرض */
+      .mega-menu {
+        display: none;
+        width: 100%;
+        background-color: var(--primary-color);
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        max-height: none !important;
+        transition: none !important;
+        border-radius: 0;
+      }
+
+      /* نمایش مگا منو وقتی باز است */
+      .mega-menu.active {
+        display: block;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        display: block !important;
+      }
+
+      /* گرید به حالت عمودی تغییر کند */
+      .mega-menu-content {
+        display: block;
+        padding: 0;
+        margin: 0;
+      }
+
+      /* هر ستون (دسته‌بندی) */
+      .category-column {
+        margin-bottom: 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 10px;
+      }
+
+      .category-column h3 {
+        color: var(--white);
+        margin: 0 0 8px 0;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      .category-column ul {
+        list-style: none;
+        padding-left: 15px;
+        margin: 0;
+      }
+
+      .category-column li {
+        margin-bottom: 8px;
+      }
+
+      .category-column a {
+        color: var(--white);
+        font-size: 1rem;
+        text-decoration: none;
+        display: block;
+        padding: 8px 0;
+        transition: color 0.3s ease;
+      }
+
+      .category-column a:hover {
+        color: var(--accent-color);
+      }
+
+      /* منوی سمت راست */
+      .nav-menu {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+      }
+
+      .nav-menu li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        margin: 0;
+      }
+
+      .nav-menu a {
+        color: var(--white);
+        font-size: 1.1rem;
+        padding: 15px;
+        display: block;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .nav-menu a:hover {
+        color: var(--accent-color);
+      }
+
+      .products-menu:hover .mega-menu {
+        display: none !important;
+      }
+    }
+
+    @media (min-width: 993px) {
+      .products-menu:hover .mega-menu {
+        display: block;
+      }
+    }
+
+    /* Small Mobile Styles */
+    @media (max-width: 480px) {
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 0.9rem;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .categories-filter-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .category_container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pagination {
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+
+      .pagination a,
+      .pagination span {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .cart-item-image {
+        margin: 0;
+        align-self: center;
+      }
+
+      .cart-item-controls {
+        align-self: center;
+      }
+    }
+
+    /* Touch Device Optimizations */
+    @media (hover: none) and (pointer: coarse) {
+      .product-card:hover {
+        transform: none;
+      }
+
+      .product-card:hover .product-image img {
+        transform: none;
+      }
+
+      .category-card:hover {
+        transform: none;
+      }
+
+      .btn-primary:hover {
+        transform: none;
+      }
+
+      .add-to-cart:hover {
+        transform: none;
+      }
+
+      /* Make touch targets larger */
+      .cart-icon a {
+        width: 60px;
+        height: 60px;
+      }
+
+      .quantity-btn {
+        width: 40px;
+        height: 40px;
+      }
+
+      .mobile-menu-toggle {
+        padding: 15px;
+      }
+
+      .mobile-menu-toggle span {
+        height: 4px;
+        margin: 4px 0;
+      }
+    }
+
+    /* High DPI Displays */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .product-image,
+      .cart-item-image {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
+    }
+
+    /* Landscape Mobile */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .hero {
+        padding: 40px 0;
+      }
+
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+
+      .featured-products,
+      .categories,
+      .all-products {
+        padding: 40px 0;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+    }
+
+    /* Print Styles */
+    @media print {
+      .header,
+      .navbar,
+      .cart-sidebar,
+      .modal,
+      .overlay,
+      .footer {
+        display: none !important;
+      }
+
+      .main-content {
+        margin: 0;
+        padding: 0;
+      }
+
+      .product-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid var(--gray-300);
+      }
+
+      .btn {
+        display: none;
+      }
+
+      a {
+        color: var(--dark-color) !important;
+        text-decoration: underline;
+      }
+    }
+
+    /* Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .hero::before {
+        animation: none;
+      }
+
+      .spinner {
+        animation: none;
+        border: 4px solid var(--primary-color);
+      }
+    }
+
+    /* Dark Mode Support */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --white: #1a1a1a;
+        --dark-color: #ffffff;
+        --gray-100: #2d2d2d;
+        --gray-200: #3d3d3d;
+        --gray-300: #4d4d4d;
+        --gray-400: #6d6d6d;
+        --gray-500: #8d8d8d;
+        --gray-600: #adadad;
+        --gray-700: #cdcdcd;
+        --gray-800: #ededef;
+        --gray-900: #ffffff;
+      }
+
+      .header {
+        background-color: var(--gray-100);
+      }
+
+      .product-card,
+      .category-card,
+      .modal-content,
+      .cart-sidebar {
+        background-color: var(--gray-100);
+      }
+
+      .mega-menu {
+        background-color: var(--gray-100);
+      }
+
+      .categories {
+        background-color: var(--gray-200);
+      }
+    }
+
+    @media (min-width: 767px) and (max-width: 992px) {
+      .nav-right {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .nav-left {
+        display: none !important;
+      }
+    }
+
+
+  </style>
+</head>
+
+<body>
+<!-- Header -->
+<header class="header">
+  <div class="header-top">
+    <div class="container">
+      <div class="header-top-content">
+        <div class="header-contact">
+          <span><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</span>
+          <span><i class="fas fa-envelope"></i> info@vapetube.com</span>
+        </div>
+        <div class="header-auth">
+          <div class="auth-buttons" id="authButtons">
+            <a href="#" class="auth-link" id="loginBtn">ورود</a>
+            <span>|</span>
+            <a href="#" class="auth-link" id="registerBtn">ثبت نام</a>
+          </div>
+          <div class="user-menu" id="userMenu" style="display: none;">
+            <span class="user-name" id="userName"></span>
+            <div class="user-dropdown">
+              <a href="#" id="profileBtn">پروفایل</a>
+              <a href="#" id="ordersBtn">سفارشات</a>
+              <a href="#" id="logoutBtn">خروج</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="header-main">
+    <div class="container">
+      <div class="header-main-content">
+        <!-- لوگو با تصویر -->
+        <div class="logo">
+          <a href="index.html">
+            <img src="assets/images/products/logo.jpg" alt="ویپ تیوب">
+            <h1>ویپ تیوب | Vape Tube</h1>
+          </a>
+        </div>
+
+        <!-- جستجو -->
+        <div class="search-box">
+          <form class="search-form" id="searchForm">
+            <input type="text" placeholder="جستجو در محصولات..." id="searchInput">
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+
+          <!-- نمایش نتایج جستجو -->
+          <div id="searchResults" class="search-results"></div>
+        </div>
+
+        <!-- سبد خرید -->
+        <div class="cart-icon">
+          <a href="#" id="cartToggle">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-content">
+        <!-- Mobile Menu Toggle -->
+        <div class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" role="button" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <!-- Right Menu (Products) -->
+        <div class="nav-left">
+          <div class="products-menu">
+            <a href="#" class="products-link" aria-haspopup="true" aria-expanded="false">محصولات <i class="fas fa-chevron-down"></i></a>
+            <div class="mega-menu" aria-label="محصولات">
+              <div class="mega-menu-content">
+                <div class="category-column" data-category="1">
+                  <h3>مود ویپ</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="1">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="2">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="3">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="2">
+                  <h3>سیستم های پاد</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="4">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="5">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="6">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="3">
+                  <h3>نیکوتین نمک</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="7">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="8">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="9">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="4">
+                  <h3>مایع ویپ</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="10">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="11">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="12">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="5">
+                  <h3>یکبار مصرف</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="13">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="14">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="15">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="6">
+                  <h3>کویل و کارتریج</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="16">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="17">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="18">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="7">
+                  <h3>لوازم جانبی</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="19">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="20">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="21">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="8">
+                  <h3>سیگار الکترونیکی</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="22">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="23">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="24">آیتم ۳</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left Menu -->
+        <div class="nav-right">
+          <ul class="nav-menu">
+            <li><a href="#" data-page="about">درباره ما</a></li>
+            <li><a href="#" data-page="contact">تماس با ما</a></li>
+            <li><a href="#" data-page="faq">سوالات متداول</a></li>
+            <li><a href="#" data-page="articles">مقالات</a></li>
+          </ul>
+        </div>
+
+
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+  <!-- Categories -->
+
+  <section class="categories">
+    <div class="section-header">
+      <h2>دسته بندی محصولات</h2>
+      <p>با خیالت راحت انتخاب و خرید کنید</p>
+    </div>
+    <div class="category_container">
+
+      <!-- Pod Systems Category -->
+      <a href="http://localhost/vape-tube/api/auth.php">
+        <div class="category-card">
+          <img src="assets/images/products/iqos-iluma.jpg" alt="نام دسته بندی ۱" />
+          <h3>پاد سیستم</h3>
+          <p>محصولاتی برای ترک</p>
+        </div>
+      </a>
+
+      <div class="category-card">
+        <img src="assets/images/bg/Berseker.jpg" alt="نام دسته بندی ۲" />
+        <h3>نام دسته بندی ۲</h3>
+        <p>توضیح کوتاه درباره دسته بندی ۲</p>
+      </div>
+      <div class="category-card">
+        <img src="path-to-image3.jpg" alt="نام دسته بندی ۳" />
+        <h3>نام دسته بندی ۳</h3>
+        <p>توضیح کوتاه درباره دسته بندی ۳</p>
+      </div>
+      <div class="category-card">
+        <img src="path-to-image4.jpg" alt="نام دسته بندی ۴" />
+        <h3>نام دسته بندی ۴</h3>
+        <p>توضیح کوتاه درباره دسته بندی ۴</p>
+      </div>
+      <div class="category-card">
+        <img src="path-to-image5.jpg" alt="نام دسته بندی ۵" />
+        <h3>نام دسته بندی ۵</h3>
+        <p>توضیح کوتاه درباره دسته بندی ۵</p>
+      </div>
+
+      <div class="category-card">
+        <img src="path-to-image1.jpg" alt="دسته بندی ۱" />
+        <h3>دسته بندی ۱</h3>
+        <p>توضیح کوتاه دسته بندی ۱</p>
+      </div>
+      <div class="category-card">
+        <img src="path-to-image2.jpg" alt="دسته بندی ۲" />
+        <h3>دسته بندی ۲</h3>
+        <p>توضیح کوتاه دسته بندی ۲</p>
+      </div>
+      <div class="category-card">
+        <img src="path-to-image3.jpg" alt="دسته بندی ۳" />
+        <h3>دسته بندی ۳</h3>
+        <p>توضیح کوتاه دسته بندی ۳</p>
+      </div>
+
+
+
+    </div>
+  </section>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-slider">
+      <div class="hero-slide active">
+        <div class="hero-content">
+          <h2>بهترین محصولات ویپ</h2>
+          <p>کیفیت بالا، قیمت مناسب، ارسال سریع</p>
+          <a href="#" class="btn btn-primary">مشاهده محصولات</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <!-- Category Filter-->
+    <div class="categories-filter-grid" id="categoriesGrid">
+      <!-- Categories will be loaded here -->
+    </div>
+  </section>
+
+  <!-- All Products with Category Filter -->
+  <section class="all-products" id="allProductsSection">
+    <div class="container">
+      <div class="section-header">
+        <h2>همه محصولات</h2>
+        <div class="products-filters">
+          <select id="categoryFilter">
+            <option value="">همه دسته‌ها</option>
+          </select>
+          <select id="sortFilter">
+            <option value="newest">جدیدترین</option>
+            <option value="price_low">قیمت: کم به زیاد</option>
+            <option value="price_high">قیمت: زیاد به کم</option>
+          </select>
+        </div>
+      </div>
+      <div class="products-grid" id="allProducts">
+        <!-- Products will be loaded here -->
+      </div>
+      <div class="pagination" id="pagination">
+        <!-- Pagination will be loaded here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Special Products -->
+  <section class="featured-products">
+    <div class="container">
+      <div class="section-header">
+        <h2>محصولات ویژه</h2>
+        <p>جدیدترین و بهترین محصولات ویپ</p>
+      </div>
+      <div class="products-grid" id="featuredProducts">
+        <!-- Products will be loaded here -->
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Shopping Cart Sidebar -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>سبد خرید</h3>
+    <button class="cart-close" id="cartClose"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-content" id="cartContent">
+    <!-- Cart items will be loaded here -->
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>مجموع: <span id="cartTotal">۰ تومان</span></span>
+    </div>
+    <button class="btn btn-primary btn-block" id="checkoutBtn">تسویه حساب</button>
+  </div>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Modals -->
+<!-- Login Modal -->
+<div class="modal" id="loginModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>ورود به حساب کاربری</h3>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="loginForm">
+        <div class="form-group">
+          <label>نام کاربری یا ایمیل</label>
+          <input type="text" name="username" required>
+        </div>
+        <div class="form-group">
+          <label>رمز عبور</label>
+          <input type="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">ورود</button>
+      </form>
+      <p class="modal-footer-text">
+        حساب کاربری ندارید؟ <a href="#" id="switchToRegister">ثبت نام کنید</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal" id="registerModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>ثبت نام</h3>
+      <button class="modal-close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="registerForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>نام</label>
+            <input type="text" name="first_name" required>
+          </div>
+          <div class="form-group">
+            <label>نام خانوادگی</label>
+            <input type="text" name="last_name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>نام کاربری</label>
+          <input type="text" name="username" required>
+        </div>
+        <div class="form-group">
+          <label>ایمیل</label>
+          <input type="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label>شماره تلفن</label>
+          <input type="tel" name="phone">
+        </div>
+        <div class="form-group">
+          <label>رمز عبور</label>
+          <input type="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">ثبت نام</button>
+      </form>
+      <p class="modal-footer-text">
+        قبلاً ثبت نام کرده‌اید؟ <a href="#" id="switchToLogin">وارد شوید</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Vape Tube</h3>
+        <p>بهترین فروشگاه آنلاین ویپ و سیگار الکترونیکی در ایران</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-telegram"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>لینک های مفید</h4>
+        <ul>
+          <li><a href="#">درباره ما</a></li>
+          <li><a href="#">تماس با ما</a></li>
+          <li><a href="#">سوالات متداول</a></li>
+          <li><a href="#">مقالات</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>خدمات مشتریان</h4>
+        <ul>
+          <li><a href="#">راهنمای خرید</a></li>
+          <li><a href="#">شرایط استفاده</a></li>
+          <li><a href="#">حریم خصوصی</a></li>
+          <li><a href="#">ضمانت بازگشت</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>تماس با ما</h4>
+        <div class="contact-info">
+          <p><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</p>
+          <p><i class="fas fa-envelope"></i> info@vapetube.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> تهران، خیابان ولیعصر</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; ۱۴۰۳ Vape Tube. تمامی حقوق محفوظ است.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+  // Vape Tube Website JavaScript
+  let fuse;
+
+  class VapeTube {
+    constructor() {
+      this.apiBase = 'http://localhost/vape-tube/api/';
+      this.currentUser = null;
+      this.cart = [];
+      this.products = [];
+      this.categories = [];
+      this.currentPage = 1;
+      this.totalPages = 1;
+
+      this.init();
+    }
+
+    init() {
+      this.bindEvents();
+      this.checkAuth();
+      this.loadCategories();
+      this.loadFeaturedProducts();
+      this.loadAllProducts();  // بارگذاری همه محصولات
+      this.loadCart();
+    }
+
+    bindEvents() {
+      // Authentication
+      document.getElementById('loginBtn')?.addEventListener('click', () => this.showModal('loginModal'));
+      document.getElementById('registerBtn')?.addEventListener('click', () => this.showModal('registerModal'));
+      document.getElementById('logoutBtn')?.addEventListener('click', () => this.logout());
+      document.getElementById('switchToRegister')?.addEventListener('click', () => {
+        this.hideModal('loginModal');
+        this.showModal('registerModal');
+      });
+      document.getElementById('switchToLogin')?.addEventListener('click', () => {
+        this.hideModal('registerModal');
+        this.showModal('loginModal');
+      });
+
+      // Forms
+      document.getElementById('loginForm')?.addEventListener('submit', (e) => this.handleLogin(e));
+      document.getElementById('registerForm')?.addEventListener('submit', (e) => this.handleRegister(e));
+      document.getElementById('searchForm')?.addEventListener('submit', (e) => vapeTube.handleSearch(e));
+
+      // Cart
+      document.getElementById('cartToggle')?.addEventListener('click', () => this.toggleCart());
+      document.getElementById('cartClose')?.addEventListener('click', () => this.hideCart());
+      document.getElementById('checkoutBtn')?.addEventListener('click', () => this.checkout());
+
+      // Filters
+      document.getElementById('categoryFilter')?.addEventListener('change', () => this.filterProducts());
+      document.getElementById('sortFilter')?.addEventListener('change', () => this.filterProducts());
+
+      // Modal close
+      document.querySelectorAll('.modal-close').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const modal = e.target.closest('.modal');
+          this.hideModal(modal.id);
+        });
+      });
+
+      // Overlay
+      document.getElementById('overlay')?.addEventListener('click', () => {
+        this.hideCart();
+        this.hideAllModals();
+      });
+
+      // // Mobile menu
+      // document.querySelector('.mobile-menu-toggle')?.addEventListener('click', () => {
+      //     this.toggleMobileMenu();
+      // });
+
+      // Product categories hover (desktop)
+      if (window.innerWidth > 768) {
+        this.setupMegaMenu();
+      }
+    }
+
+    setupMegaMenu() {
+      const productsMenu = document.querySelector('.products-menu');
+      const megaMenu = document.querySelector('.mega-menu');
+
+      if (productsMenu && megaMenu) {
+        productsMenu.addEventListener('mouseenter', () => {
+          megaMenu.style.display = 'block';
+        });
+
+        productsMenu.addEventListener('mouseleave', () => {
+          megaMenu.style.display = 'none';
+        });
+      }
+    }
+
+    // API Methods
+    async apiCall(endpoint, method = 'GET', data = null) {
+      const options = {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      if (data) {
+        options.body = JSON.stringify(data);
+      }
+
+      try {
+        const response = await fetch(this.apiBase + endpoint, options);
+        const result = await response.json();
+
+        return result;
+      } catch (error) {
+        console.error('API Error:', error);
+        this.showNotification('خطا در ارتباط با سرور', 'error');
+        return { success: false, message: 'خطا در ارتباط با سرور' };
+      }
+    }
+
+    // Authentication Methods
+    async checkAuth() {
+      const result = await this.apiCall('auth.php?action=check');
+      if (result.success && result.logged_in) {
+        this.currentUser = result.user;
+        this.updateAuthUI(true);
+      } else {
+        this.updateAuthUI(false);
+      }
+    }
+
+    async handleLogin(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+
+      const result = await this.apiCall('auth.php?action=login', 'POST', data);
+
+      if (result.success) {
+        this.currentUser = result.user;
+        this.updateAuthUI(true);
+        this.hideModal('loginModal');
+        this.showNotification('ورود موفقیت آمیز', 'success');
+        this.loadCart();
+      } else {
+        this.showNotification(result.message, 'error');
+      }
+    }
+
+    async handleRegister(e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData);
+
+      const result = await this.apiCall('auth.php?action=register', 'POST', data);
+
+      if (result.success) {
+        this.hideModal('registerModal');
+        this.showNotification('ثبت نام موفقیت آمیز. لطفا وارد شوید.', 'success');
+        this.showModal('loginModal');
+      } else {
+        this.showNotification(result.message, 'error');
+      }
+    }
+
+    async logout() {
+      const result = await this.apiCall('auth.php?action=logout', 'POST');
+
+      if (result.success) {
+        this.currentUser = null;
+        this.cart = [];
+        this.updateAuthUI(false);
+        this.updateCartUI();
+        this.showNotification('خروج موفقیت آمیز', 'success');
+      }
+    }
+
+    updateAuthUI(isLoggedIn) {
+      const authButtons = document.getElementById('authButtons');
+      const userMenu = document.getElementById('userMenu');
+      const userName = document.getElementById('userName');
+
+      if (isLoggedIn && this.currentUser) {
+        authButtons.style.display = 'none';
+        userMenu.style.display = 'block';
+        userName.textContent = this.currentUser.name;
+      } else {
+        authButtons.style.display = 'block';
+        userMenu.style.display = 'none';
+      }
+    }
+
+    // Product Methods
+    async loadCategories() {
+      const result = await this.apiCall('products.php?action=categories');
+      if (result.success) {
+        this.categories = result.categories;
+        this.renderCategories();
+        this.populateCategoryFilter();
+      }
+    }
+
+    async loadFeaturedProducts() {
+      const result = await this.apiCall('products.php?action=featured');
+      if (result.success) {
+        this.renderProducts(result.products, 'featuredProducts');
+      }
+    }
+
+    // بارگذاری همه محصولات
+    async loadAllProducts(page = 1, categoryId = '', search = '', sort = '') {
+      const params = new URLSearchParams({
+        action: 'all',
+        page: page,
+        category_id: categoryId,
+        sort: sort
+      });
+
+      const result = await this.apiCall(`products.php?${params}`);
+      if (result.success) {
+        this.products = result.products;
+        this.currentPage = result.pagination.current_page;
+        this.totalPages = result.pagination.total_pages;
+
+        // ایجاد یک شی Fuse برای جستجو در محصولات
+        const options = {
+          includeScore: true,  // نمایش امتیاز تطابق
+          keys: ['name_fa', 'description']  // کلیدهایی که می‌خواهیم جستجو در آن‌ها انجام شود
+        };
+        fuse = new Fuse(this.products, options);  // ایجاد نمونه Fuse با محصولات
+      }
+    }
+    renderCategories() {
+      const container = document.getElementById('categoriesGrid');
+      if (!container) return;
+
+      container.innerHTML = this.categories.map(category => `
+                    <div class="category-card" onclick="vapeTube.filterByCategory(${category.id})">
+                        <div class="category-icon">
+                            <i class="fas fa-smoking"></i>
+                        </div>
+                        <div class="category-name">${category.name_fa}</div>
+                    </div>
+                `).join('');
+    }
+
+    // متد برای رسم محصولات
+    renderProducts(products, containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      if (products.length === 0) {
+        container.innerHTML = '<div class="text-center">محصولی یافت نشد</div>';
+        return;
+      }
+
+      container.innerHTML = products.map(product => `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${product.image_url || 'assets/images/placeholder.jpg'}" alt="${product.name_fa}">
+                            ${product.is_featured ? '<div class="product-badge">ویژه</div>' : ''}
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">${product.name_fa}</div>
+                            <div class="product-price">
+                                <span class="current-price">${this.formatPrice(product.sale_price || product.price)}</span>
+                                ${product.sale_price ? `<span class="original-price">${this.formatPrice(product.price)}</span>` : ''}
+                            </div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" onclick="vapeTube.addToCart(${product.id})">
+                                    افزودن به سبد
+                                </button>
+                                <button class="quick-view" onclick="vapeTube.quickView(${product.id})">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+    }
+
+    renderPagination(pagination) {
+      const container = document.getElementById('pagination');
+      if (!container) return;
+
+      let html = '';
+
+      if (pagination.has_previous) {
+        html += `<a href="#" onclick="vapeTube.changePage(${pagination.previous_page})">قبلی</a>`;
+      }
+
+      for (let i = 1; i <= pagination.total_pages; i++) {
+        if (i === pagination.current_page) {
+          html += `<span class="current">${i}</span>`;
+        } else {
+          html += `<a href="#" onclick="vapeTube.changePage(${i})">${i}</a>`;
+        }
+      }
+
+      if (pagination.has_next) {
+        html += `<a href="#" onclick="vapeTube.changePage(${pagination.next_page})">بعدی</a>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    populateCategoryFilter() {
+      const select = document.getElementById('categoryFilter');
+      if (!select) return;
+
+      select.innerHTML = '<option value="">همه دسته‌ها</option>' +
+              this.categories.map(category =>
+                      `<option value="${category.id}">${category.name_fa}</option>`
+              ).join('');
+    }
+
+    // Cart Methods
+    async loadCart() {
+      if (!this.currentUser) {
+        this.loadSessionCart();
+        return;
+      }
+
+      const result = await this.apiCall('cart.php?action=get');
+      if (result.success) {
+        this.cart = result.items;
+        this.updateCartUI();
+      }
+    }
+
+    loadSessionCart() {
+      const sessionCart = localStorage.getItem('vape_tube_cart');
+      if (sessionCart) {
+        this.cart = JSON.parse(sessionCart);
+        this.updateCartUI();
+      }
+    }
+
+    async addToCart(productId, quantity = 1) {
+      if (!this.currentUser) {
+        this.addToSessionCart(productId, quantity);
+        return;
+      }
+
+      const result = await this.apiCall('cart.php?action=add', 'POST', {
+        product_id: productId,
+        quantity: quantity
+      });
+
+      if (result.success) {
+        this.showNotification('محصول به سبد خرید اضافه شد', 'success');
+        this.loadCart();
+      } else {
+        this.showNotification(result.message, 'error');
+      }
+    }
+
+    addToSessionCart(productId, quantity) {
+      const existingItem = this.cart.find(item => item.product_id == productId);
+
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        // Find product details
+        const product = this.products.find(p => p.id == productId);
+        if (product) {
+          this.cart.push({
+            product_id: productId,
+            name_fa: product.name_fa,
+            price: product.price,
+            sale_price: product.sale_price,
+            image_url: product.image_url,
+            quantity: quantity,
+            current_price: product.sale_price || product.price,
+            total_price: (product.sale_price || product.price) * quantity
+          });
+        }
+      }
+
+      localStorage.setItem('vape_tube_cart', JSON.stringify(this.cart));
+      this.updateCartUI();
+      this.showNotification('محصول به سبد خرید اضافه شد', 'success');
+    }
+
+    async updateCartItem(productId, quantity) {
+      if (!this.currentUser) {
+        this.updateSessionCartItem(productId, quantity);
+        return;
+      }
+
+      const result = await this.apiCall('cart.php?action=update', 'POST', {
+        product_id: productId,
+        quantity: quantity
+      });
+
+      if (result.success) {
+        this.loadCart();
+      } else {
+        this.showNotification(result.message, 'error');
+      }
+    }
+
+    updateSessionCartItem(productId, quantity) {
+      const item = this.cart.find(item => item.product_id == productId);
+      if (item) {
+        if (quantity <= 0) {
+          this.cart = this.cart.filter(item => item.product_id != productId);
+        } else {
+          item.quantity = quantity;
+          item.total_price = item.current_price * quantity;
+        }
+        localStorage.setItem('vape_tube_cart', JSON.stringify(this.cart));
+        this.updateCartUI();
+      }
+    }
+
+    async removeFromCart(productId) {
+      if (!this.currentUser) {
+        this.updateSessionCartItem(productId, 0);
+        return;
+      }
+
+      const result = await this.apiCall('cart.php?action=remove', 'POST', {
+        product_id: productId
+      });
+
+      if (result.success) {
+        this.showNotification('محصول از سبد خرید حذف شد', 'success');
+        this.loadCart();
+      } else {
+        this.showNotification(result.message, 'error');
+      }
+    }
+
+    updateCartUI() {
+      const cartCount = document.getElementById('cartCount');
+      const cartContent = document.getElementById('cartContent');
+      const cartTotal = document.getElementById('cartTotal');
+
+      // Update cart count
+      const totalItems = this.cart.reduce((sum, item) => sum + item.quantity, 0);
+      if (cartCount) cartCount.textContent = totalItems;
+
+      // Update cart content
+      if (cartContent) {
+        if (this.cart.length === 0) {
+          cartContent.innerHTML = '<div class="text-center">سبد خرید خالی است</div>';
+        } else {
+          cartContent.innerHTML = this.cart.map(item => `
+                            <div class="cart-item">
+                                <div class="cart-item-image">
+                                    <img src="${item.image_url || 'assets/images/placeholder.jpg'}" alt="${item.name_fa}">
+                                </div>
+                                <div class="cart-item-info">
+                                    <div class="cart-item-name">${item.name_fa}</div>
+                                    <div class="cart-item-price">${this.formatPrice(item.current_price)}</div>
+                                    <div class="cart-item-controls">
+                                        <button class="quantity-btn" onclick="vapeTube.updateCartItem(${item.product_id}, ${item.quantity - 1})">-</button>
+                                        <input type="number" class="quantity-input" value="${item.quantity}" min="1"
+                                               onchange="vapeTube.updateCartItem(${item.product_id}, this.value)">
+                                        <button class="quantity-btn" onclick="vapeTube.updateCartItem(${item.product_id}, ${item.quantity + 1})">+</button>
+                                        <i class="fas fa-trash remove-item" onclick="vapeTube.removeFromCart(${item.product_id})"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('');
+        }
+      }
+
+      // Update cart total
+      const total = this.cart.reduce((sum, item) => sum + (item.total_price || item.current_price * item.quantity), 0);
+      if (cartTotal) cartTotal.textContent = this.formatPrice(total);
+    }
+
+    // جستجو در محصولات (Real-Time)
+    async handleSearch(e) {
+      e.preventDefault();  // جلوگیری از ارسال فرم
+
+      const searchInput = document.getElementById('searchInput');
+      const query = searchInput.value.trim();  // دریافت کلمه جستجو
+
+      // اگر کلمه جستجو خالی نباشد
+      if (query) {
+        // جستجو با Fuse.js
+        const results = fuse.search(query);  // انجام جستجو با Fuse.js
+
+        // نمایش نتایج جستجو
+        this.displaySearchResults(results);
+      } else {
+        // اگر کلمه جستجو خالی بود، نتایج را مخفی کنیم
+        document.getElementById('searchResults').style.display = 'none';
+      }
+    }
+
+    // نمایش نتایج جستجو به صورت Real-Time
+    displaySearchResults(results) {
+      const searchResultsContainer = document.getElementById('searchResults');
+
+      // اگر نتایج جستجو وجود داشته باشند
+      if (results.length > 0) {
+        searchResultsContainer.innerHTML = results.map(result => `
+                    <div class="result-item" onclick="window.location.href='pages/products/product_view.php?id=${result.item.id}'">
+                        <img src="${result.item.image_url || 'assets/images/placeholder.jpg'}" alt="${result.item.name_fa}"
+                        class="result-item-image" onclick="window.location.href='pages/products/product_view.php?id=${result.item.id}'>
+                        <span class="result-item-name">${result.item.name_fa}</span>
+                    </div>
+                `).join('');
+        searchResultsContainer.style.display = 'grid';  // نمایش نتایج به صورت grid
+      } else {
+        searchResultsContainer.innerHTML = '<div class="text-center">محصولی یافت نشد</div>';
+        searchResultsContainer.style.display = 'block';  // نمایش پیام عدم یافتن نتایج
+      }
+    }
+    async filterProducts() {
+      const categoryFilter = document.getElementById('categoryFilter');
+      const sortFilter = document.getElementById('sortFilter');
+
+      const categoryId = categoryFilter?.value || '';
+      const sort = sortFilter?.value || '';
+
+      await this.loadAllProducts(1, categoryId, '', sort);
+    }
+
+    async filterByCategory(categoryId) {
+      const categoryFilter = document.getElementById('categoryFilter');
+      if (categoryFilter) {
+        categoryFilter.value = categoryId;
+      }
+
+      await this.loadAllProducts(1, categoryId);
+      document.getElementById('allProductsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async changePage(page) {
+      const categoryFilter = document.getElementById('categoryFilter');
+      const sortFilter = document.getElementById('sortFilter');
+      const searchInput = document.getElementById('searchInput');
+
+      const categoryId = categoryFilter?.value || '';
+      const sort = sortFilter?.value || '';
+      const search = searchInput?.value || '';
+
+      await this.loadAllProducts(page, categoryId, search, sort);
+      document.getElementById('allProductsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // UI Methods
+    showModal(modalId) {
+      const modal = document.getElementById(modalId);
+      const overlay = document.getElementById('overlay');
+
+      if (modal) {
+        modal.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    hideModal(modalId) {
+      const modal = document.getElementById(modalId);
+      const overlay = document.getElementById('overlay');
+
+      if (modal) {
+        modal.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    hideAllModals() {
+      document.querySelectorAll('.modal').forEach(modal => {
+        modal.classList.remove('active');
+      });
+      document.getElementById('overlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    toggleCart() {
+      const cartSidebar = document.getElementById('cartSidebar');
+      const overlay = document.getElementById('overlay');
+
+      if (cartSidebar.classList.contains('active')) {
+        this.hideCart();
+      } else {
+        cartSidebar.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    hideCart() {
+      const cartSidebar = document.getElementById('cartSidebar');
+      const overlay = document.getElementById('overlay');
+
+      cartSidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // toggleMobileMenu() {
+    //     const navLeft = document.querySelector('.nav-left');
+    //     const navRight = document.querySelector('.nav-right');
+    //
+    //     navLeft?.classList.toggle('active');
+    //     navRight?.classList.toggle('active');
+    // }
+
+    showNotification(message, type = 'info') {
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.className = `notification notification-${type}`;
+      notification.innerHTML = `
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.remove()">&times;</button>
+                `;
+
+      // Add styles if not already added
+      if (!document.getElementById('notification-styles')) {
+        const styles = document.createElement('style');
+        styles.id = 'notification-styles';
+        styles.textContent = `
+                        .notification {
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            padding: 15px 20px;
+                            border-radius: 8px;
+                            color: white;
+                            z-index: 10000;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            animation: slideIn 0.3s ease;
+                        }
+                        .notification-success { background-color: #00b894; }
+                        .notification-error { background-color: #e17055; }
+                        .notification-info { background-color: #6c5ce7; }
+                        .notification button {
+                            background: none;
+                            border: none;
+                            color: white;
+                            font-size: 18px;
+                            cursor: pointer;
+                        }
+                        @keyframes slideIn {
+                            from { transform: translateX(100%); opacity: 0; }
+                            to { transform: translateX(0); opacity: 1; }
+                        }
+                    `;
+        document.head.appendChild(styles);
+      }
+
+      document.body.appendChild(notification);
+
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        notification.remove();
+      }, 5000);
+    }
+
+    // Utility Methods
+    formatPrice(price) {
+      return new Intl.NumberFormat('fa-IR').format(price) + ' تومان';
+    }
+
+    quickView(productId) {
+      // Implement quick view modal
+      this.showNotification('نمایش سریع محصول', 'info');
+    }
+
+    async checkout() {
+      if (!this.currentUser) {
+        this.showNotification('لطفا ابتدا وارد شوید', 'error');
+        this.showModal('loginModal');
+        return;
+      }
+
+      if (this.cart.length === 0) {
+        this.showNotification('سبد خرید خالی است', 'error');
+        return;
+      }
+
+      // Implement checkout process
+      this.showNotification('در حال پیاده سازی...', 'info');
+    }
+  }
+  // document.addEventListener('DOMContentLoaded', () => {
+  //     const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  //     const navLeft = document.querySelector('.nav-left');
+  //     const navRight = document.querySelector('.nav-right');
+  //     const productsLink = document.querySelector('.products-link');
+  //     const megaMenu = document.querySelector('.mega-menu');
+  //
+  //     if (!mobileMenuToggle || !navLeft || !navRight || !productsLink || !megaMenu) {
+  //         console.error('یکی از المنت های ناوبری پیدا نشد!');
+  //         return;
+  //     }
+  //
+  //     // باز/بستن منوی کلی موبایل
+  //     mobileMenuToggle.addEventListener('click', () => {
+  //         const expanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+  //         mobileMenuToggle.setAttribute('aria-expanded', !expanded);
+  //         mobileMenuToggle.classList.toggle('active');
+  //         navLeft.classList.toggle('active');
+  //         navRight.classList.toggle('active');
+  //
+  //         // همزمان زیرمنوی محصولات بسته شود
+  //         megaMenu.classList.remove('active');
+  //         productsLink.classList.remove('active');
+  //         productsLink.setAttribute('aria-expanded', false);
+  //     });
+  //
+  //     // باز/بستن زیرمنوی محصولات در موبایل
+  //     productsLink.addEventListener('click', (e) => {
+  //         e.preventDefault(); // جلوگیری از رفتن به لینک
+  //
+  //         const isActive = megaMenu.classList.contains('active');
+  //         if (isActive) {
+  //             megaMenu.classList.remove('active');
+  //             productsLink.classList.remove('active');
+  //             productsLink.setAttribute('aria-expanded', false);
+  //         } else {
+  //             megaMenu.classList.add('active');
+  //             productsLink.classList.add('active');
+  //             productsLink.setAttribute('aria-expanded', true);
+  //         }
+  //     });
+  //
+  //     // بستن منو هنگام کلیک بیرون
+  //     document.addEventListener('click', (e) => {
+  //         if (!e.target.closest('.navbar-content') && !e.target.closest('.mobile-menu-toggle')) {
+  //             mobileMenuToggle.classList.remove('active');
+  //             mobileMenuToggle.setAttribute('aria-expanded', false);
+  //             navLeft.classList.remove('active');
+  //             navRight.classList.remove('active');
+  //             megaMenu.classList.remove('active');
+  //             productsLink.classList.remove('active');
+  //             productsLink.setAttribute('aria-expanded', false);
+  //         }
+  //     });
+  // });
+  //
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLeft = document.querySelector('.nav-left');
+    const navRight = document.querySelector('.nav-right');
+    const productsLink = document.querySelector('.products-link');
+    const megaMenu = document.querySelector('.mega-menu');
+
+    if (!mobileMenuToggle || !navLeft || !navRight || !productsLink || !megaMenu) {
+      console.error('یکی از المنت های ناوبری پیدا نشد!');
+      return;
+    }
+
+    // باز/بستن منوی کلی موبایل
+    const toggleMainMenu = () => {
+      const expanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+      mobileMenuToggle.setAttribute('aria-expanded', !expanded);
+      mobileMenuToggle.classList.toggle('active');
+      navLeft.classList.toggle('active');
+      navRight.classList.toggle('active');
+
+      // بستن زیرمنوی محصولات همزمان
+      megaMenu.classList.remove('active');
+      productsLink.classList.remove('active');
+      productsLink.setAttribute('aria-expanded', false);
+    };
+
+    mobileMenuToggle.addEventListener('click', toggleMainMenu);
+    mobileMenuToggle.addEventListener('touchstart', toggleMainMenu);
+
+    // باز/بستن زیرمنوی محصولات (فقط موبایل ≤ 992px)
+    const toggleProductSubMenu = (e) => {
+      if (window.innerWidth > 992) return;
+
+      e.preventDefault();
+
+      const isActive = megaMenu.classList.contains('active');
+      if (isActive) {
+        megaMenu.classList.remove('active');
+        productsLink.classList.remove('active');
+        productsLink.setAttribute('aria-expanded', false);
+      } else {
+        megaMenu.classList.add('active');
+        productsLink.classList.add('active');
+        productsLink.setAttribute('aria-expanded', true);
+      }
+    };
+
+    productsLink.addEventListener('click', toggleProductSubMenu);
+    productsLink.addEventListener('touchstart', toggleProductSubMenu);
+
+    // بستن منو هنگام کلیک بیرون
+    const closeMenusOnOutsideClick = (e) => {
+      if (!e.target.closest('.navbar-content') && !e.target.closest('.mobile-menu-toggle')) {
+        mobileMenuToggle.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', false);
+        navLeft.classList.remove('active');
+        navRight.classList.remove('active');
+        megaMenu.classList.remove('active');
+        productsLink.classList.remove('active');
+        productsLink.setAttribute('aria-expanded', false);
+      }
+    };
+
+    document.addEventListener('click', closeMenusOnOutsideClick);
+    document.addEventListener('touchstart', closeMenusOnOutsideClick);
+  });
+
+  // Tablet style product
+  // کنترل باز و بسته شدن منوی محصولات با کلیک فقط در موبایل و تبلت (≤ 992px)
+
+  // افزودن رویداد به ورودی جستجو برای Real-Time
+  document.getElementById('searchInput').addEventListener('input', (e) => vapeTube.handleSearch(e));
+
+
+  // Initialize the application
+  const vapeTube = new VapeTube();
+
+  // Make it globally available
+  window.vapeTube = vapeTube;
+  // New Function for change image in the background of categories section
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.querySelector('.categories');
+
+    const bgImages = [
+      'assets/images/bg/thelemaSolo.webp',
+      'assets/images/bg/uwell.webp',
+      'assets/images/bg/Berseker.jpg',
+      'assets/images/bg/sxmini.jpeg',
+      'assets/images/bg/ripevape2.jpg',
+      'assets/images/bg/ripevape.png',
+      'assets/images/bg/Kayfunx.jpg',
+      'assets/images/bg/Centaurus.jpg'
+    ];
+
+    // پیش‌بارگذاری تصاویر
+    bgImages.forEach(img => {
+      const preload = new Image();
+      preload.src = img;
+    });
+
+    let currentIndex = 0;
+
+    function changeBackground() {
+      section.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${bgImages[currentIndex]}')`;
+      currentIndex = (currentIndex + 1) % bgImages.length;
+    }
+
+    // مقدار اولیه
+    changeBackground();
+
+    // تعویض هر 2 ثانیه
+    setInterval(changeBackground, 4000);
+  });
+
+</script>
+</body>
+</html>
