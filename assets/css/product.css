@@ -1,0 +1,174 @@
+/* عمومی */
+body {
+    font-family: 'Vazir', sans-serif;
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+}
+
+/* اصلاحات برای اینکه .product-container تمام صفحه را بگیرد */
+.product-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%; /* عرض را 100% تنظیم می‌کنیم */
+    min-height: 30vh; /* ارتفاع را به حداقل 100% ارتفاع صفحه تنظیم می‌کنیم */
+    margin: 0; /* اطمینان از اینکه هیچ فاصله‌ای ندارد */
+    padding: 20px; /* برای دادن فضای داخلی به بخش */
+    background-color: white; /* رنگ پس‌زمینه سفید */
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    position: relative; /* برای موقعیت‌دهی صحیح */
+    top: 0;
+    left: 0;
+}
+
+
+/* تصویر اسلاید شو */
+.product-images {
+    flex: 1;
+    margin-right: 30px;  /* فاصله از اطلاعات محصول */
+}
+
+.product-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.thumbnails {
+    display: flex;
+    margin-top: 10px;
+}
+
+.thumbnail-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.thumbnail-img:hover {
+    transform: scale(1.1);
+}
+
+
+/* فاصله بین تصویر و بخش نام و توضیحات محصول */
+.product-details {
+    flex: 2;
+    padding-left: 30px;  /* اضافه کردن فاصله به سمت چپ */
+    padding-right: 30px; /* اضافه کردن فاصله به سمت راست */
+}
+
+.product-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+.product-subtitle {
+    font-size: 18px;
+    color: #777;
+    margin-top: 10px;
+}
+
+.price {
+    font-size: 22px;
+    color: green;
+    margin-top: 15px;
+}
+
+.sale-price {
+    color: red;
+    font-size: 16px;
+    text-decoration: line-through;
+    margin-right: 10px;
+}
+
+.product-description {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* انتخاب تعداد و افزودن به سبد خرید */
+.add-to-cart {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.quantity-selector button {
+    background: #ddd;
+    border: none;
+    padding: 5px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.quantity-selector input {
+    width: 50px;
+    text-align: center;
+    font-size: 18px;
+    margin: 0 10px;
+}
+
+.add-to-cart button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* ویدیو یوتیوب */
+.youtube-video {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.youtube-video iframe {
+    width: 80%;
+    height: 500px;
+    border-radius: 8px;
+}
+
+/* نظرات کاربران */
+.comments {
+    margin-top: 40px;
+    background: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.comments h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: relative; /* اطمینان از قرار گرفتن فوتر در انتهای صفحه */
+    bottom: 0;
+    width: 100%;
+    margin-top: 40px; /* فاصله از پایین */
+}
