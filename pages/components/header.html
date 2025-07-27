@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/vape-tube/">
+    <title>Vape Tube - فروشگاه ویپ و سیگار الکترونیکی</title>
+    <meta name="description" content="فروشگاه آنلاین ویپ تیوب - خرید انواع ویپ، مود، پاد سیستم، مایع ویپ و لوازم جانبی با بهترین قیمت">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/style_new.css">
+
+    <!-- Fuse Searching Mechanism -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+
+
+
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+  <div class="header-top">
+    <div class="container">
+      <div class="header-top-content">
+        <div class="header-contact">
+          <span><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</span>
+          <span><i class="fas fa-envelope"></i> info@vapetube.com</span>
+        </div>
+        <div class="header-auth">
+          <div class="auth-buttons" id="authButtons">
+            <a href="#" class="auth-link" id="loginBtn">ورود</a>
+            <span>|</span>
+            <a href="#" class="auth-link" id="registerBtn">ثبت نام</a>
+          </div>
+          <div class="user-menu" id="userMenu" style="display: none;">
+            <span class="user-name" id="userName"></span>
+            <div class="user-dropdown">
+              <a href="#" id="profileBtn">پروفایل</a>
+              <a href="#" id="ordersBtn">سفارشات</a>
+              <a href="#" id="logoutBtn">خروج</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="header-main">
+    <div class="container">
+      <div class="header-main-content">
+        <!-- لوگو با تصویر -->
+        <div class="logo">
+          <a href="index.html">
+            <img src="assets/images/products/logo.jpg" alt="ویپ تیوب">
+            <h1>ویپ تیوب | Vape Tube</h1>
+          </a>
+        </div>
+
+        <!-- جستجو -->
+        <div class="search-box">
+          <form class="search-form" id="searchForm">
+            <input type="text" placeholder="جستجو در محصولات..." id="searchInput">
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+
+          <!-- نمایش نتایج جستجو -->
+          <div id="searchResults" class="search-results"></div>
+        </div>
+
+        <!-- سبد خرید -->
+        <div class="cart-icon">
+          <a href="#" id="cartToggle">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cartCount">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-content">
+        <!-- Mobile Menu Toggle -->
+        <div class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" role="button" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <!-- Right Menu (Products) -->
+        <div class="nav-left">
+          <div class="products-menu">
+            <a href="#" class="products-link" aria-haspopup="true" aria-expanded="false">محصولات <i class="fas fa-chevron-down"></i></a>
+            <div class="mega-menu" aria-label="محصولات">
+              <div class="mega-menu-content">
+                <div class="category-column" data-category="1">
+                  <h3>مود ویپ</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="1">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="2">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="3">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="2">
+                  <h3>سیستم های پاد</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="4">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="5">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="6">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="3">
+                  <h3>نیکوتین نمک</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="7">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="8">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="9">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="4">
+                  <h3>مایع ویپ</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="10">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="11">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="12">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="5">
+                  <h3>یکبار مصرف</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="13">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="14">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="15">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="6">
+                  <h3>کویل و کارتریج</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="16">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="17">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="18">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="7">
+                  <h3>لوازم جانبی</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="19">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="20">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="21">آیتم ۳</a></li>
+                  </ul>
+                </div>
+                <div class="category-column" data-category="8">
+                  <h3>سیگار الکترونیکی</h3>
+                  <ul>
+                    <li><a href="#" data-subcategory="22">آیتم ۱</a></li>
+                    <li><a href="#" data-subcategory="23">آیتم ۲</a></li>
+                    <li><a href="#" data-subcategory="24">آیتم ۳</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left Menu -->
+        <div class="nav-right">
+          <ul class="nav-menu">
+            <li><a href="#" data-page="about">درباره ما</a></li>
+            <li><a href="#" data-page="contact">تماس با ما</a></li>
+            <li><a href="#" data-page="faq">سوالات متداول</a></li>
+            <li><a href="#" data-page="articles">مقالات</a></li>
+          </ul>
+        </div>
+
+
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- JavaScript -->
+<script src="assets/js/app.js"></script>
+
+</body>
+</html>

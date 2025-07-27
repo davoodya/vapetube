@@ -46,11 +46,14 @@ $imagePath = "assets/images/products/" . htmlspecialchars($product['image_url'])
     <base href="/vape-tube/">
 
     <link rel="stylesheet" href="assets/css/product.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body>
 
+<?php include '../components/header.html'; ?>
 <!-- Header Section -->
+
 <div class="header-section">
     <!-- کارت اول: تصاویر اسلاید شو -->
     <div class="product-card product-images">
