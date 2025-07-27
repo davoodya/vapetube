@@ -604,11 +604,14 @@ a:hover {
     font-size: 1.2rem;
     margin-bottom: 30px;
     opacity: 0.9;
+    color: orange;
     animation: fadeInUp 1s ease 0.2s both;
 }
 
 .hero .btn {
     animation: fadeInUp 1s ease 0.4s both;
+    color: white;
+    transition: background-color;
 }
 
 /* Section & Categories */
@@ -624,7 +627,7 @@ a:hover {
 .category_container {
     max-width: 1200px;
     margin: auto;
-    padding: 20px 20px;
+    padding: 5px 5px;
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* ۵ ستون مساوی */
     gap: 30px; /* فاصله بین کارت‌ها */
@@ -632,9 +635,23 @@ a:hover {
 }
 
 .categories {
-    background-color: rgba(128, 128, 2, 0.4);
+    position: relative;
     padding: 60px 20px;
     font-family: var(--font-family);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
+    z-index: 1;
+}
+
+/* برای شفاف‌سازی محتوا روی بک‌گراند */
+.categories::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4); /* لایه تیره برای خوانایی */
+    z-index: -1;
 }
 
 .categories .section-header {
