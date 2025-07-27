@@ -305,6 +305,12 @@
     }
 }
 
+@media (min-width: 993px) {
+    .products-menu:hover .mega-menu {
+        display: block;
+    }
+}
+
 /* Small Mobile Styles */
 @media (max-width: 480px) {
     .hero h2 {
@@ -514,3 +520,13 @@
     }
 }
 
+@media (min-width: 767px) and (max-width: 992px) {
+    .nav-right {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .nav-left {
+        display: none !important;
+    }
+}

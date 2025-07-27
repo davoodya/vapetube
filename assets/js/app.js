@@ -720,24 +720,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // باز/بستن منوی کلی موبایل
-    mobileMenuToggle.addEventListener('click', () => {
+    const toggleMainMenu = () => {
         const expanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
         mobileMenuToggle.setAttribute('aria-expanded', !expanded);
         mobileMenuToggle.classList.toggle('active');
         navLeft.classList.toggle('active');
         navRight.classList.toggle('active');
 
-        // همزمان زیرمنوی محصولات بسته شود
+        // بستن زیرمنوی محصولات همزمان
         megaMenu.classList.remove('active');
         productsLink.classList.remove('active');
         productsLink.setAttribute('aria-expanded', false);
-    });
+    };
 
-    // باز/بستن زیرمنوی محصولات فقط در موبایل (عرض ≤ 992px)
-    productsLink.addEventListener('click', (e) => {
-        if (window.innerWidth > 992) return; // فقط در موبایل ادامه بده
+    mobileMenuToggle.addEventListener('click', toggleMainMenu);
+    mobileMenuToggle.addEventListener('touchstart', toggleMainMenu);
 
-        e.preventDefault(); // جلوگیری از رفتن به لینک
+    // باز/بستن زیرمنوی محصولات (فقط موبایل ≤ 992px)
+    const toggleProductSubMenu = (e) => {
+        if (window.innerWidth > 992) return;
+
+        e.preventDefault();
 
         const isActive = megaMenu.classList.contains('active');
         if (isActive) {
@@ -749,10 +752,13 @@ document.addEventListener('DOMContentLoaded', () => {
             productsLink.classList.add('active');
             productsLink.setAttribute('aria-expanded', true);
         }
-    });
+    };
+
+    productsLink.addEventListener('click', toggleProductSubMenu);
+    productsLink.addEventListener('touchstart', toggleProductSubMenu);
 
     // بستن منو هنگام کلیک بیرون
-    document.addEventListener('click', (e) => {
+    const closeMenusOnOutsideClick = (e) => {
         if (!e.target.closest('.navbar-content') && !e.target.closest('.mobile-menu-toggle')) {
             mobileMenuToggle.classList.remove('active');
             mobileMenuToggle.setAttribute('aria-expanded', false);
@@ -762,9 +768,14 @@ document.addEventListener('DOMContentLoaded', () => {
             productsLink.classList.remove('active');
             productsLink.setAttribute('aria-expanded', false);
         }
-    });
+    };
+
+    document.addEventListener('click', closeMenusOnOutsideClick);
+    document.addEventListener('touchstart', closeMenusOnOutsideClick);
 });
 
+// Tablet style product
+// کنترل باز و بسته شدن منوی محصولات با کلیک فقط در موبایل و تبلت (≤ 992px)
 
 // Initialize the application
 const vapeTube = new VapeTube();
