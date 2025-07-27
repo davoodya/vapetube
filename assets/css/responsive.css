@@ -79,78 +79,165 @@
     .cart-icon {
         position: absolute;
         top: 15px;
-        left: 15px;
+        left: 70px;
     }
     
     /* Navigation Mobile */
+    /* استایل کلی ناوبری */
+    .navbar {
+        background: linear-gradient(135deg, #2c3e50, #4a6491);
+        padding: 0;
+        position: relative;
+        z-index: 999;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
     .navbar-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         position: relative;
     }
-    
-    .nav-left,
+
+    /* معکوس کردن موقعیت منوها */
+    .nav-left {
+        order: 1; /* محصولات در سمت چپ */
+    }
+
     .nav-right {
-        display: none;
+        order: 2; /* سایر منوها در سمت راست */
+        margin-right: auto; /* فاصله از محصولات */
+    }
+
+    /* استایل منوی محصولات */
+    .products-menu {
+        position: relative;
+    }
+
+    .products-link {
+        display: flex;
+        align-items: center;
+        padding: 15px 25px;
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .products-link:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .products-link i {
+        margin-right: 8px;
+        transition: transform 0.3s;
+    }
+
+    /* مگامنو محصولات */
+    .mega-menu {
         position: absolute;
         top: 100%;
-        left: 0;
-        right: 0;
-        background-color: var(--white);
-        box-shadow: var(--box-shadow);
+        right: 0; /* تغییر از left به right */
+        width: 900px;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border-radius: 0 0 8px 8px;
+        display: none;
         z-index: 1000;
     }
-    
-    .nav-left.active,
-    .nav-right.active {
+
+    .products-menu:hover .mega-menu {
         display: block;
+        animation: fadeIn 0.3s ease;
     }
-    
-    .nav-menu {
-        flex-direction: column;
-        padding: 20px;
-    }
-    
-    .nav-menu li {
-        margin: 0 0 15px 0;
-    }
-    
-    .nav-menu a {
-        color: var(--dark-color);
-        padding: 10px 0;
-        border-bottom: 1px solid var(--gray-200);
-    }
-    
-    .products-menu {
-        position: static;
-    }
-    
-    .products-link {
-        color: var(--dark-color);
-        padding: 15px 20px;
-        justify-content: space-between;
-        border-bottom: 1px solid var(--gray-200);
-    }
-    
-    .mega-menu {
-        position: static;
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0;
-        min-width: auto;
-        background-color: var(--gray-100);
-    }
-    
+
     .mega-menu-content {
-        grid-template-columns: 1fr;
-        gap: 0;
-        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        padding: 25px;
     }
-    
-    .category-column {
-        margin-bottom: 20px;
+
+    .category-column h3 {
+        color: #2c3e50;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #6c5ce7;
     }
-    
-    .mobile-menu-toggle {
+
+    .category-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .category-column li {
+        margin-bottom: 8px;
+    }
+
+    .category-column a {
+        color: #555;
+        text-decoration: none;
+        transition: all 0.3s;
+        display: block;
+        padding: 5px 0;
+    }
+
+    .category-column a:hover {
+        color: #6c5ce7;
+        transform: translateX(5px);
+    }
+
+    /* استایل منوی راست (درباره ما، تماس با ما و...) */
+    .nav-menu {
         display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-menu li {
+        position: relative;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 15px 20px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+
+    .nav-menu a:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* دکمه منوی موبایل */
+    .mobile-menu-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        cursor: pointer;
+    }
+
+    .mobile-menu-toggle span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background: #fff;
+        border-radius: 3px;
+        transition: all 0.3s;
+    }
+
+    /* انیمیشن‌ها */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
     
     /* Hero Mobile */
@@ -271,6 +358,75 @@
     
     .contact-info p {
         justify-content: center;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar-content {
+        flex-wrap: wrap;
+    }
+
+    .nav-left,
+    .nav-right {
+        order: 3;
+        display: none;
+        position: static;
+        width: 100%;
+        background: #2c3e50;
+    }
+
+    .nav-left.active,
+    .nav-right.active {
+        display: block;
+    }
+
+    /* معکوس کردن ترتیب در موبایل */
+    .nav-left {
+        order: 1;
+    }
+
+    .nav-right {
+        order: 2;
+    }
+
+    .products-menu {
+        width: 100%;
+    }
+
+    .products-link {
+        justify-content: space-between;
+    }
+
+    .mega-menu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+
+    .mega-menu-content {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+        order: 4;
+    }
+
+    /* حالت فعال برای دکمه منو */
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
     }
 }
 

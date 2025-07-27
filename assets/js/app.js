@@ -651,9 +651,33 @@ class VapeTube {
     }
 }
 
+// مدیریت منوی موبایل
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const navLeft = document.querySelector('.nav-left');
+const navRight = document.querySelector('.nav-right');
+
+if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLeft.classList.toggle('active');
+        navRight.classList.toggle('active');
+    });
+}
+
+// بستن منو هنگام کلیک خارج از آن
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.navbar-content') && !e.target.closest('.mobile-menu-toggle')) {
+        mobileMenuToggle.classList.remove('active');
+        navLeft.classList.remove('active');
+        navRight.classList.remove('active');
+    }
+});
+
+
 // Initialize the application
 const vapeTube = new VapeTube();
 
 // Make it globally available
 window.vapeTube = vapeTube;
+
 
