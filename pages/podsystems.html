@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پاد سیستم‌ها | Vape Tube</title>
+  <meta name="description" content="نمایش انواع پاد سیستم‌ها با قابلیت فیلترینگ پیشرفته در ویپ تیوب">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/podsystems.css">
+
+  <base href="/vape-tube/">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+  <!-- Include header content from index.html -->
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+  <!-- Filter Brands Section -->
+  <section class="filter-brands">
+    <div class="container">
+      <div class="section-header">
+        <h2>برندهای پاد سیستم</h2>
+        <select id="brandFilter" class="filter-select">
+          <option value="">همه برندها</option>
+          <option value="brand1">برند 1</option>
+          <option value="brand2">برند 2</option>
+          <option value="brand3">برند 3</option>
+          <!-- Add more brands here -->
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Display Section -->
+  <section class="products-display">
+    <div class="container">
+      <div class="products-container">
+        <!-- Sidebar Filter -->
+        <aside class="sidebar-filter">
+          <h3>فیلتر پیشرفته</h3>
+          <form id="filterForm">
+            <div class="filter-group">
+              <label for="priceRange">محدوده قیمت</label>
+              <input type="range" id="priceRange" min="0" max="1000" step="10" />
+              <span id="priceValue">۰ تومان</span>
+            </div>
+            <div class="filter-group">
+              <label for="ratingFilter">رتبه‌بندی</label>
+              <select id="ratingFilter">
+                <option value="">همه</option>
+                <option value="5">۵ ستاره</option>
+                <option value="4">۴ ستاره</option>
+                <option value="3">۳ ستاره</option>
+                <option value="2">۲ ستاره</option>
+                <option value="1">۱ ستاره</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="availabilityFilter">وضعیت موجودی</label>
+              <select id="availabilityFilter">
+                <option value="">همه</option>
+                <option value="inStock">موجود</option>
+                <option value="outOfStock">ناموجود</option>
+              </select>
+            </div>
+          </form>
+        </aside>
+
+        <!-- Product Cards -->
+        <div class="products-list">
+          <div class="product-card">
+            <img src="assets/images/products/pod1.jpeg" alt="پاد سیستم ۱">
+            <h3>پاد سیستم ۱</h3>
+            <p class="product-price">۵۰۰,۰۰۰ تومان</p>
+            <button class="btn btn-primary">افزودن به سبد خرید</button>
+          </div>
+
+          <div class="product-card">
+            <img src="assets/images/products/pod2.jpeg" alt="پاد سیستم ۲">
+            <h3>پاد سیستم ۲</h3>
+            <p class="product-price">۴۵۰,۰۰۰ تومان</p>
+            <button class="btn btn-primary">افزودن به سبد خرید</button>
+          </div>
+
+          <!-- More product cards can go here -->
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <!-- Include footer content from index.html -->
+</footer>
+
+<!-- JavaScript -->
+<script src="assets/js/app.js"></script>
+</body>
+</html>
