@@ -1,7 +1,7 @@
 /* عمومی */
 body {
     font-family: 'Vazir', sans-serif;
-    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    background: linear-gradient(45deg, rgba(78, 78, 78, 0.16), rgb(13, 13, 13));
     color: #333;
     margin: 0;
     padding: 0;
@@ -129,9 +129,9 @@ body {
     color: #555;
 }
 
-/* انتخاب تعداد و افزودن به سبد خرید */
+
 /* کارت سوم: انتخاب تعداد و افزودن به سبد خرید */
-.add-to-cart {
+.add-to-cart-bg {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -160,7 +160,7 @@ body {
     margin: 0 10px;
 }
 
-.add-to-cart button {
+.add-to-cart-bg button {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;

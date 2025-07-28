@@ -46,7 +46,7 @@ $imagePath = "assets/images/products/" . htmlspecialchars($product['image_url'])
     <base href="/vape-tube/">
 
     <link rel="stylesheet" href="assets/css/product.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+<!--    <link rel="stylesheet" href="assets/css/style.css">-->
 
 </head>
 <body>
@@ -81,7 +81,7 @@ $imagePath = "assets/images/products/" . htmlspecialchars($product['image_url'])
     </div>
 
     <!-- کارت سوم: انتخاب تعداد و دکمه افزودن به سبد خرید -->
-    <div class="product-card add-to-cart">
+    <div class="product-card  add-to-cart-bg">
         <div class="quantity-selector">
             <button onclick="changeQuantity(-1)">-</button>
             <input type="number" id="quantity" value="1" min="1">
@@ -113,9 +113,10 @@ $imagePath = "assets/images/products/" . htmlspecialchars($product['image_url'])
 </div>
 
 <!-- Footer Section -->
-<footer>
-    <p>تمامی حقوق متعلق به ویپ تیوب است.</p>
-</footer>
+<?php include '../components/footer.html'; ?>
+<!--<footer>-->
+<!--    <p>تمامی حقوق متعلق به ویپ تیوب است.</p>-->
+<!--</footer>-->
 
 <script>
     function changeImage(image) {
