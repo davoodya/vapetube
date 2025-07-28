@@ -44,11 +44,20 @@
             <section class="filter-price">
                 <div class="container">
                     <h3>فیلتر بر اساس قیمت</h3>
+
+                    <!-- نوار لغزنده دو طرفه -->
                     <div class="filter-group">
                         <label for="priceRange">محدوده قیمت</label>
-                        <input type="range" id="priceRange" min="0" max="1000" step="10" />
-                        <span id="priceValue">۰ تومان</span>
+                        <input type="range" id="priceMin" min="0" max="50000000" step="1000" value="1000000" />
+                        <input type="range" id="priceMax" min="0" max="50000000" step="1000" value="10000000" />
+                        <div id="priceValues">
+                            <span id="priceMinValue">1,000,000 تومان</span> -
+                            <span id="priceMaxValue">10,000,000 تومان</span>
+                        </div>
                     </div>
+
+                    <!-- دکمه ثبت فیلتر -->
+                    <button id="applyFilter" class="btn btn-primary">ثبت فیلتر</button>
                 </div>
             </section>
 
@@ -147,9 +156,16 @@
                         die("Connection failed: " . $conn->connect_error);
                     }
 
-                    // کوئری برای واکشی محصولات پاد
-                    $sql = "SELECT * FROM products WHERE category_id LIKE '%2%'";
-                    $result = $conn->query($sql);
+                    // دریافت فیلتر قیمت از GET
+                    $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : 0;
+                    $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : 1000000;  // مقدار پیش‌فرض بسیار بالا
+
+                    // کوئری برای واکشی محصولات پاد با فیلتر قیمت
+                    $sql = "SELECT * FROM products WHERE category_id LIKE '%2%' AND price >= ? AND price <= ?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("ii", $minPrice, $maxPrice); // بایند کردن مقادیر به کوئری
+                    $stmt->execute();
+                    $result = $stmt->get_result();
 
                     // بررسی اینکه آیا نتیجه‌ای برگشت داده شد یا نه
                     if ($result->num_rows > 0) {
@@ -160,7 +176,7 @@
                             echo '<h3 style="text-align: center; margin: 0 auto; color: coral;">' . $row["name"] . '</h3>';
                             echo '<br>';
                             echo '<p>' . $row["description_fa"] . '</p>';
-                            echo '<p style="display: block; text-align: center; margin: 0 auto; color: green;" class="product-price">' . number_format($row["price"], 2) . ' تومان</p>';
+                            echo '<p style="display: block; text-align: center; margin: 0 auto; color: green;" class="product-price">' . number_format($row["price"]) . ' تومان</p>';
                             echo '<br>';
                             echo '<button style="display: block; margin: 0 auto;" class="btn btn-primary">افزودن به سبد خرید</button>';
                             echo '</div>';
@@ -173,6 +189,7 @@
                     $conn->close();
                     ?>
                 </div>
+
 
                 <!-- Pod System Categories -->
                 <section class="categories">
@@ -257,6 +274,9 @@
 
 <!-- Add this CSS for the two-column layout -->
 <style>
+    /* اطمینان از اینکه فونت Vazir بارگذاری شده باشد */
+    @import url('https://fonts.googleapis.com/css2?family=Vazir&display=swap');
+
     /* استایل برای تقسیم صفحه به دو ستون */
     .main-container {
         display: flex;             /* استفاده از Flexbox برای تقسیم صفحه */
@@ -528,6 +548,32 @@
         border-color: #f39c12; /* تغییر رنگ حاشیه زمانی که فیلد انتخاب می‌شود */
     }
 
+    /* استایل برای دکمه ثبت فیلتر */
+    #applyFilter {
+        display: block; /* برای قرار دادن دکمه در وسط */
+        width: 200px; /* عرض دکمه */
+        margin: 20px auto; /* برای قرار گرفتن دکمه در وسط */
+        padding: 10px 20px; /* فاصله داخلی دکمه */
+        font-family: 'Vazir', sans-serif; /* استفاده از فونت Vazir */
+        font-size: 16px; /* اندازه فونت */
+        color: #fff; /* رنگ متن سفید */
+        background: linear-gradient(to right, #FFA500, #FF0000); /* گرادیانت نارنجی، زرد و قرمز */
+        border: none; /* حذف حاشیه */
+        border-radius: 5px; /* گوشه‌های دکمه گرد */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1); /* سایه جعبه */
+        cursor: pointer; /* نشانگر موس تغییر می‌کند به یک اشاره‌گر */
+        text-align: center; /* متن دکمه در وسط قرار می‌گیرد */
+        transition: all 0.3s ease; /* برای انیمیشن نرم */
+    }
+
+    /* تغییرات هنگام هاور */
+    #applyFilter:hover {
+        background: linear-gradient(to right, #FF8C00, #FF6347); /* تغییر گرادیانت در هاور */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3), 0 3px 6px rgba(0, 0, 0, 0.1); /* افزایش سایه */
+        transform: translateY(-2px); /* جابجایی دکمه به سمت بالا */
+    }
+
+
 </style>
 
 
@@ -537,6 +583,50 @@
 <!-- JavaScript -->
 <script src="assets/js/app.js"></script>
 <script src="assets/js/podsystem.js"></script>
+
+<!--Script for limit price-->
+<script>
+    // گرفتن المان های مورد نظر
+    const priceMin = document.getElementById("priceMin");
+    const priceMax = document.getElementById("priceMax");
+    const priceMinValue = document.getElementById("priceMinValue");
+    const priceMaxValue = document.getElementById("priceMaxValue");
+    const applyFilterButton = document.getElementById("applyFilter");
+
+    // نمایش مقدار اولیه قیمت با فرمت کاما
+    priceMinValue.textContent = formatPrice(priceMin.value) + " تومان";
+    priceMaxValue.textContent = formatPrice(priceMax.value) + " تومان";
+
+    // تنظیم رویداد برای تغییر نوار لغزنده حداقل قیمت
+    priceMin.addEventListener("input", function () {
+        priceMinValue.textContent = formatPrice(priceMin.value) + " تومان";  // نمایش قیمت با فرمت کاما
+    });
+
+    // تنظیم رویداد برای تغییر نوار لغزنده حداکثر قیمت
+    priceMax.addEventListener("input", function () {
+        priceMaxValue.textContent = formatPrice(priceMax.value) + " تومان";  // نمایش قیمت با فرمت کاما
+    });
+
+    // تابع برای فرمت کردن قیمت با کاما
+    function formatPrice(value) {
+        return value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // اعمال فیلتر و رفرش صفحه با دکمه ثبت فیلتر
+    applyFilterButton.addEventListener("click", function () {
+        const minPrice = priceMin.value;
+        const maxPrice = priceMax.value;
+
+        // بروزرسانی URL با پارامترهای جدید فیلتر
+        const newUrl = window.location.pathname + "?minPrice=" + minPrice + "&maxPrice=" + maxPrice;
+        history.pushState(null, "", newUrl);
+
+        // رفرش صفحه برای نمایش محصولات جدید
+        location.reload();  // صفحه به طور خودکار رفرش می‌شود
+    });
+</script>
+
+
 
 
 </body>
