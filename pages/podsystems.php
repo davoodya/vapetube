@@ -300,8 +300,9 @@
     /* استایل برای گرید محصولات */
     .products-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* تعداد ستون‌های خودکار */
+        grid-template-columns: repeat(4, 1fr); /* تعداد ستون‌ها همیشه 4 تا باشد */
         gap: 20px;
+        justify-items: center; /* این باعث می‌شود محصولات در هر سلول گرید به صورت مرکزی قرار گیرند */
     }
 
     /* استایل برای کارت‌های محصولات */
