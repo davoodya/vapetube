@@ -70,7 +70,7 @@
                         <select id="sortBy" class="filter-select">
                             <option value="cheapest">ارزان‌ترین</option>
                             <option value="expensive">گران‌ترین</option>
-
+                            <option value="default">ترتیب عادی</option> <!-- گزینه جدید برای ترتیب عادی -->
                         </select>
                     </div>
                 </div>
@@ -159,19 +159,28 @@
                     // دریافت فیلتر قیمت از GET
                     $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : 0;
                     $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : 1000000;  // مقدار پیش‌فرض بسیار بالا
-                    $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'cheapest';  // مقدار پیش‌فرض مرتب‌سازی بر اساس ارزان‌ترین
+                    $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'default';  // مقدار پیش‌فرض مرتب‌سازی بر اساس ترتیب عادی
 
                     // ساختن کوئری بر اساس نوع مرتب‌سازی
                     if ($sortBy == 'cheapest') {
                         $orderBy = 'price ASC';  // از ارزان‌ترین به گران‌ترین
                     } elseif ($sortBy == 'expensive') {
                         $orderBy = 'price DESC';  // از گران‌ترین به ارزان‌ترین
+                    } elseif ($sortBy == 'default') {
+                        // اگر گزینه ترتیب عادی است، هیچ گونه مرتب‌سازی اعمال نمی‌شود
+                        $orderBy = '';  // این یعنی مرتب‌سازی انجام نشود
                     } else {
                         $orderBy = 'sales DESC';  // بر اساس پر فروش‌ترین
                     }
 
                     // کوئری برای واکشی محصولات پاد با فیلتر قیمت و مرتب‌سازی
-                    $sql = "SELECT * FROM products WHERE category_id LIKE '%2%' AND price >= ? AND price <= ? ORDER BY $orderBy";
+                    $sql = "SELECT * FROM products WHERE category_id LIKE '%2%' AND price >= ? AND price <= ?";
+
+                    // اضافه کردن بخش مرتب‌سازی به کوئری در صورتی که مرتب‌سازی فعال باشد
+                    if ($orderBy != '') {
+                        $sql .= " ORDER BY $orderBy";
+                    }
+
                     $stmt = $conn->prepare($sql);
                     $stmt->bind_param("ii", $minPrice, $maxPrice); // بایند کردن مقادیر به کوئری
                     $stmt->execute();
@@ -199,6 +208,7 @@
                     $conn->close();
                     ?>
                 </div>
+
 
                 <!-- Pod System Categories -->
                 <section class="categories">
@@ -646,18 +656,25 @@
     sortBy.addEventListener("change", function () {
         const sortOption = sortBy.value;
 
-        // بروزرسانی آدرس URL با پارامتر جدید مرتب‌سازی
+        // دریافت فیلتر قیمت از URL
         const minPrice = new URLSearchParams(window.location.search).get('minPrice') || 0;
         const maxPrice = new URLSearchParams(window.location.search).get('maxPrice') || 1000000;
 
-        // به‌روز رسانی URL
-        const newUrl = window.location.pathname + "?minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&sortBy=" + sortOption;
-        history.pushState(null, "", newUrl);
-
-        // رفرش صفحه برای نمایش محصولات جدید به ترتیب انتخاب‌شده
-        location.reload(); // صفحه به طور خودکار رفرش می‌شود
+        // بررسی گزینه انتخاب‌شده
+        if (sortOption === "default") {
+            // اگر گزینه "ترتیب عادی" انتخاب شد، صفحه را بدون فیلتر یا مرتب‌سازی رفرش کنید
+            const newUrl = window.location.pathname + "?minPrice=" + minPrice + "&maxPrice=" + maxPrice;
+            history.pushState(null, "", newUrl);
+            location.reload(); // صفحه به طور خودکار رفرش می‌شود
+        } else {
+            // بروزرسانی آدرس URL با پارامتر جدید مرتب‌سازی
+            const newUrl = window.location.pathname + "?minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&sortBy=" + sortOption;
+            history.pushState(null, "", newUrl);
+            location.reload(); // صفحه به طور خودکار رفرش می‌شود
+        }
     });
 </script>
+
 
 
 
