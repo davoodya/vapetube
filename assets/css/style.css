@@ -629,7 +629,7 @@ a:hover {
     margin: auto;
     padding: 5px 5px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* ۵ ستون مساوی */
+    grid-template-columns: repeat(5, 1fr); /* ۵ ستون مساوی */
     gap: 30px; /* فاصله بین کارت‌ها */
 
 }
@@ -702,7 +702,6 @@ a:hover {
 
 
 .category-card {
-	
     background-color: #fff;
     border-radius: 12px;
     padding: 20px;
@@ -714,12 +713,11 @@ a:hover {
     flex-direction: column;
     align-items: center;
     user-select: none;
-	
 }
 
 .category-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 12px 20px rgb(194, 97, 21);
 }
 
 .category-card img {
@@ -733,14 +731,14 @@ a:hover {
 
 .category-card h3 {
     font-size: 1.2rem;
-    color: #333;
+    color: darkorange;
     margin-bottom: 8px;
     font-weight: 600;
 }
 
 .category-card p {
     font-size: 0.95rem;
-    color: #666;
+    color: white;
 }
 
 /* واکنشگرایی برای موبایل و تبلت */
@@ -886,21 +884,21 @@ a:hover {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
+/*.category-card {*/
+/*    background-color: var(--white);*/
+/*    border-radius: var(--border-radius);*/
+/*    padding: 30px 20px;*/
+/*    text-align: center;*/
+/*    box-shadow: var(--box-shadow);*/
+/*    transition: var(--transition);*/
+/*    cursor: pointer;*/
+/*}*/
 
-.category-card {
-    background-color: var(--white);
-    border-radius: var(--border-radius);
-    padding: 30px 20px;
-    text-align: center;
-    box-shadow: var(--box-shadow);
-    transition: var(--transition);
-    cursor: pointer;
-}
 
-.category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
+/*.category-card:hover {*/
+/*    transform: translateY(-5px);*/
+/*    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);*/
+/*}*/
 
 .category-icon {
     width: 60px;
