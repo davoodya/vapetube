@@ -76,40 +76,89 @@
     width: 100%;
 }
 
-.product-card {
-    background-color: var(--white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* استایل برای گرید محصولات */
+.products-grid-2 {
+    display: grid; /* فعال کردن گرید */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* تعداد ستون‌ها به صورت خودکار با حداقل عرض 250px */
+    gap: 20px; /* فاصله بین هر کارت محصول */
+    margin: 20px auto; /* تنظیم فاصله بالا و پایین و قرار دادن در مرکز */
+    padding: 10px;
+}
+
+/* استایل برای هر کارت محصول */
+product-card-2 {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* سایه برای کارت */
+    overflow: hidden; /* پنهان کردن محتویات خارج از حد کارت */
+    text-align: center; /* متن داخل کارت در وسط قرار گیرد */
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* انیمیشن برای تغییر اندازه و سایه */
+}
+
+/* تغییرات روی کارت محصول هنگام هاور */
+product-card-2:hover {
+    transform: translateY(-5px); /* جابجایی کارت به سمت بالا هنگام هاور */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* افزایش سایه هنگام هاور */
+}
+
+/* تنظیمات برای تصویر محصول */
+product-card-2 img {
+    max-width: 100%; /* تصویر حداکثر عرض به اندازه 100% */
+    height: auto; /* تنظیم خودکار ارتفاع تصویر */
+    border-radius: 8px; /* گرد کردن گوشه‌های تصویر */
+    margin-bottom: 10px; /* فاصله از پایین تصویر */
+}
+
+/* استایل برای عنوان محصول */
+product-card-2 h3 {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 10px 0;
 }
 
 .product-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: var(--border-radius);
-    margin-bottom: 15px;
+    width: 300px;          /* عرض ثابت 300px */
+    height: 300px;         /* ارتفاع ثابت 300px */
+    object-fit: scale-down; /* در صورتی که اندازه تصویر بزرگتر باشد، تصویر را کوچک می‌کند */
+    object-position: center; /* موقعیت تصویر را به وسط تنظیم می‌کند */
 }
 
-.product-card h3 {
-    font-size: 1.2rem;
-    color: var(--dark-color);
-    margin-bottom: 10px;
+.center-content {
+    display: flex;                /* فعال کردن Flexbox */
+    justify-content: center;      /* وسط‌چین کردن به صورت افقی */
+    align-items: center;          /* وسط‌چین کردن به صورت عمودی */
+    height: 100vh;                /* ارتفاع کل صفحه */
+    text-align: center;           /* متن را در وسط قرار می‌دهد */
 }
 
+/* استایل برای قیمت محصول */
 .product-price {
     font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 15px;
+    font-weight: bold;
+    color: #ff5722; /* رنگ برای قیمت */
+    margin-bottom: 15px; /* فاصله از دکمه */
 }
 
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+/* استایل برای دکمه */
+.btn-primary {
+    background-color: #0073e6;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
+
+/* تغییر رنگ دکمه هنگام هاور */
+.btn-primary:hover {
+    background-color: #005bb5;
+}
+
+
 
 /* Responsive Styles */
 @media (max-width: 768px) {
