@@ -43,289 +43,289 @@
                 </div>
             </section>
 
-            <!-- Second Row: Price Filter -->
-            <section class="filter-price">
-                <div class="container">
-                    <h3>فیلتر بر اساس قیمت</h3>
+<!-- Second Row: Price Filter -->
+<section class="filter-price">
+    <div class="container">
+        <h3>فیلتر بر اساس قیمت</h3>
 
-                    <!-- نوار لغزنده دو طرفه -->
-                    <div class="filter-group">
-                        <label for="priceRange">محدوده قیمت</label>
-                        <input type="range" id="priceMin" min="0" max="50000000" step="1000" value="10" />
-                        <input type="range" id="priceMax" min="0" max="50000000" step="1000" value="50000000" />
-                        <div id="priceValues">
-                            <span id="priceMinValue">1,000,000 تومان</span> -
-                            <span id="priceMaxValue">10,000,000 تومان</span>
-                        </div>
+        <!-- نوار لغزنده دو طرفه -->
+        <div class="filter-group">
+            <label for="priceRange">محدوده قیمت</label>
+            <input type="range" id="priceMin" min="0" max="50000000" step="1000" value="10" />
+            <input type="range" id="priceMax" min="0" max="50000000" step="1000" value="50000000" />
+            <div id="priceValues">
+                <span id="priceMinValue">1,000,000 تومان</span> -
+                <span id="priceMaxValue">10,000,000 تومان</span>
+            </div>
+        </div>
+
+        <!-- دکمه ثبت فیلتر -->
+        <button id="applyFilter" class="btn btn-primary">ثبت فیلتر</button>
+    </div>
+</section>
+
+<!-- بخش مرتب سازی -->
+<section class="sort-options">
+    <div class="container">
+        <h3>مرتب سازی بر اساس</h3>
+        <div class="filter-group">
+            <label for="sortBy">گزینه مرتب‌سازی:</label>
+            <select id="sortBy" class="filter-select">
+                <option value="cheapest">ارزان‌ترین</option>
+                <option value="expensive">گران‌ترین</option>
+                <option value="default">ترتیب عادی</option> <!-- گزینه جدید برای ترتیب عادی -->
+            </select>
+        </div>
+    </div>
+</section>
+
+<!-- Third Row: Brand, Availability, Rating Filters -->
+<section class="filter-options">
+    <div class="container">
+        <h3>فیلتر پیشرفته</h3>
+        <form id="filterForm">
+            <!-- Brand Filter -->
+            <div class="filter-group">
+                <label for="brandFilter">برندهای پاد سیستم</label>
+                <select id="brandFilter" class="filter-select">
+                    <option value="">همه برندها</option>
+                    <option value="uwell">uwell</option>
+                    <option value="smoke">smoke</option>
+                    <option value="voopoo">voopoo</option>
+                    <!-- Add more brands here -->
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="availabilityFilter">وضعیت موجودی</label>
+                <select id="availabilityFilter">
+                    <option value="">همه</option>
+                    <option value="inStock">موجود</option>
+                    <option value="outOfStock">ناموجود</option>
+                </select>
+            </div>
+
+            <!-- Rating Filter -->
+            <div class="filter-group">
+                <label for="ratingFilter">رتبه‌بندی</label>
+                <select id="ratingFilter">
+                    <option value="">همه</option>
+                    <option value="5">۵ ستاره</option>
+                    <option value="4">۴ ستاره</option>
+                    <option value="3">۳ ستاره</option>
+                    <option value="2">۲ ستاره</option>
+                    <option value="1">۱ ستاره</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- فیلتر بر اساس قدرت وات -->
+<section class="filter-power">
+    <div class="container">
+        <h3>فیلتر بر اساس قدرت وات</h3>
+        <div class="filter-group">
+            <label><input type="checkbox" id="powerFilter50" class="filter-checkbox" value="50W"> 50 وات</label>
+        </div>
+        <div class="filter-group">
+            <label><input type="checkbox" id="powerFilter100" class="filter-checkbox" value="100W"> 100 وات</label>
+        </div>
+        <div class="filter-group">
+            <label><input type="checkbox" id="powerFilter150" class="filter-checkbox" value="150W"> 150 وات</label>
+        </div>
+        <div class="filter-group">
+            <label><input type="checkbox" id="powerFilter200" class="filter-checkbox" value="200W"> 200 وات</label>
+        </div>
+    </div>
+</section>
+
+</aside>
+
+<!-- Products Section (Left Column) -->
+<section class="featured-products" style="flex: 0 0 80%; padding: 20px;">
+    <div class="container">
+        <div class="section-header">
+            <h2 style="display: flex; justify-content: center; align-items: center; text-align: center; color: orange; margin-top: 25px;">انواع پاد سیستم ها</h2>
+            <p style="display: flex; justify-content: center; align-items: center; text-align: center; font-size: 1.2rem">پاد سیستم های موجود در وبسایت ما</p>
+        </div>
+
+        <!-- Show all Products in Pod System Category -->
+        <div class="products-grid" id="featuredProducts">
+            <?php
+            // اتصال به دیتابیس
+            $conn = new mysqli('localhost', 'root', '12945', 'vape_tube');
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            // دریافت فیلتر قیمت از GET
+            $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : 0;
+            $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : 50000000;  // مقدار پیش‌فرض بسیار بالا
+            $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'default';  // مقدار پیش‌فرض مرتب‌سازی بر اساس ترتیب عادی
+            $brand = isset($_GET['brand']) ? $_GET['brand'] : '';  // دریافت برند از GET (اگر انتخاب شده باشد)
+            $availability = isset($_GET['availability']) ? $_GET['availability'] : '';  // دریافت وضعیت موجودی از GET
+            $rating = isset($_GET['rating']) ? $_GET['rating'] : '';  // دریافت رتبه‌بندی از GET
+
+            // ساختن بخش WHERE برای فیلتر قیمت
+            $conditions = [];
+            $params = []; // این متغیر برای نگه داشتن پارامترهای بایند شده است
+            $paramTypes = ''; // برای مشخص کردن نوع داده‌ها در bind_param
+
+            // اضافه کردن فیلتر قیمت
+            $conditions[] = "price >= ? AND price <= ?";
+            $params[] = $minPrice;
+            $params[] = $maxPrice;
+            $paramTypes .= 'ii'; // برای minPrice و maxPrice از نوع integer استفاده می‌کنیم
+
+            // اضافه کردن فیلتر برند
+            if ($brand) {
+                $conditions[] = "brand = ?";
+                $params[] = $brand;
+                $paramTypes .= 's'; // برای برند از نوع string استفاده می‌کنیم
+            }
+
+            // اضافه کردن فیلتر موجودی
+            if ($availability === 'inStock') {
+                $conditions[] = "is_active = 1";  // موجود
+            } elseif ($availability === 'outOfStock') {
+                $conditions[] = "is_active = 0";  // ناموجود
+            }
+
+            // اضافه کردن فیلتر رتبه‌بندی
+            if ($rating) {
+                $conditions[] = "rating = ?";
+                $params[] = $rating;
+                $paramTypes .= 'i'; // برای رتبه از نوع integer استفاده می‌کنیم
+            }
+
+            // ساختن کوئری بر اساس شرایط
+            $sql = "SELECT * FROM products WHERE category_id LIKE '%2%' AND " . implode(" AND ", $conditions);
+
+            // اضافه کردن بخش مرتب‌سازی به کوئری در صورتی که مرتب‌سازی فعال باشد
+            if ($sortBy == 'cheapest') {
+                $sql .= " ORDER BY price ASC";
+            } elseif ($sortBy == 'expensive') {
+                $sql .= " ORDER BY price DESC";
+            } elseif ($sortBy == 'sales') {
+                $sql .= " ORDER BY sales DESC";
+            }
+
+            // آماده‌سازی کوئری
+            $stmt = $conn->prepare($sql);
+
+            // بایند کردن پارامترها به کوئری
+            $stmt->bind_param($paramTypes, ...$params);
+
+            // اجرای کوئری
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            // بررسی اینکه آیا نتیجه‌ای برگشت داده شد یا نه
+            if ($result->num_rows > 0) {
+                // نمایش محصولات
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="product-card">';
+                    echo '<img src="' . $row["image_url"] . '" alt="' . $row["name"] . '" style="width: 300px; height: 300px; object-fit: scale-down; object-position: center; display: block; margin: 0 auto; padding: 3px 3px 3px 3px;" >';
+                    echo '<h3 style="text-align: center; margin: 0 auto; color: coral;">' . $row["name"] . '</h3>';
+                    echo '<br>';
+                    echo '<p>' . $row["description_fa"] . '</p>';
+                    echo '<p style="display: block; text-align: center; margin: 0 auto; color: green;" class="product-price">' . number_format($row["price"]) . ' تومان</p>';
+                    echo '<br>';
+                    echo '<button style="display: block; margin: 0 auto;" class="btn btn-primary">افزودن به سبد خرید</button>';
+                    echo '</div>';
+                }
+            } else {
+                echo "محصولی یافت نشد.";
+            }
+
+            // بستن اتصال به دیتابیس
+            $conn->close();
+            ?>
+        </div>
+
+
+
+        <!-- Pod System Categories -->
+        <section class="categories">
+            <div class="section-header">
+                <h2>برندهای پاد سیستم</h2>
+                <p>تمام برندهای پاد سیستم در ویپ کلاب</p>
+            </div>
+            <div class="category_container">
+
+                <!-- Pod Systems Category -->
+                <a href="pages/podsystems.php">
+                    <div class="category-card">
+                        <img src="assets/images/categories/podsystem.jpeg" alt="پاد سیستم" />
+                        <h3>پاد سیستم</h3>
+                        <p>محصولاتی برای ترک سیگار</p>
                     </div>
+                </a>
 
-                    <!-- دکمه ثبت فیلتر -->
-                    <button id="applyFilter" class="btn btn-primary">ثبت فیلتر</button>
+                <!-- Pod Mod Systems Category -->
+                <div class="category-card">
+                    <img src="assets/images/categories/podmod.jpeg" alt="پاد ماد" />
+                    <h3>پاد ماد</h3>
+                    <p>دستگاه هایی دو کاره بین پاد و ماد</p>
                 </div>
-            </section>
 
-            <!-- بخش مرتب سازی -->
-            <section class="sort-options">
-                <div class="container">
-                    <h3>مرتب سازی بر اساس</h3>
-                    <div class="filter-group">
-                        <label for="sortBy">گزینه مرتب‌سازی:</label>
-                        <select id="sortBy" class="filter-select">
-                            <option value="cheapest">ارزان‌ترین</option>
-                            <option value="expensive">گران‌ترین</option>
-                            <option value="default">ترتیب عادی</option> <!-- گزینه جدید برای ترتیب عادی -->
-                        </select>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Third Row: Brand, Availability, Rating Filters -->
-            <section class="filter-options">
-                <div class="container">
-                    <h3>فیلتر پیشرفته</h3>
-                    <form id="filterForm">
-                        <!-- Brand Filter -->
-                        <div class="filter-group">
-                            <label for="brandFilter">برندهای پاد سیستم</label>
-                            <select id="brandFilter" class="filter-select">
-                                <option value="">همه برندها</option>
-                                <option value="uwell">uwell</option>
-                                <option value="smoke">smoke</option>
-                                <option value="voopoo">voopoo</option>
-                                <!-- Add more brands here -->
-                            </select>
-                        </div>
-
-                        <div class="filter-group">
-                            <label for="availabilityFilter">وضعیت موجودی</label>
-                            <select id="availabilityFilter">
-                                <option value="">همه</option>
-                                <option value="inStock">موجود</option>
-                                <option value="outOfStock">ناموجود</option>
-                            </select>
-                        </div>
-
-                        <!-- Rating Filter -->
-                        <div class="filter-group">
-                            <label for="ratingFilter">رتبه‌بندی</label>
-                            <select id="ratingFilter">
-                                <option value="">همه</option>
-                                <option value="5">۵ ستاره</option>
-                                <option value="4">۴ ستاره</option>
-                                <option value="3">۳ ستاره</option>
-                                <option value="2">۲ ستاره</option>
-                                <option value="1">۱ ستاره</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-            </section>
-
-            <!-- فیلتر بر اساس قدرت وات -->
-            <section class="filter-power">
-                <div class="container">
-                    <h3>فیلتر بر اساس قدرت وات</h3>
-                    <div class="filter-group">
-                        <label><input type="checkbox" id="powerFilter50" class="filter-checkbox" value="50W"> 50 وات</label>
-                    </div>
-                    <div class="filter-group">
-                        <label><input type="checkbox" id="powerFilter100" class="filter-checkbox" value="100W"> 100 وات</label>
-                    </div>
-                    <div class="filter-group">
-                        <label><input type="checkbox" id="powerFilter150" class="filter-checkbox" value="150W"> 150 وات</label>
-                    </div>
-                    <div class="filter-group">
-                        <label><input type="checkbox" id="powerFilter200" class="filter-checkbox" value="200W"> 200 وات</label>
-                    </div>
-                </div>
-            </section>
-
-        </aside>
-
-        <!-- Products Section (Left Column) -->
-        <section class="featured-products" style="flex: 0 0 80%; padding: 20px;">
-            <div class="container">
-                <div class="section-header">
-                    <h2 style="display: flex; justify-content: center; align-items: center; text-align: center; color: orange; margin-top: 25px;">انواع پاد سیستم ها</h2>
-                    <p style="display: flex; justify-content: center; align-items: center; text-align: center; font-size: 1.2rem">پاد سیستم های موجود در وبسایت ما</p>
+                <!-- Vape Mod Category -->
+                <div class="category-card">
+                    <img src="assets/images/categories/vape.jpeg" alt="ویپ" />
+                    <h3>ویپ | ماد</h3>
+                    <p>دستگاه هایی برای ترک قلیان با وات بالا</p>
                 </div>
 
-                <!-- Show all Products in Pod System Category -->
-                <div class="products-grid" id="featuredProducts">
-                    <?php
-                    // اتصال به دیتابیس
-                    $conn = new mysqli('localhost', 'root', '12945', 'vape_tube');
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-
-                    // دریافت فیلتر قیمت از GET
-                    $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : 0;
-                    $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : 50000000;  // مقدار پیش‌فرض بسیار بالا
-                    $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'default';  // مقدار پیش‌فرض مرتب‌سازی بر اساس ترتیب عادی
-                    $brand = isset($_GET['brand']) ? $_GET['brand'] : '';  // دریافت برند از GET (اگر انتخاب شده باشد)
-                    $availability = isset($_GET['availability']) ? $_GET['availability'] : '';  // دریافت وضعیت موجودی از GET
-                    $rating = isset($_GET['rating']) ? $_GET['rating'] : '';  // دریافت رتبه‌بندی از GET
-
-                    // ساختن بخش WHERE برای فیلتر قیمت
-                    $conditions = [];
-                    $params = []; // این متغیر برای نگه داشتن پارامترهای بایند شده است
-                    $paramTypes = ''; // برای مشخص کردن نوع داده‌ها در bind_param
-
-                    // اضافه کردن فیلتر قیمت
-                    $conditions[] = "price >= ? AND price <= ?";
-                    $params[] = $minPrice;
-                    $params[] = $maxPrice;
-                    $paramTypes .= 'ii'; // برای minPrice و maxPrice از نوع integer استفاده می‌کنیم
-
-                    // اضافه کردن فیلتر برند
-                    if ($brand) {
-                        $conditions[] = "brand = ?";
-                        $params[] = $brand;
-                        $paramTypes .= 's'; // برای برند از نوع string استفاده می‌کنیم
-                    }
-
-                    // اضافه کردن فیلتر موجودی
-                    if ($availability === 'inStock') {
-                        $conditions[] = "is_active = 1";  // موجود
-                    } elseif ($availability === 'outOfStock') {
-                        $conditions[] = "is_active = 0";  // ناموجود
-                    }
-
-                    // اضافه کردن فیلتر رتبه‌بندی
-                    if ($rating) {
-                        $conditions[] = "rating = ?";
-                        $params[] = $rating;
-                        $paramTypes .= 'i'; // برای رتبه از نوع integer استفاده می‌کنیم
-                    }
-
-                    // ساختن کوئری بر اساس شرایط
-                    $sql = "SELECT * FROM products WHERE category_id LIKE '%2%' AND " . implode(" AND ", $conditions);
-
-                    // اضافه کردن بخش مرتب‌سازی به کوئری در صورتی که مرتب‌سازی فعال باشد
-                    if ($sortBy == 'cheapest') {
-                        $sql .= " ORDER BY price ASC";
-                    } elseif ($sortBy == 'expensive') {
-                        $sql .= " ORDER BY price DESC";
-                    } elseif ($sortBy == 'sales') {
-                        $sql .= " ORDER BY sales DESC";
-                    }
-
-                    // آماده‌سازی کوئری
-                    $stmt = $conn->prepare($sql);
-
-                    // بایند کردن پارامترها به کوئری
-                    $stmt->bind_param($paramTypes, ...$params);
-
-                    // اجرای کوئری
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-
-                    // بررسی اینکه آیا نتیجه‌ای برگشت داده شد یا نه
-                    if ($result->num_rows > 0) {
-                        // نمایش محصولات
-                        while ($row = $result->fetch_assoc()) {
-                            echo '<div class="product-card">';
-                            echo '<img src="' . $row["image_url"] . '" alt="' . $row["name"] . '" style="width: 300px; height: 300px; object-fit: scale-down; object-position: center; display: block; margin: 0 auto; padding: 3px 3px 3px 3px;" >';
-                            echo '<h3 style="text-align: center; margin: 0 auto; color: coral;">' . $row["name"] . '</h3>';
-                            echo '<br>';
-                            echo '<p>' . $row["description_fa"] . '</p>';
-                            echo '<p style="display: block; text-align: center; margin: 0 auto; color: green;" class="product-price">' . number_format($row["price"]) . ' تومان</p>';
-                            echo '<br>';
-                            echo '<button style="display: block; margin: 0 auto;" class="btn btn-primary">افزودن به سبد خرید</button>';
-                            echo '</div>';
-                        }
-                    } else {
-                        echo "محصولی یافت نشد.";
-                    }
-
-                    // بستن اتصال به دیتابیس
-                    $conn->close();
-                    ?>
+                <!-- Disposable Category -->
+                <div class="category-card">
+                    <img src="assets/images/categories/dispossable.jpeg" alt="پاد های یکبار مصرف" />
+                    <h3>یکبار مصرف ها</h3>
+                    <p>انواع پاد و ماد یکبار مصرف</p>
                 </div>
 
+                <!-- E-Cigar Category -->
+                <div class="category-card">
+                    <img src="assets/images/categories/eciggaret.jpeg" alt="سیگارهای الکترونیکی" />
+                    <h3>سیگار های الکترونیکی</h3>
+                    <p>انواع سیگار های الکترونیکی آیکاس، جوی و ...</p>
+                </div>
 
+                <!-- Nicotine Salt Category -->
+                <div class="category-card">
+                    <img src="assets/images/categories/salt.jpeg" alt="سالت نیکوتین" />
+                    <h3>سالت نیکوتین</h3>
+                    <p>مایع مصرفی برای پاد سیستم ها</p>
+                </div>
 
-                <!-- Pod System Categories -->
-                <section class="categories">
-                    <div class="section-header">
-                        <h2>برندهای پاد سیستم</h2>
-                        <p>تمام برندهای پاد سیستم در ویپ کلاب</p>
-                    </div>
-                    <div class="category_container">
+                <!-- E-Juice Category -->
+                <div class="category-card">
+                    <img src="assets/images/categories/juice.jpeg" alt="جویس ویپ" />
+                    <h3>جویس</h3>
+                    <p>مایع مصرفی ویپ | ماد</p>
+                </div>
 
-                        <!-- Pod Systems Category -->
-                        <a href="pages/podsystems.php">
-                            <div class="category-card">
-                                <img src="assets/images/categories/podsystem.jpeg" alt="پاد سیستم" />
-                                <h3>پاد سیستم</h3>
-                                <p>محصولاتی برای ترک سیگار</p>
-                            </div>
-                        </a>
+                <!-- Coil Cartridge Category -->
+                <div class="category-card">
+                    <img src="assets/images/categories/coil.jpeg" alt="کویل و کارتریج" />
+                    <h3>کویل و کارتریج</h3>
+                    <p>انواع کویل و کارتریج دستگاه ها</p>
+                </div>
 
-                        <!-- Pod Mod Systems Category -->
-                        <div class="category-card">
-                            <img src="assets/images/categories/podmod.jpeg" alt="پاد ماد" />
-                            <h3>پاد ماد</h3>
-                            <p>دستگاه هایی دو کاره بین پاد و ماد</p>
-                        </div>
-
-                        <!-- Vape Mod Category -->
-                        <div class="category-card">
-                            <img src="assets/images/categories/vape.jpeg" alt="ویپ" />
-                            <h3>ویپ | ماد</h3>
-                            <p>دستگاه هایی برای ترک قلیان با وات بالا</p>
-                        </div>
-
-                        <!-- Disposable Category -->
-                        <div class="category-card">
-                            <img src="assets/images/categories/dispossable.jpeg" alt="پاد های یکبار مصرف" />
-                            <h3>یکبار مصرف ها</h3>
-                            <p>انواع پاد و ماد یکبار مصرف</p>
-                        </div>
-
-                        <!-- E-Cigar Category -->
-                        <div class="category-card">
-                            <img src="assets/images/categories/eciggaret.jpeg" alt="سیگارهای الکترونیکی" />
-                            <h3>سیگار های الکترونیکی</h3>
-                            <p>انواع سیگار های الکترونیکی آیکاس، جوی و ...</p>
-                        </div>
-
-                        <!-- Nicotine Salt Category -->
-                        <div class="category-card">
-                            <img src="assets/images/categories/salt.jpeg" alt="سالت نیکوتین" />
-                            <h3>سالت نیکوتین</h3>
-                            <p>مایع مصرفی برای پاد سیستم ها</p>
-                        </div>
-
-                        <!-- E-Juice Category -->
-                        <div class="category-card">
-                            <img src="assets/images/categories/juice.jpeg" alt="جویس ویپ" />
-                            <h3>جویس</h3>
-                            <p>مایع مصرفی ویپ | ماد</p>
-                        </div>
-
-                        <!-- Coil Cartridge Category -->
-                        <div class="category-card">
-                            <img src="assets/images/categories/coil.jpeg" alt="کویل و کارتریج" />
-                            <h3>کویل و کارتریج</h3>
-                            <p>انواع کویل و کارتریج دستگاه ها</p>
-                        </div>
-
-                        <!-- Accessory Category -->
-                        <div class="category-card">
-                            <img src="assets/images/categories/accessory.jpeg" alt="اکسسوری" />
-                            <h3>لوازم جانبی</h3>
-                            <p>لوازم جانبی پاد، پادماد و ماد</p>
-                        </div>
-
-                    </div>
-                </section>
+                <!-- Accessory Category -->
+                <div class="category-card">
+                    <img src="assets/images/categories/accessory.jpeg" alt="اکسسوری" />
+                    <h3>لوازم جانبی</h3>
+                    <p>لوازم جانبی پاد، پادماد و ماد</p>
+                </div>
 
             </div>
         </section>
 
     </div>
+</section>
+
+</div>
 </main>
 
 <!-- Add this CSS for the two-column layout -->
@@ -890,7 +890,7 @@
                 item.className = 'search-result-item';
                 item.innerHTML = `
                 <div class="result-item-content">
-                    ${product.image ? `<img src="/assets/images/products/${product.image}" alt="${product.name}" class="product-thumb">` : ''}
+                    ${product.image_url ? `<img src="${product.image_url}" alt="${product.name}" class="product-thumb">` : ''}
                     <div class="product-info">
                         <h3>${product.name_fa || product.name}</h3>
                         <p class="price">${product.price ? new Intl.NumberFormat('fa-IR').format(product.price) + ' تومان' : 'تماس بگیرید'}</p>
@@ -943,6 +943,4 @@
     });
 
 </script>
-
-</body>
 </html>
