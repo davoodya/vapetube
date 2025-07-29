@@ -4,11 +4,9 @@ header_remove(); // پاک کردن تمام هدرهای قبلی
 header('Content-Type: application/json; charset=utf-8');
 header("Cache-Control: no-cache, must-revalidate");
 
-// اطلاعات اتصال به دیتابیس
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'vape_tube');
-define('DB_USER', 'root');
-define('DB_PASS', '12945');
+
+require_once '../config.php'; // فایلی که شامل اطلاعات اتصال به دیتابیس است
+
 
 $response = [
     'success' => false,
