@@ -162,6 +162,7 @@
                     $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'default';  // مقدار پیش‌فرض مرتب‌سازی بر اساس ترتیب عادی
                     $brand = isset($_GET['brand']) ? $_GET['brand'] : '';  // دریافت برند از GET (اگر انتخاب شده باشد)
                     $availability = isset($_GET['availability']) ? $_GET['availability'] : '';  // دریافت وضعیت موجودی از GET
+                    $rating = isset($_GET['rating']) ? $_GET['rating'] : '';  // دریافت رتبه‌بندی از GET
 
                     // ساختن بخش WHERE برای فیلتر قیمت
                     $conditions = [];
@@ -186,6 +187,13 @@
                         $conditions[] = "is_active = 1";  // موجود
                     } elseif ($availability === 'outOfStock') {
                         $conditions[] = "is_active = 0";  // ناموجود
+                    }
+
+                    // اضافه کردن فیلتر رتبه‌بندی
+                    if ($rating) {
+                        $conditions[] = "rating = ?";
+                        $params[] = $rating;
+                        $paramTypes .= 'i'; // برای رتبه از نوع integer استفاده می‌کنیم
                     }
 
                     // ساختن کوئری بر اساس شرایط
@@ -232,6 +240,7 @@
                     $conn->close();
                     ?>
                 </div>
+
 
 
                 <!-- Pod System Categories -->
@@ -739,6 +748,31 @@
 
         // بروزرسانی آدرس URL با پارامترهای جدید فیلتر
         const newUrl = window.location.pathname + "?minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&sortBy=" + sortBy + "&brand=" + brand + "&availability=" + selectedAvailability;
+        history.pushState(null, "", newUrl);
+
+        // رفرش صفحه برای نمایش محصولات جدید
+        location.reload();
+    });
+</script>
+
+<!-- Script for Rating Filtering -->
+<script>
+    // گرفتن المان ratingFilter
+    const ratingFilter = document.getElementById("ratingFilter");
+
+    // هنگام تغییر گزینه رتبه‌بندی
+    ratingFilter.addEventListener("change", function () {
+        const selectedRating = ratingFilter.value;
+
+        // دریافت سایر فیلترها از URL
+        const minPrice = new URLSearchParams(window.location.search).get('minPrice') || 0;
+        const maxPrice = new URLSearchParams(window.location.search).get('maxPrice') || 1000000;
+        const sortBy = new URLSearchParams(window.location.search).get('sortBy') || 'default';
+        const brand = new URLSearchParams(window.location.search).get('brand') || '';
+        const availability = new URLSearchParams(window.location.search).get('availability') || '';
+
+        // بروزرسانی آدرس URL با پارامترهای جدید فیلتر
+        const newUrl = window.location.pathname + "?minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&sortBy=" + sortBy + "&brand=" + brand + "&availability=" + availability + "&rating=" + selectedRating;
         history.pushState(null, "", newUrl);
 
         // رفرش صفحه برای نمایش محصولات جدید
