@@ -48,8 +48,8 @@
                     <!-- نوار لغزنده دو طرفه -->
                     <div class="filter-group">
                         <label for="priceRange">محدوده قیمت</label>
-                        <input type="range" id="priceMin" min="0" max="50000000" step="1000" value="1000000" />
-                        <input type="range" id="priceMax" min="0" max="50000000" step="1000" value="10000000" />
+                        <input type="range" id="priceMin" min="0" max="50000000" step="1000" value="10" />
+                        <input type="range" id="priceMax" min="0" max="50000000" step="1000" value="50000000" />
                         <div id="priceValues">
                             <span id="priceMinValue">1,000,000 تومان</span> -
                             <span id="priceMaxValue">10,000,000 تومان</span>
@@ -158,7 +158,7 @@
 
                     // دریافت فیلتر قیمت از GET
                     $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : 0;
-                    $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : 1000000;  // مقدار پیش‌فرض بسیار بالا
+                    $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : 50000000;  // مقدار پیش‌فرض بسیار بالا
                     $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'default';  // مقدار پیش‌فرض مرتب‌سازی بر اساس ترتیب عادی
                     $brand = isset($_GET['brand']) ? $_GET['brand'] : '';  // دریافت برند از GET (اگر انتخاب شده باشد)
                     $availability = isset($_GET['availability']) ? $_GET['availability'] : '';  // دریافت وضعیت موجودی از GET
