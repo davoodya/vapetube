@@ -1,0 +1,71 @@
+/* استایل‌های عمومی سبد خرید */
+.cart-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #ff5722;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.cart-sidebar.active {
+    right: 0;
+}
+
+.cart-header {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.cart-item-controls button {
+    padding: 5px 10px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.cart-item-controls button:hover {
+    background-color: #e64a19;
+}
+
+.cart-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}

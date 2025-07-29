@@ -15,15 +15,202 @@
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/podsystems.css">
+    <!-- اضافه کردن Cart.JS از CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cartjs/2.5.0/cart.min.js"></script>
 
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/vape-tube/assets/css/style.css">
+    <link rel="stylesheet" href="/vape-tube/assets/css/podsystems.css">
+    <link rel="stylesheet" href="/vape-tube/assets/css/cart.css">
 
 </head>
 <body>
 <!-- Header -->
-<div id="header-container"></div>
+<!--<div id="header-container"></div>-->
+<!-- Header -->
+<header class="header">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-top-content">
+                <!-- Phone & Email in Header -->
+                <div class="header-contact">
+                    <span><i class="fas fa-phone"></i> 091311122234</span>
+                    <span><i class="fas fa-envelope"></i> info@vapeclub.com</span>
+                </div>
+
+                <!-- Auth Section -->
+                <div class="header-auth">
+                    <div class="auth-buttons" id="authButtons">
+                        <a href="#" class="auth-link" id="loginBtn">ورود</a>
+                        <span>|</span>
+                        <a href="#" class="auth-link" id="registerBtn">ثبت نام</a>
+                    </div>
+                    <div class="user-menu" id="userMenu" style="display: none;">
+                        <span class="user-name" id="userName"></span>
+                        <div class="user-dropdown">
+                            <a href="#" id="profileBtn">پروفایل</a>
+                            <a href="#" id="ordersBtn">سفارشات</a>
+                            <a href="#" id="logoutBtn">خروج</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="header-main">
+        <div class="container">
+            <div class="header-main-content">
+                <!-- لوگو با تصویر -->
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="assets/images/logo.jpeg" alt="ویپ تیوب">
+                        <h1>ویپ تیوب | Vape Tube</h1>
+                    </a>
+                </div>
+
+                <!-- جستجو -->
+                <!--        <div class="search-box">-->
+                <!--          <form class="search-form" id="searchForm">-->
+                <!--            <input type="text" placeholder="جستجو در محصولات..." id="searchInput">-->
+                <!--            <button type="submit"><i class="fas fa-search"></i></button>-->
+                <!--          </form>-->
+
+                <!--          &lt;!&ndash; نمایش نتایج جستجو &ndash;&gt;-->
+                <!--          <div id="searchResults" class="search-results"></div>-->
+                <!--        </div>-->
+
+                <!-- سبد خرید -->
+                <!-- آیکون سبد خرید -->
+                <div id="cartToggle" class="cart-icon" onclick="cart.toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount">0</span> <!-- تعداد آیتم‌های سبد خرید -->
+                </div>
+
+                <!-- سبد خرید -->
+                <div id="cartSidebar" class="cart-sidebar">
+                    <div class="cart-header">
+                        <h3>سبد خرید</h3>
+                        <button id="cartClose" class="cart-close" onclick="cart.hideCart()">بستن</button>
+                    </div>
+                    <div id="cartContent" class="cart-content">
+                        <!-- محتوای سبد خرید بارگذاری می‌شود -->
+                    </div>
+                    <div class="cart-footer">
+                        <div class="cart-total">
+                            <span>مجموع: <span id="cartTotal">۰ تومان</span></span>
+                        </div>
+                        <button class="btn btn-primary btn-block" id="checkoutBtn" onclick="checkout()">تسویه حساب</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <!-- Mobile Menu Toggle -->
+                <div class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false" role="button" tabindex="0">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <!-- Right Menu (Products) -->
+                <div class="nav-left">
+                    <div class="products-menu">
+                        <a href="#" class="products-link" aria-haspopup="true" aria-expanded="false">محصولات <i class="fas fa-chevron-down"></i></a>
+                        <div class="mega-menu" aria-label="محصولات">
+                            <div class="mega-menu-content">
+                                <div class="category-column" data-category="1">
+                                    <h3>مود ویپ</h3>
+                                    <ul>
+                                        <li><a href="#" data-subcategory="1">آیتم ۱</a></li>
+                                        <li><a href="#" data-subcategory="2">آیتم ۲</a></li>
+                                        <li><a href="#" data-subcategory="3">آیتم ۳</a></li>
+                                    </ul>
+                                </div>
+                                <div class="category-column" data-category="2">
+                                    <h3>سیستم های پاد</h3>
+                                    <ul>
+                                        <li><a href="#" data-subcategory="4">آیتم ۱</a></li>
+                                        <li><a href="#" data-subcategory="5">آیتم ۲</a></li>
+                                        <li><a href="#" data-subcategory="6">آیتم ۳</a></li>
+                                    </ul>
+                                </div>
+                                <div class="category-column" data-category="3">
+                                    <h3>نیکوتین نمک</h3>
+                                    <ul>
+                                        <li><a href="#" data-subcategory="7">آیتم ۱</a></li>
+                                        <li><a href="#" data-subcategory="8">آیتم ۲</a></li>
+                                        <li><a href="#" data-subcategory="9">آیتم ۳</a></li>
+                                    </ul>
+                                </div>
+                                <div class="category-column" data-category="4">
+                                    <h3>مایع ویپ</h3>
+                                    <ul>
+                                        <li><a href="#" data-subcategory="10">آیتم ۱</a></li>
+                                        <li><a href="#" data-subcategory="11">آیتم ۲</a></li>
+                                        <li><a href="#" data-subcategory="12">آیتم ۳</a></li>
+                                    </ul>
+                                </div>
+                                <div class="category-column" data-category="5">
+                                    <h3>یکبار مصرف</h3>
+                                    <ul>
+                                        <li><a href="#" data-subcategory="13">آیتم ۱</a></li>
+                                        <li><a href="#" data-subcategory="14">آیتم ۲</a></li>
+                                        <li><a href="#" data-subcategory="15">آیتم ۳</a></li>
+                                    </ul>
+                                </div>
+                                <div class="category-column" data-category="6">
+                                    <h3>کویل و کارتریج</h3>
+                                    <ul>
+                                        <li><a href="#" data-subcategory="16">آیتم ۱</a></li>
+                                        <li><a href="#" data-subcategory="17">آیتم ۲</a></li>
+                                        <li><a href="#" data-subcategory="18">آیتم ۳</a></li>
+                                    </ul>
+                                </div>
+                                <div class="category-column" data-category="7">
+                                    <h3>لوازم جانبی</h3>
+                                    <ul>
+                                        <li><a href="#" data-subcategory="19">آیتم ۱</a></li>
+                                        <li><a href="#" data-subcategory="20">آیتم ۲</a></li>
+                                        <li><a href="#" data-subcategory="21">آیتم ۳</a></li>
+                                    </ul>
+                                </div>
+                                <div class="category-column" data-category="8">
+                                    <h3>سیگار الکترونیکی</h3>
+                                    <ul>
+                                        <li><a href="#" data-subcategory="22">آیتم ۱</a></li>
+                                        <li><a href="#" data-subcategory="23">آیتم ۲</a></li>
+                                        <li><a href="#" data-subcategory="24">آیتم ۳</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Left Menu -->
+                <div class="nav-right">
+                    <ul class="nav-menu">
+                        <li><a href="#" data-page="about">درباره ما</a></li>
+                        <li><a href="#" data-page="contact">تماس با ما</a></li>
+                        <li><a href="#" data-page="faq">سوالات متداول</a></li>
+                        <li><a href="#" data-page="articles">مقالات</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </nav>
+</header>
 
 <!-- Main Content -->
 <main class="main-content">
@@ -142,188 +329,188 @@
 
 </aside>
 
-<!-- Products Section (Left Column) -->
-<section class="featured-products" style="flex: 0 0 80%; padding: 20px;">
-    <div class="container">
-        <div class="section-header">
-            <h2 style="display: flex; justify-content: center; align-items: center; text-align: center; color: orange; margin-top: 25px;">انواع پاد سیستم ها</h2>
-            <p style="display: flex; justify-content: center; align-items: center; text-align: center; font-size: 1.2rem">پاد سیستم های موجود در وبسایت ما</p>
-        </div>
-
-        <!-- Show all Products in Pod System Category -->
-        <div class="products-grid" id="featuredProducts">
-            <?php
-            // اتصال به دیتابیس
-            $conn = new mysqli('localhost', 'root', '12945', 'vape_tube');
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-            // دریافت فیلتر قیمت از GET
-            $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : 0;
-            $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : 50000000;  // مقدار پیش‌فرض بسیار بالا
-            $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'default';  // مقدار پیش‌فرض مرتب‌سازی بر اساس ترتیب عادی
-            $brand = isset($_GET['brand']) ? $_GET['brand'] : '';  // دریافت برند از GET (اگر انتخاب شده باشد)
-            $availability = isset($_GET['availability']) ? $_GET['availability'] : '';  // دریافت وضعیت موجودی از GET
-            $rating = isset($_GET['rating']) ? $_GET['rating'] : '';  // دریافت رتبه‌بندی از GET
-
-            // ساختن بخش WHERE برای فیلتر قیمت
-            $conditions = [];
-            $params = []; // این متغیر برای نگه داشتن پارامترهای بایند شده است
-            $paramTypes = ''; // برای مشخص کردن نوع داده‌ها در bind_param
-
-            // اضافه کردن فیلتر قیمت
-            $conditions[] = "price >= ? AND price <= ?";
-            $params[] = $minPrice;
-            $params[] = $maxPrice;
-            $paramTypes .= 'ii'; // برای minPrice و maxPrice از نوع integer استفاده می‌کنیم
-
-            // اضافه کردن فیلتر برند
-            if ($brand) {
-                $conditions[] = "brand = ?";
-                $params[] = $brand;
-                $paramTypes .= 's'; // برای برند از نوع string استفاده می‌کنیم
-            }
-
-            // اضافه کردن فیلتر موجودی
-            if ($availability === 'inStock') {
-                $conditions[] = "is_active = 1";  // موجود
-            } elseif ($availability === 'outOfStock') {
-                $conditions[] = "is_active = 0";  // ناموجود
-            }
-
-            // اضافه کردن فیلتر رتبه‌بندی
-            if ($rating) {
-                $conditions[] = "rating = ?";
-                $params[] = $rating;
-                $paramTypes .= 'i'; // برای رتبه از نوع integer استفاده می‌کنیم
-            }
-
-            // ساختن کوئری بر اساس شرایط
-            $sql = "SELECT * FROM products WHERE category_id LIKE '%2%' AND " . implode(" AND ", $conditions);
-
-            // اضافه کردن بخش مرتب‌سازی به کوئری در صورتی که مرتب‌سازی فعال باشد
-            if ($sortBy == 'cheapest') {
-                $sql .= " ORDER BY price ASC";
-            } elseif ($sortBy == 'expensive') {
-                $sql .= " ORDER BY price DESC";
-            } elseif ($sortBy == 'sales') {
-                $sql .= " ORDER BY sales DESC";
-            }
-
-            // آماده‌سازی کوئری
-            $stmt = $conn->prepare($sql);
-
-            // بایند کردن پارامترها به کوئری
-            $stmt->bind_param($paramTypes, ...$params);
-
-            // اجرای کوئری
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            // بررسی اینکه آیا نتیجه‌ای برگشت داده شد یا نه
-            if ($result->num_rows > 0) {
-                // نمایش محصولات
-                while ($row = $result->fetch_assoc()) {
-                    echo '<div class="product-card">';
-                    echo '<img src="' . $row["image_url"] . '" alt="' . $row["name"] . '" style="width: 300px; height: 300px; object-fit: scale-down; object-position: center; display: block; margin: 0 auto; padding: 3px 3px 3px 3px;" >';
-                    echo '<h3 style="text-align: center; margin: 0 auto; color: coral;">' . $row["name"] . '</h3>';
-                    echo '<br>';
-                    echo '<p>' . $row["description_fa"] . '</p>';
-                    echo '<p style="display: block; text-align: center; margin: 0 auto; color: green;" class="product-price">' . number_format($row["price"]) . ' تومان</p>';
-                    echo '<br>';
-                    echo '<button style="display: block; margin: 0 auto;" class="btn btn-primary">افزودن به سبد خرید</button>';
-                    echo '</div>';
-                }
-            } else {
-                echo "محصولی یافت نشد.";
-            }
-
-            // بستن اتصال به دیتابیس
-            $conn->close();
-            ?>
-        </div>
-
-
-
-        <!-- Pod System Categories -->
-        <section class="categories">
+    <!-- Products Section (Left Column) -->
+    <section class="featured-products" style="flex: 0 0 80%; padding: 20px;">
+        <div class="container">
             <div class="section-header">
-                <h2>برندهای پاد سیستم</h2>
-                <p>تمام برندهای پاد سیستم در ویپ کلاب</p>
+                <h2 style="display: flex; justify-content: center; align-items: center; text-align: center; color: orange; margin-top: 25px;">انواع پاد سیستم ها</h2>
+                <p style="display: flex; justify-content: center; align-items: center; text-align: center; font-size: 1.2rem">پاد سیستم های موجود در وبسایت ما</p>
             </div>
-            <div class="category_container">
 
-                <!-- Pod Systems Category -->
-                <a href="pages/podsystems.php">
+            <!-- Show all Products in Pod System Category -->
+            <div class="products-grid" id="featuredProducts">
+                <?php
+                // اتصال به دیتابیس
+                $conn = new mysqli('localhost', 'root', '12945', 'vape_tube');
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+
+                // دریافت فیلتر قیمت از GET
+                $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : 0;
+                $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : 50000000;  // مقدار پیش‌فرض بسیار بالا
+                $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'default';  // مقدار پیش‌فرض مرتب‌سازی بر اساس ترتیب عادی
+                $brand = isset($_GET['brand']) ? $_GET['brand'] : '';  // دریافت برند از GET (اگر انتخاب شده باشد)
+                $availability = isset($_GET['availability']) ? $_GET['availability'] : '';  // دریافت وضعیت موجودی از GET
+                $rating = isset($_GET['rating']) ? $_GET['rating'] : '';  // دریافت رتبه‌بندی از GET
+
+                // ساختن بخش WHERE برای فیلتر قیمت
+                $conditions = [];
+                $params = []; // این متغیر برای نگه داشتن پارامترهای بایند شده است
+                $paramTypes = ''; // برای مشخص کردن نوع داده‌ها در bind_param
+
+                // اضافه کردن فیلتر قیمت
+                $conditions[] = "price >= ? AND price <= ?";
+                $params[] = $minPrice;
+                $params[] = $maxPrice;
+                $paramTypes .= 'ii'; // برای minPrice و maxPrice از نوع integer استفاده می‌کنیم
+
+                // اضافه کردن فیلتر برند
+                if ($brand) {
+                    $conditions[] = "brand = ?";
+                    $params[] = $brand;
+                    $paramTypes .= 's'; // برای برند از نوع string استفاده می‌کنیم
+                }
+
+                // اضافه کردن فیلتر موجودی
+                if ($availability === 'inStock') {
+                    $conditions[] = "is_active = 1";  // موجود
+                } elseif ($availability === 'outOfStock') {
+                    $conditions[] = "is_active = 0";  // ناموجود
+                }
+
+                // اضافه کردن فیلتر رتبه‌بندی
+                if ($rating) {
+                    $conditions[] = "rating = ?";
+                    $params[] = $rating;
+                    $paramTypes .= 'i'; // برای رتبه از نوع integer استفاده می‌کنیم
+                }
+
+                // ساختن کوئری بر اساس شرایط
+                $sql = "SELECT * FROM products WHERE category_id LIKE '%2%' AND " . implode(" AND ", $conditions);
+
+                // اضافه کردن بخش مرتب‌سازی به کوئری در صورتی که مرتب‌سازی فعال باشد
+                if ($sortBy == 'cheapest') {
+                    $sql .= " ORDER BY price ASC";
+                } elseif ($sortBy == 'expensive') {
+                    $sql .= " ORDER BY price DESC";
+                } elseif ($sortBy == 'sales') {
+                    $sql .= " ORDER BY sales DESC";
+                }
+
+                // آماده‌سازی کوئری
+                $stmt = $conn->prepare($sql);
+
+                // بایند کردن پارامترها به کوئری
+                $stmt->bind_param($paramTypes, ...$params);
+
+                // اجرای کوئری
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                // بررسی اینکه آیا نتیجه‌ای برگشت داده شد یا نه
+                if ($result->num_rows > 0) {
+                    // نمایش محصولات
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<div class="product-card">';
+                        echo '<img src="' . $row["image_url"] . '" alt="' . $row["name"] . '" style="width: 300px; height: 300px; object-fit: scale-down; object-position: center; display: block; margin: 0 auto; padding: 3px 3px 3px 3px;" >';
+                        echo '<h3 style="text-align: center; margin: 0 auto; color: coral;">' . $row["name"] . '</h3>';
+                        echo '<br>';
+                        echo '<p>' . $row["description_fa"] . '</p>';
+                        echo '<p style="display: block; text-align: center; margin: 0 auto; color: green;" class="product-price">' . number_format($row["price"]) . ' تومان</p>';
+                        echo '<br>';
+                        echo '<button style="display: block; margin: 0 auto;" class="btn btn-primary" onclick="addToCart(1, 1)">افزودن به سبد خرید</button>';
+                        echo '</div>';
+                    }
+                } else {
+                    echo "محصولی یافت نشد.";
+                }
+
+                // بستن اتصال به دیتابیس
+                $conn->close();
+                ?>
+            </div>
+
+
+
+            <!-- Pod System Categories -->
+            <section class="categories">
+                <div class="section-header">
+                    <h2>برندهای پاد سیستم</h2>
+                    <p>تمام برندهای پاد سیستم در ویپ کلاب</p>
+                </div>
+                <div class="category_container">
+
+                    <!-- Pod Systems Category -->
+                    <a href="pages/podsystems.php">
+                        <div class="category-card">
+                            <img src="assets/images/categories/podsystem.jpeg" alt="پاد سیستم" />
+                            <h3>پاد سیستم</h3>
+                            <p>محصولاتی برای ترک سیگار</p>
+                        </div>
+                    </a>
+
+                    <!-- Pod Mod Systems Category -->
                     <div class="category-card">
-                        <img src="assets/images/categories/podsystem.jpeg" alt="پاد سیستم" />
-                        <h3>پاد سیستم</h3>
-                        <p>محصولاتی برای ترک سیگار</p>
+                        <img src="assets/images/categories/podmod.jpeg" alt="پاد ماد" />
+                        <h3>پاد ماد</h3>
+                        <p>دستگاه هایی دو کاره بین پاد و ماد</p>
                     </div>
-                </a>
 
-                <!-- Pod Mod Systems Category -->
-                <div class="category-card">
-                    <img src="assets/images/categories/podmod.jpeg" alt="پاد ماد" />
-                    <h3>پاد ماد</h3>
-                    <p>دستگاه هایی دو کاره بین پاد و ماد</p>
+                    <!-- Vape Mod Category -->
+                    <div class="category-card">
+                        <img src="assets/images/categories/vape.jpeg" alt="ویپ" />
+                        <h3>ویپ | ماد</h3>
+                        <p>دستگاه هایی برای ترک قلیان با وات بالا</p>
+                    </div>
+
+                    <!-- Disposable Category -->
+                    <div class="category-card">
+                        <img src="assets/images/categories/dispossable.jpeg" alt="پاد های یکبار مصرف" />
+                        <h3>یکبار مصرف ها</h3>
+                        <p>انواع پاد و ماد یکبار مصرف</p>
+                    </div>
+
+                    <!-- E-Cigar Category -->
+                    <div class="category-card">
+                        <img src="assets/images/categories/eciggaret.jpeg" alt="سیگارهای الکترونیکی" />
+                        <h3>سیگار های الکترونیکی</h3>
+                        <p>انواع سیگار های الکترونیکی آیکاس، جوی و ...</p>
+                    </div>
+
+                    <!-- Nicotine Salt Category -->
+                    <div class="category-card">
+                        <img src="assets/images/categories/salt.jpeg" alt="سالت نیکوتین" />
+                        <h3>سالت نیکوتین</h3>
+                        <p>مایع مصرفی برای پاد سیستم ها</p>
+                    </div>
+
+                    <!-- E-Juice Category -->
+                    <div class="category-card">
+                        <img src="assets/images/categories/juice.jpeg" alt="جویس ویپ" />
+                        <h3>جویس</h3>
+                        <p>مایع مصرفی ویپ | ماد</p>
+                    </div>
+
+                    <!-- Coil Cartridge Category -->
+                    <div class="category-card">
+                        <img src="assets/images/categories/coil.jpeg" alt="کویل و کارتریج" />
+                        <h3>کویل و کارتریج</h3>
+                        <p>انواع کویل و کارتریج دستگاه ها</p>
+                    </div>
+
+                    <!-- Accessory Category -->
+                    <div class="category-card">
+                        <img src="assets/images/categories/accessory.jpeg" alt="اکسسوری" />
+                        <h3>لوازم جانبی</h3>
+                        <p>لوازم جانبی پاد، پادماد و ماد</p>
+                    </div>
+
                 </div>
+            </section>
 
-                <!-- Vape Mod Category -->
-                <div class="category-card">
-                    <img src="assets/images/categories/vape.jpeg" alt="ویپ" />
-                    <h3>ویپ | ماد</h3>
-                    <p>دستگاه هایی برای ترک قلیان با وات بالا</p>
-                </div>
-
-                <!-- Disposable Category -->
-                <div class="category-card">
-                    <img src="assets/images/categories/dispossable.jpeg" alt="پاد های یکبار مصرف" />
-                    <h3>یکبار مصرف ها</h3>
-                    <p>انواع پاد و ماد یکبار مصرف</p>
-                </div>
-
-                <!-- E-Cigar Category -->
-                <div class="category-card">
-                    <img src="assets/images/categories/eciggaret.jpeg" alt="سیگارهای الکترونیکی" />
-                    <h3>سیگار های الکترونیکی</h3>
-                    <p>انواع سیگار های الکترونیکی آیکاس، جوی و ...</p>
-                </div>
-
-                <!-- Nicotine Salt Category -->
-                <div class="category-card">
-                    <img src="assets/images/categories/salt.jpeg" alt="سالت نیکوتین" />
-                    <h3>سالت نیکوتین</h3>
-                    <p>مایع مصرفی برای پاد سیستم ها</p>
-                </div>
-
-                <!-- E-Juice Category -->
-                <div class="category-card">
-                    <img src="assets/images/categories/juice.jpeg" alt="جویس ویپ" />
-                    <h3>جویس</h3>
-                    <p>مایع مصرفی ویپ | ماد</p>
-                </div>
-
-                <!-- Coil Cartridge Category -->
-                <div class="category-card">
-                    <img src="assets/images/categories/coil.jpeg" alt="کویل و کارتریج" />
-                    <h3>کویل و کارتریج</h3>
-                    <p>انواع کویل و کارتریج دستگاه ها</p>
-                </div>
-
-                <!-- Accessory Category -->
-                <div class="category-card">
-                    <img src="assets/images/categories/accessory.jpeg" alt="اکسسوری" />
-                    <h3>لوازم جانبی</h3>
-                    <p>لوازم جانبی پاد، پادماد و ماد</p>
-                </div>
-
-            </div>
-        </section>
-
-    </div>
-</section>
+        </div>
+    </section>
 
 </div>
 </main>
@@ -674,9 +861,11 @@
 <!-- Footer -->
 <div id="footer-container"></div>
 
+
 <!-- JavaScript -->
-<script src="assets/js/app.js"></script>
-<script src="assets/js/podsystem.js"></script>
+<script src="/vape-tube/assets/js/cart.js"></script>
+<script src="/vape-tube/assets/js/app.js"></script>
+<script src="/vape-tube/assets/js/podsystem.js"></script>
 
 <!--Script for limit price-->
 <script>
@@ -943,4 +1132,7 @@
     });
 
 </script>
+
+
+</body>
 </html>
