@@ -4,6 +4,31 @@ class Cart {
         this.cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     }
 
+
+
+    // به‌روزرسانی تعداد یک محصول در سبد خرید
+    updateItem(productId, quantity) {
+        // پیدا کردن آیتمی که می‌خواهیم تغییر دهیم
+        const item = this.cartItems.find(item => item.product_id === productId);
+
+        if (item) {
+            // اگر مقدار جدید کمتر از 1 باشد، باید تعداد محصول را به 1 حداقل محدود کنیم
+            if (quantity < 1) {
+                quantity = 1;
+            }
+
+            // به‌روزرسانی تعداد و قیمت کل محصول
+            item.quantity = quantity;
+            item.total_price = item.quantity * item.price;
+
+            // ذخیره‌سازی تغییرات در localStorage
+            this.saveCartToLocalStorage();
+
+            // به‌روزرسانی UI سبد خرید
+            this.updateCartUI();
+        }
+    }
+
     // حذف آیتم از سبد خرید
     removeItem(productId) {
         // حذف محصول از آرایه cartItems
@@ -53,6 +78,7 @@ class Cart {
     }
 
     // به‌روزرسانی UI
+    // به‌روزرسانی UI سبد خرید
     updateCartUI() {
         const cartCount = document.getElementById('cartCount');
         if (cartCount) {
@@ -78,10 +104,17 @@ class Cart {
                         <span>${item.quantity} x ${item.price} تومان</span>
                     </div>
                     <div class="cart-item-controls">
+                        <!-- دکمه کاهش تعداد محصول -->
                         <button onclick="cart.updateItem(${item.product_id}, ${item.quantity - 1})">-</button>
+
+                        <!-- ورودی برای نمایش و تغییر تعداد محصول -->
                         <input type="number" value="${item.quantity}" min="1" onchange="cart.updateItem(${item.product_id}, this.value)">
+
+                        <!-- دکمه افزایش تعداد محصول -->
                         <button onclick="cart.updateItem(${item.product_id}, ${item.quantity + 1})">+</button>
-                        <button onclick="cart.removeItem(${item.product_id})">حذف</button> <!-- دکمه حذف -->
+
+                        <!-- دکمه حذف محصول -->
+                        <button onclick="cart.removeItem(${item.product_id})">حذف</button>
                     </div>
                 </div>
             `).join('');
