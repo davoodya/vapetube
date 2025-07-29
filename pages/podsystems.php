@@ -86,9 +86,9 @@
                             <label for="brandFilter">برندهای پاد سیستم</label>
                             <select id="brandFilter" class="filter-select">
                                 <option value="">همه برندها</option>
-                                <option value="brand1">برند 1</option>
-                                <option value="brand2">برند 2</option>
-                                <option value="brand3">برند 3</option>
+                                <option value="uwell">uwell</option>
+                                <option value="smoke">smoke</option>
+                                <option value="voopoo">voopoo</option>
                                 <!-- Add more brands here -->
                             </select>
                         </div>
@@ -148,6 +148,7 @@
                     <p style="display: flex; justify-content: center; align-items: center; text-align: center; font-size: 1.2rem">پاد سیستم های موجود در وبسایت ما</p>
                 </div>
 
+                <!-- Show all Products in Pod System Category -->
                 <div class="products-grid" id="featuredProducts">
                     <?php
                     // اتصال به دیتابیس
@@ -160,29 +161,45 @@
                     $minPrice = isset($_GET['minPrice']) ? $_GET['minPrice'] : 0;
                     $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : 1000000;  // مقدار پیش‌فرض بسیار بالا
                     $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'default';  // مقدار پیش‌فرض مرتب‌سازی بر اساس ترتیب عادی
+                    $brand = isset($_GET['brand']) ? $_GET['brand'] : '';  // دریافت برند از GET (اگر انتخاب شده باشد)
 
-                    // ساختن کوئری بر اساس نوع مرتب‌سازی
-                    if ($sortBy == 'cheapest') {
-                        $orderBy = 'price ASC';  // از ارزان‌ترین به گران‌ترین
-                    } elseif ($sortBy == 'expensive') {
-                        $orderBy = 'price DESC';  // از گران‌ترین به ارزان‌ترین
-                    } elseif ($sortBy == 'default') {
-                        // اگر گزینه ترتیب عادی است، هیچ گونه مرتب‌سازی اعمال نمی‌شود
-                        $orderBy = '';  // این یعنی مرتب‌سازی انجام نشود
-                    } else {
-                        $orderBy = 'sales DESC';  // بر اساس پر فروش‌ترین
+                    // ساختن بخش WHERE برای فیلتر قیمت
+                    $conditions = [];
+                    $params = []; // این متغیر برای نگه داشتن پارامترهای بایند شده است
+                    $paramTypes = ''; // برای مشخص کردن نوع داده‌ها در bind_param
+
+                    // اضافه کردن فیلتر قیمت
+                    $conditions[] = "price >= ? AND price <= ?";
+                    $params[] = $minPrice;
+                    $params[] = $maxPrice;
+                    $paramTypes .= 'ii'; // برای minPrice و maxPrice از نوع integer استفاده می‌کنیم
+
+                    // اضافه کردن فیلتر برند
+                    if ($brand) {
+                        $conditions[] = "brand = ?";
+                        $params[] = $brand;
+                        $paramTypes .= 's'; // برای برند از نوع string استفاده می‌کنیم
                     }
 
-                    // کوئری برای واکشی محصولات پاد با فیلتر قیمت و مرتب‌سازی
-                    $sql = "SELECT * FROM products WHERE category_id LIKE '%2%' AND price >= ? AND price <= ?";
+                    // ساختن کوئری بر اساس شرایط
+                    $sql = "SELECT * FROM products WHERE category_id LIKE '%2%' AND " . implode(" AND ", $conditions);
 
                     // اضافه کردن بخش مرتب‌سازی به کوئری در صورتی که مرتب‌سازی فعال باشد
-                    if ($orderBy != '') {
-                        $sql .= " ORDER BY $orderBy";
+                    if ($sortBy == 'cheapest') {
+                        $sql .= " ORDER BY price ASC";
+                    } elseif ($sortBy == 'expensive') {
+                        $sql .= " ORDER BY price DESC";
+                    } elseif ($sortBy == 'sales') {
+                        $sql .= " ORDER BY sales DESC";
                     }
 
+                    // آماده‌سازی کوئری
                     $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("ii", $minPrice, $maxPrice); // بایند کردن مقادیر به کوئری
+
+                    // بایند کردن پارامترها به کوئری
+                    $stmt->bind_param($paramTypes, ...$params);
+
+                    // اجرای کوئری
                     $stmt->execute();
                     $result = $stmt->get_result();
 
@@ -208,6 +225,8 @@
                     $conn->close();
                     ?>
                 </div>
+
+
 
 
                 <!-- Pod System Categories -->
@@ -675,6 +694,28 @@
     });
 </script>
 
+<!-- Script for Brand Filtering -->
+<script>
+    // گرفتن المان brandFilter
+    const brandFilter = document.getElementById("brandFilter");
+
+    // هنگام تغییر گزینه برند
+    brandFilter.addEventListener("change", function () {
+        const selectedBrand = brandFilter.value;
+
+        // دریافت فیلتر قیمت از URL
+        const minPrice = new URLSearchParams(window.location.search).get('minPrice') || 0;
+        const maxPrice = new URLSearchParams(window.location.search).get('maxPrice') || 1000000;
+        const sortBy = new URLSearchParams(window.location.search).get('sortBy') || 'default';
+
+        // بروزرسانی آدرس URL با پارامترهای جدید فیلتر
+        const newUrl = window.location.pathname + "?minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&sortBy=" + sortBy + "&brand=" + selectedBrand;
+        history.pushState(null, "", newUrl);
+
+        // رفرش صفحه برای نمایش محصولات جدید
+        location.reload();
+    });
+</script>
 
 
 
