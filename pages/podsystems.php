@@ -35,7 +35,10 @@
                 <div class="container">
                     <div class="section-header">
                         <h2>جستجو</h2>
-                        <input type="text" id="searchField" class="filter-input" placeholder="جستجو کنید...">
+                        <div class="search-container">
+                            <input type="text" id="searchField" class="filter-input" placeholder="جستجو کنید..." autocomplete="off">
+                            <div id="searchResults" class="search-results-container"></div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -627,6 +630,43 @@
         transform: translateY(-2px); /* جابجایی دکمه به سمت بالا */
     }
 
+    /*search result styles*/
+    .search-result-item {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .search-result-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .result-item-content {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .product-thumb {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 4px;
+    }
+
+    .product-info h3 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .product-info .price {
+        margin: 0;
+        font-size: 14px;
+        color: #28a745;
+        font-weight: bold;
+    }
 
 </style>
 
@@ -780,6 +820,129 @@
     });
 </script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchField = document.getElementById('searchField');
+        const resultsContainer = document.getElementById('searchResults');
+        let searchTimeout;
+
+        if (!searchField || !resultsContainer) {
+            console.error('عناصر جستجو یافت نشدند!');
+            return;
+        }
+
+        searchField.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.trim();
+            clearTimeout(searchTimeout);
+
+            if (searchTerm.length < 2) {
+                resultsContainer.style.display = 'none';
+                return;
+            }
+
+            searchTimeout = setTimeout(() => {
+                fetchSearchResults(searchTerm);
+            }, 300);
+        });
+
+        async function fetchSearchResults(searchTerm) {
+            try {
+                const response = await fetch('api/search.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ search_term: searchTerm })
+                });
+
+                // بررسی وضعیت پاسخ
+                if (!response.ok) {
+                    throw new Error(`خطای HTTP: ${response.status}`);
+                }
+
+                // بررسی نوع محتوا
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    const text = await response.text();
+                    throw new Error(`پاسخ غیر JSON دریافت شد: ${text.substring(0, 100)}...`);
+                }
+
+                return await response.json();
+
+            } catch (error) {
+                console.error('جزئیات خطا:', error);
+                throw error;
+            }
+        }
+
+        function updateResultsUI(products) {
+            resultsContainer.innerHTML = '';
+
+            if (products.length === 0) {
+                resultsContainer.innerHTML = '<div class="no-results">نتیجه‌ای یافت نشد</div>';
+                resultsContainer.style.display = 'block';
+                return;
+            }
+
+            products.forEach(product => {
+                const item = document.createElement('div');
+                item.className = 'search-result-item';
+                item.innerHTML = `
+                <div class="result-item-content">
+                    ${product.image ? `<img src="/assets/images/products/${product.image}" alt="${product.name}" class="product-thumb">` : ''}
+                    <div class="product-info">
+                        <h3>${product.name_fa || product.name}</h3>
+                        <p class="price">${product.price ? new Intl.NumberFormat('fa-IR').format(product.price) + ' تومان' : 'تماس بگیرید'}</p>
+                    </div>
+                </div>
+            `;
+
+                item.addEventListener('click', () => {
+                    window.location.href = `product.php?id=${product.id}`;
+                });
+
+                resultsContainer.appendChild(item);
+            });
+
+            resultsContainer.style.display = 'block';
+        }
+
+        document.getElementById('searchField').addEventListener('input', async function(e) {
+            const searchTerm = e.target.value.trim();
+
+            if (searchTerm.length < 2) {
+                document.getElementById('searchResults').style.display = 'none';
+                return;
+            }
+
+            try {
+                const data = await fetchSearchResults(searchTerm);
+
+                if (!data.success) {
+                    throw new Error(data.message || 'خطا در پردازش جستجو');
+                }
+
+                updateResultsUI(data.results);
+
+            } catch (error) {
+                const resultsContainer = document.getElementById('searchResults');
+                resultsContainer.innerHTML = `
+            <div class="search-error">
+                خطا در دریافت نتایج: ${error.message}
+            </div>
+        `;
+                resultsContainer.style.display = 'block';
+            }
+        });
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-container')) {
+                resultsContainer.style.display = 'none';
+            }
+        });
+    });
+
+</script>
 
 </body>
 </html>
