@@ -1,25 +1,25 @@
 class Cart {
     constructor() {
-        // اینجا اطلاعات سبد خرید در حافظه موقت (localStorage) ذخیره می‌شود
+        // اطلاعات سبد خرید از localStorage بارگذاری می‌شود
         this.cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     }
 
     // افزودن آیتم به سبد خرید
-    addItem(productId, quantity = 1) {
+    addItem(productId, quantity = 1, productPrice, productName) {
         const existingItem = this.cartItems.find(item => item.product_id === productId);
 
         if (existingItem) {
-            // اگر محصول در سبد خرید وجود داشته باشد، فقط تعداد آن را افزایش می‌دهیم
+            // اگر محصول در سبد خرید موجود باشد، فقط تعداد آن را افزایش می‌دهیم
             existingItem.quantity += quantity;
             existingItem.total_price = existingItem.quantity * existingItem.price;
         } else {
             // اگر محصول در سبد خرید نباشد، آن را اضافه می‌کنیم
             const newItem = {
                 product_id: productId,
-                name: "Vape Mod", // نام محصول، باید از دیتابیس یا API گرفته شود
-                price: 250000, // قیمت محصول، باید از دیتابیس یا API گرفته شود
+                name: productName, // نام محصول
+                price: productPrice, // قیمت محصول
                 quantity: quantity,
-                total_price: 250000 * quantity // قیمت کل محصول
+                total_price: productPrice * quantity // محاسبه قیمت کل
             };
             this.cartItems.push(newItem);
         }
@@ -29,32 +29,9 @@ class Cart {
 
         // به‌روزرسانی UI سبد خرید
         this.updateCartUI();
-    }
 
-    // حذف آیتم از سبد خرید
-    removeItem(productId) {
-        this.cartItems = this.cartItems.filter(item => item.product_id !== productId);
-
-        // ذخیره تغییرات در localStorage
-        this.saveCartToLocalStorage();
-
-        // به‌روزرسانی UI سبد خرید
-        this.updateCartUI();
-    }
-
-    // به‌روزرسانی تعداد محصول در سبد خرید
-    updateItem(productId, quantity) {
-        const item = this.cartItems.find(item => item.product_id === productId);
-        if (item) {
-            item.quantity = quantity;
-            item.total_price = item.quantity * item.price;
-
-            // ذخیره تغییرات در localStorage
-            this.saveCartToLocalStorage();
-
-            // به‌روزرسانی UI سبد خرید
-            this.updateCartUI();
-        }
+        // باز کردن مدال سبد خرید بعد از اضافه کردن محصول
+        this.toggleCart();
     }
 
     // ذخیره‌سازی سبد خرید در localStorage
@@ -64,21 +41,18 @@ class Cart {
 
     // به‌روزرسانی UI
     updateCartUI() {
-        // تعداد آیتم‌ها در سبد خرید
         const cartCount = document.getElementById('cartCount');
         if (cartCount) {
             const totalItems = this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
             cartCount.textContent = totalItems;
         }
 
-        // مجموع قیمت
         const cartTotal = document.getElementById('cartTotal');
         if (cartTotal) {
             const totalPrice = this.cartItems.reduce((sum, item) => sum + item.total_price, 0);
             cartTotal.textContent = totalPrice.toLocaleString() + ' تومان';
         }
 
-        // محتوای سبد خرید
         const cartContent = document.getElementById('cartContent');
         if (cartContent) {
             if (this.cartItems.length === 0) {
@@ -104,37 +78,56 @@ class Cart {
 
     // بارگذاری سبد خرید از localStorage
     loadCart() {
-        // اگر سبد خرید در localStorage موجود باشد، بارگذاری می‌شود
         const cartItemsFromLocalStorage = JSON.parse(localStorage.getItem('cartItems'));
         if (cartItemsFromLocalStorage) {
             this.cartItems = cartItemsFromLocalStorage;
             this.updateCartUI();
         }
     }
+
+    // باز یا بسته کردن مدال سبد خرید
+    toggleCart() {
+        const cartSidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('overlay');
+
+        if (cartSidebar.classList.contains('active')) {
+            cartSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        } else {
+            cartSidebar.classList.add('active');
+            overlay.classList.add('active');
+        }
+    }
+
+    // بستن مدال سبد خرید
+    hideCart() {
+        const cartSidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('overlay');
+        cartSidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    }
 }
 
-// Show Shopping Card Modal
 // نمونه‌ای از شیء Cart برای دسترسی در جاهای مختلف
 const cart = new Cart();
 cart.loadCart();
 
 // تابع برای اضافه کردن محصول به سبد خرید
-function addToCart(productId, quantity) {
-    cart.addItem(productId, quantity);
+function addToCart(productId, quantity, productPrice, productName) {
+    cart.addItem(productId, quantity, productPrice, productName);
 }
-document.addEventListener('DOMContentLoaded', () => {
-    // شیء Cart که برای مدیریت سبد خرید استفاده می‌شود
-    const cart = new Cart();
 
-    // بارگذاری سبد خرید از localStorage
+document.addEventListener('DOMContentLoaded', () => {
+    // ایجاد شیء Cart
+    const cart = new Cart();
     cart.loadCart();
 
-    // باز یا بسته کردن مدال سبد خرید
+    // تابع برای باز و بسته کردن مدال سبد خرید
     cart.toggleCart = function () {
         const cartSidebar = document.getElementById('cartSidebar');
         const overlay = document.getElementById('overlay');
 
-        // اگر مدال سبد خرید باز است، آن را ببندید، و اگر بسته است، آن را باز کنید
+        // اگر مدال سبد خرید باز است، آن را ببندید
         if (cartSidebar.classList.contains('active')) {
             cartSidebar.classList.remove('active');
             overlay.classList.remove('active');
@@ -144,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // بستن سبد خرید
+    // بستن مدال سبد خرید
     cart.hideCart = function () {
         const cartSidebar = document.getElementById('cartSidebar');
         const overlay = document.getElementById('overlay');
@@ -153,11 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // افزودن محصول به سبد خرید
-    function addToCart(productId, quantity) {
-        cart.addItem(productId, quantity); // اضافه کردن محصول به سبد خرید
+    function addToCart(productId, quantity, productPrice, productName) {
+        cart.addItem(productId, quantity, productPrice, productName);  // اضافه کردن محصول به سبد خرید
+        cart.toggleCart();  // باز کردن مدال سبد خرید بعد از اضافه کردن محصول
     }
 
-    // به‌روزرسانی UI سبد خرید
+    // مشاهده تعداد محصولات در سبد خرید
     cart.updateCartUI = function () {
         const cartCount = document.getElementById('cartCount');
         const totalItems = cart.cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -165,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const cartTotal = document.getElementById('cartTotal');
         const totalPrice = cart.cartItems.reduce((sum, item) => sum + item.total_price, 0);
-        cartTotal.textContent = totalPrice.toLocaleString() + ' تومان'; // نمایش مجموع قیمت
+        cartTotal.textContent = totalPrice.toLocaleString() + ' تومان';  // نمایش قیمت مجموع
     };
 
     // مشاهده محتوای سبد خرید
@@ -193,7 +187,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // بررسی کلیک روی دکمه سبد خرید
-    document.getElementById('cartToggle').addEventListener('click', () => cart.toggleCart());
-    document.getElementById('cartClose').addEventListener('click', () => cart.hideCart());
+    // اتصال رویداد به آیکون سبد خرید
+    const cartToggle = document.getElementById('cartToggle');
+    if (cartToggle) {
+        cartToggle.addEventListener('click', () => cart.toggleCart());  // باز یا بسته کردن مدال
+    }
+
+    // رویداد بستن مدال
+    const cartClose = document.getElementById('cartClose');
+    if (cartClose) {
+        cartClose.addEventListener('click', () => cart.hideCart());  // بستن مدال سبد خرید
+    }
 });
+

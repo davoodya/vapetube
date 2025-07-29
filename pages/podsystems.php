@@ -425,7 +425,7 @@
                         echo '<p>' . $row["description_fa"] . '</p>';
                         echo '<p style="display: block; text-align: center; margin: 0 auto; color: green;" class="product-price">' . number_format($row["price"]) . ' تومان</p>';
                         echo '<br>';
-                        echo '<button style="display: block; margin: 0 auto;" class="btn btn-primary" onclick="addToCart(1, 1)">افزودن به سبد خرید</button>';
+                        echo '<button style="display: block; margin: 0 auto;" class="btn btn-primary" onclick="addToCart(' . $row['id'] . ', 1, ' . $row['price'] . ', \'' . addslashes($row['name']) . '\')">افزودن به سبد خرید</button>';
                         echo '</div>';
                     }
                 } else {
