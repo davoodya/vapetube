@@ -899,7 +899,7 @@
             `;
 
                 item.addEventListener('click', () => {
-                    window.location.href = `product.php?id=${product.id}`;
+                    window.location.href = `pages/products/product_view.php?id=${product.id}`;
                 });
 
                 resultsContainer.appendChild(item);
