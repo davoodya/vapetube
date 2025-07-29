@@ -113,6 +113,7 @@ class Cart {
     }
 }
 
+// Show Shopping Card Modal
 // نمونه‌ای از شیء Cart برای دسترسی در جاهای مختلف
 const cart = new Cart();
 cart.loadCart();
@@ -121,3 +122,78 @@ cart.loadCart();
 function addToCart(productId, quantity) {
     cart.addItem(productId, quantity);
 }
+document.addEventListener('DOMContentLoaded', () => {
+    // شیء Cart که برای مدیریت سبد خرید استفاده می‌شود
+    const cart = new Cart();
+
+    // بارگذاری سبد خرید از localStorage
+    cart.loadCart();
+
+    // باز یا بسته کردن مدال سبد خرید
+    cart.toggleCart = function () {
+        const cartSidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('overlay');
+
+        // اگر مدال سبد خرید باز است، آن را ببندید، و اگر بسته است، آن را باز کنید
+        if (cartSidebar.classList.contains('active')) {
+            cartSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        } else {
+            cartSidebar.classList.add('active');
+            overlay.classList.add('active');
+        }
+    };
+
+    // بستن سبد خرید
+    cart.hideCart = function () {
+        const cartSidebar = document.getElementById('cartSidebar');
+        const overlay = document.getElementById('overlay');
+        cartSidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    };
+
+    // افزودن محصول به سبد خرید
+    function addToCart(productId, quantity) {
+        cart.addItem(productId, quantity); // اضافه کردن محصول به سبد خرید
+    }
+
+    // به‌روزرسانی UI سبد خرید
+    cart.updateCartUI = function () {
+        const cartCount = document.getElementById('cartCount');
+        const totalItems = cart.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
+
+        const cartTotal = document.getElementById('cartTotal');
+        const totalPrice = cart.cartItems.reduce((sum, item) => sum + item.total_price, 0);
+        cartTotal.textContent = totalPrice.toLocaleString() + ' تومان'; // نمایش مجموع قیمت
+    };
+
+    // مشاهده محتوای سبد خرید
+    cart.updateCartUI = function () {
+        const cartContent = document.getElementById('cartContent');
+        if (cartContent) {
+            if (this.cartItems.length === 0) {
+                cartContent.innerHTML = '<div class="text-center">سبد خرید خالی است</div>';
+            } else {
+                cartContent.innerHTML = this.cartItems.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <span>${item.name}</span>
+                            <span>${item.quantity} x ${item.price} تومان</span>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button onclick="cart.updateItem(${item.product_id}, ${item.quantity - 1})">-</button>
+                            <input type="number" value="${item.quantity}" min="1" onchange="cart.updateItem(${item.product_id}, this.value)">
+                            <button onclick="cart.updateItem(${item.product_id}, ${item.quantity + 1})">+</button>
+                            <button onclick="cart.removeItem(${item.product_id})">حذف</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+    };
+
+    // بررسی کلیک روی دکمه سبد خرید
+    document.getElementById('cartToggle').addEventListener('click', () => cart.toggleCart());
+    document.getElementById('cartClose').addEventListener('click', () => cart.hideCart());
+});

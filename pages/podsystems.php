@@ -82,18 +82,21 @@
                 <!--          <div id="searchResults" class="search-results"></div>-->
                 <!--        </div>-->
 
-                <!-- سبد خرید -->
                 <!-- آیکون سبد خرید -->
-                <div id="cartToggle" class="cart-icon" onclick="cart.toggleCart()">
+                <!-- آیکون سبد خرید -->
+                <div id="cartToggle" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cartCount">0</span> <!-- تعداد آیتم‌های سبد خرید -->
                 </div>
 
-                <!-- سبد خرید -->
+                <!-- لایه پوششی -->
+                <div id="overlay" class="overlay" onclick="cart.hideCart()"></div>
+
+                <!-- سبد خرید (مدال) -->
                 <div id="cartSidebar" class="cart-sidebar">
                     <div class="cart-header">
                         <h3>سبد خرید</h3>
-                        <button id="cartClose" class="cart-close" onclick="cart.hideCart()">بستن</button>
+                        <button id="cartClose" class="cart-close">بستن</button>
                     </div>
                     <div id="cartContent" class="cart-content">
                         <!-- محتوای سبد خرید بارگذاری می‌شود -->
@@ -105,6 +108,9 @@
                         <button class="btn btn-primary btn-block" id="checkoutBtn" onclick="checkout()">تسویه حساب</button>
                     </div>
                 </div>
+
+            </div>
+
 
             </div>
         </div>
