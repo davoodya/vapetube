@@ -79,17 +79,20 @@ class Cart {
 
     // به‌روزرسانی UI
     // به‌روزرسانی UI سبد خرید
+    // به‌روزرسانی UI سبد خرید
     updateCartUI() {
         const cartCount = document.getElementById('cartCount');
         if (cartCount) {
+            // محاسبه تعداد کل محصولات در سبد خرید
             const totalItems = this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
-            cartCount.textContent = totalItems;
+            cartCount.textContent = totalItems; // نمایش تعداد کل محصولات
         }
 
         const cartTotal = document.getElementById('cartTotal');
         if (cartTotal) {
+            // محاسبه مجموع قیمت سبد خرید
             const totalPrice = this.cartItems.reduce((sum, item) => sum + item.total_price, 0);
-            cartTotal.textContent = totalPrice.toLocaleString() + ' تومان';
+            cartTotal.textContent = totalPrice.toLocaleString() + ' تومان'; // نمایش مجموع قیمت
         }
 
         const cartContent = document.getElementById('cartContent');
@@ -104,17 +107,10 @@ class Cart {
                         <span>${item.quantity} x ${item.price} تومان</span>
                     </div>
                     <div class="cart-item-controls">
-                        <!-- دکمه کاهش تعداد محصول -->
                         <button onclick="cart.updateItem(${item.product_id}, ${item.quantity - 1})">-</button>
-
-                        <!-- ورودی برای نمایش و تغییر تعداد محصول -->
                         <input type="number" value="${item.quantity}" min="1" onchange="cart.updateItem(${item.product_id}, this.value)">
-
-                        <!-- دکمه افزایش تعداد محصول -->
                         <button onclick="cart.updateItem(${item.product_id}, ${item.quantity + 1})">+</button>
-
-                        <!-- دکمه حذف محصول -->
-                        <button onclick="cart.removeItem(${item.product_id})">حذف</button>
+                        <button onclick="cart.removeItem(${item.product_id})">حذف</button> <!-- دکمه حذف -->
                     </div>
                 </div>
             `).join('');
