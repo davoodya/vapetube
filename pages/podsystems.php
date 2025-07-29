@@ -83,7 +83,6 @@
                 <!--        </div>-->
 
                 <!-- آیکون سبد خرید -->
-                <!-- آیکون سبد خرید -->
                 <div id="cartToggle" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cartCount">0</span> <!-- تعداد آیتم‌های سبد خرید -->

@@ -4,6 +4,19 @@ class Cart {
         this.cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
     }
 
+    // حذف آیتم از سبد خرید
+    removeItem(productId) {
+        // حذف محصول از آرایه cartItems
+        this.cartItems = this.cartItems.filter(item => item.product_id !== productId);
+
+        // ذخیره‌سازی تغییرات در localStorage
+        this.saveCartToLocalStorage();
+
+        // به‌روزرسانی UI سبد خرید
+        this.updateCartUI();
+    }
+
+
     // افزودن آیتم به سبد خرید
     addItem(productId, quantity = 1, productPrice, productName) {
         const existingItem = this.cartItems.find(item => item.product_id === productId);
@@ -59,19 +72,19 @@ class Cart {
                 cartContent.innerHTML = '<div class="text-center">سبد خرید خالی است</div>';
             } else {
                 cartContent.innerHTML = this.cartItems.map(item => `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <span>${item.name}</span>
-                            <span>${item.quantity} x ${item.price} تومان</span>
-                        </div>
-                        <div class="cart-item-controls">
-                            <button onclick="cart.updateItem(${item.product_id}, ${item.quantity - 1})">-</button>
-                            <input type="number" value="${item.quantity}" min="1" onchange="cart.updateItem(${item.product_id}, this.value)">
-                            <button onclick="cart.updateItem(${item.product_id}, ${item.quantity + 1})">+</button>
-                            <button onclick="cart.removeItem(${item.product_id})">حذف</button>
-                        </div>
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <span>${item.name}</span>
+                        <span>${item.quantity} x ${item.price} تومان</span>
                     </div>
-                `).join('');
+                    <div class="cart-item-controls">
+                        <button onclick="cart.updateItem(${item.product_id}, ${item.quantity - 1})">-</button>
+                        <input type="number" value="${item.quantity}" min="1" onchange="cart.updateItem(${item.product_id}, this.value)">
+                        <button onclick="cart.updateItem(${item.product_id}, ${item.quantity + 1})">+</button>
+                        <button onclick="cart.removeItem(${item.product_id})">حذف</button> <!-- دکمه حذف -->
+                    </div>
+                </div>
+            `).join('');
             }
         }
     }
@@ -127,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const cartSidebar = document.getElementById('cartSidebar');
         const overlay = document.getElementById('overlay');
 
-        // اگر مدال سبد خرید باز است، آن را ببندید
         if (cartSidebar.classList.contains('active')) {
             cartSidebar.classList.remove('active');
             overlay.classList.remove('active');
@@ -179,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <button onclick="cart.updateItem(${item.product_id}, ${item.quantity - 1})">-</button>
                             <input type="number" value="${item.quantity}" min="1" onchange="cart.updateItem(${item.product_id}, this.value)">
                             <button onclick="cart.updateItem(${item.product_id}, ${item.quantity + 1})">+</button>
-                            <button onclick="cart.removeItem(${item.product_id})">حذف</button>
+                            <button onclick="cart.removeItem(${item.product_id})">حذف</button> <!-- دکمه حذف -->
                         </div>
                     </div>
                 `).join('');
@@ -199,4 +211,3 @@ document.addEventListener('DOMContentLoaded', () => {
         cartClose.addEventListener('click', () => cart.hideCart());  // بستن مدال سبد خرید
     }
 });
-
