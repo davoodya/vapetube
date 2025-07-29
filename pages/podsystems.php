@@ -93,7 +93,6 @@
                             </select>
                         </div>
 
-                        <!-- Availability Filter -->
                         <div class="filter-group">
                             <label for="availabilityFilter">وضعیت موجودی</label>
                             <select id="availabilityFilter">
@@ -162,6 +161,7 @@
                     $maxPrice = isset($_GET['maxPrice']) ? $_GET['maxPrice'] : 1000000;  // مقدار پیش‌فرض بسیار بالا
                     $sortBy = isset($_GET['sortBy']) ? $_GET['sortBy'] : 'default';  // مقدار پیش‌فرض مرتب‌سازی بر اساس ترتیب عادی
                     $brand = isset($_GET['brand']) ? $_GET['brand'] : '';  // دریافت برند از GET (اگر انتخاب شده باشد)
+                    $availability = isset($_GET['availability']) ? $_GET['availability'] : '';  // دریافت وضعیت موجودی از GET
 
                     // ساختن بخش WHERE برای فیلتر قیمت
                     $conditions = [];
@@ -179,6 +179,13 @@
                         $conditions[] = "brand = ?";
                         $params[] = $brand;
                         $paramTypes .= 's'; // برای برند از نوع string استفاده می‌کنیم
+                    }
+
+                    // اضافه کردن فیلتر موجودی
+                    if ($availability === 'inStock') {
+                        $conditions[] = "is_active = 1";  // موجود
+                    } elseif ($availability === 'outOfStock') {
+                        $conditions[] = "is_active = 0";  // ناموجود
                     }
 
                     // ساختن کوئری بر اساس شرایط
@@ -225,8 +232,6 @@
                     $conn->close();
                     ?>
                 </div>
-
-
 
 
                 <!-- Pod System Categories -->
@@ -717,6 +722,29 @@
     });
 </script>
 
+<!-- Script for Availability Filtering -->
+<script>
+    // گرفتن المان availabilityFilter
+    const availabilityFilter = document.getElementById("availabilityFilter");
+
+    // هنگام تغییر گزینه وضعیت موجودی
+    availabilityFilter.addEventListener("change", function () {
+        const selectedAvailability = availabilityFilter.value;
+
+        // دریافت فیلتر قیمت از URL
+        const minPrice = new URLSearchParams(window.location.search).get('minPrice') || 0;
+        const maxPrice = new URLSearchParams(window.location.search).get('maxPrice') || 1000000;
+        const sortBy = new URLSearchParams(window.location.search).get('sortBy') || 'default';
+        const brand = new URLSearchParams(window.location.search).get('brand') || '';
+
+        // بروزرسانی آدرس URL با پارامترهای جدید فیلتر
+        const newUrl = window.location.pathname + "?minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&sortBy=" + sortBy + "&brand=" + brand + "&availability=" + selectedAvailability;
+        history.pushState(null, "", newUrl);
+
+        // رفرش صفحه برای نمایش محصولات جدید
+        location.reload();
+    });
+</script>
 
 
 </body>
